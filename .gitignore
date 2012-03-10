@@ -7,4 +7,4 @@ Desktop.ini
 java/.classpath
 java/.settings
 java/.project
-java/target/**/*
+java/target
