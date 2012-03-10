@@ -1,0 +1,10 @@
+.DS_Store
+Desktop.ini
+*~
+*.swp
+*.tmp
+
+java/.classpath
+java/.settings
+java/.project
+java/target/**/*
