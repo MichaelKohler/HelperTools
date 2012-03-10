@@ -47,7 +47,7 @@ public class PropertiesHelper {
 
     private static void loadPropertiesFile() {
         String currentDir = new File("").getAbsolutePath();
-        _propertyFile = currentDir + _propertyFileName;
+        _propertyFile = currentDir + "/" + _propertyFileName;
 	File propFile = new File(_propertyFile);
 	try {
 	    propFile.createNewFile();
@@ -99,6 +99,6 @@ public class PropertiesHelper {
     public static void deleteSettingsFile() {
         File settingsFile = new File(_propertyFileName);
         if (settingsFile.exists())
-	    settingsFile.delete();
+            settingsFile.delete();
     }
 }

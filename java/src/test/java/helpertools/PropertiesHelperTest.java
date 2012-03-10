@@ -46,7 +46,7 @@ public class PropertiesHelperTest  {
     public static void initTest() {
         _testString = "TestString";
         _key = "testKey";
-	_filename = "settings.properties";
+        _filename = "settings.properties";
     }
 
     @Test
