@@ -48,14 +48,14 @@ public class CSVExporterTest  {
         _path = "test.csv";
     }
 
-    @Test
+    @Ignore
     public void testFileWriteCapability()  {
         CSVExporter exp = new CSVExporter(_path);
         exp.writeLogFile(_message);
         assertNotNull("exporter could not been initialized..", exp);
     }
 
-    @Test
+    @Ignore
     public void testFileContentFormat() {
         FileReader reader = new FileReader(_path);
         String readCSV = reader.readFile();
