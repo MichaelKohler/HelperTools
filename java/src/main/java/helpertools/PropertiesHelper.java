@@ -39,6 +39,10 @@ public class PropertiesHelper {
         return _propertyFileName;
     }
 
+    public static void setPropertyFilename(String aFileName) {
+        _propertyFileName = aFileName;
+    }
+
     private static void loadPropertiesFile() {
         String currentDir = new File("").getAbsolutePath();
         _propertyFile = currentDir + "/" + _propertyFileName;

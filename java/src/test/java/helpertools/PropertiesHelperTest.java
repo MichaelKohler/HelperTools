@@ -65,6 +65,15 @@ public class PropertiesHelperTest  {
     }
 
     @Test
+    public void shouldSetPropertiesFilename() {
+        String oldFileName = PropertiesHelper.getPropertyFilename();
+        String newFileName = "newProperties.properties";
+        PropertiesHelper.setPropertyFilename(newFileName);
+        assertEquals("Failure: returned filename was not the newly set one..",
+                          PropertiesHelper.getPropertyFilename(), oldFileName);
+    }
+
+    @Test
     public void shouldDeleteSettingsFile() {
         PropertiesHelper.deleteSettingsFile();
         File settingsFile = new File(_filename);
