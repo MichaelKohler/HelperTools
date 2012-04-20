@@ -29,13 +29,15 @@ import java.util.Properties;
 public class PropertiesHelper {
 
     private static Properties _props;
-    private static String _propertyFileName = "settings.properties";
+    private static String _propertyFileName;
     private static String _propertyFile;
 
     public PropertiesHelper() {
     }
 
     public static String getPropertyFilename() {
+        if (_propertyFileName == null)
+            setPropertyFilename("");
         return _propertyFileName;
     }
 

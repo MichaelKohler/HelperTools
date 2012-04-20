@@ -45,6 +45,7 @@ public class PropertiesHelperTest  {
 
     @Test
     public void shouldReadAndWriteProperties() {
+        PropertiesHelper.setPropertyFilename(_filename);
         PropertiesHelper.setProperty(_key, _testString);
         String readString = PropertiesHelper.getProperty(_key);
         assertEquals("Failure: original string was not the restored string...", _testString, readString);
@@ -52,6 +53,7 @@ public class PropertiesHelperTest  {
 
     @Test
     public void shouldRemoveProperties() {
+        PropertiesHelper.setPropertyFilename(_filename);
         PropertiesHelper.removeProperty(_key);
         boolean keyExists = PropertiesHelper.propertyExists(_key);
         assertNotNull("property was null", keyExists);
@@ -60,21 +62,14 @@ public class PropertiesHelperTest  {
 
     @Test
     public void shouldGetPropertiesFilename() {
+        PropertiesHelper.setPropertyFilename(_filename);
         String returnedFilename = PropertiesHelper.getPropertyFilename();
         assertEquals("Failure: returned filename was not " + _filename + "...", _filename, returnedFilename);
     }
 
     @Test
-    public void shouldSetPropertiesFilename() {
-        String oldFileName = PropertiesHelper.getPropertyFilename();
-        String newFileName = "newProperties.properties";
-        PropertiesHelper.setPropertyFilename(newFileName);
-        assertEquals("Failure: returned filename was not the newly set one..",
-                          PropertiesHelper.getPropertyFilename(), oldFileName);
-    }
-
-    @Test
     public void shouldDeleteSettingsFile() {
+        PropertiesHelper.setPropertyFilename(_filename);
         PropertiesHelper.deleteSettingsFile();
         File settingsFile = new File(_filename);
         assertFalse("Failure: settings file is still existent!", settingsFile.exists());
