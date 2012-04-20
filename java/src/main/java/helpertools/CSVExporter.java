@@ -28,7 +28,7 @@ public class CSVExporter {
         _path = aPath;
     }
 
-    public void writeLogFile(String aLog) {
+    public void writeCSVFileFromJTable(JTable table) {
 
     }
 
