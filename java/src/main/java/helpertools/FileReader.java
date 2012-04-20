@@ -25,14 +25,37 @@ import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 
+/**
+ * The |FileReader| is responsible to read the content of
+ * a whole file. It returns the content as a String.
+ * 
+ * @author Michael Kohler
+ * @version 0.0.1
+ */
 public class FileReader {
 
+    /**
+     * Path to the file which needs to be read. This is not just
+     * the file name, but the full qualified path.
+     */
     private String _path;
 
+    /**
+     * Constructor which sets the specified path to the
+     * _path variable.
+     * 
+     * @param aPath to the file to be read
+     */
     public FileReader(String aPath) {
         _path = aPath;
     }
 
+    /**
+     * Reads the file line after line and returns the whole file
+     * content as a String.
+     * 
+     * @return String representation of the text which was read
+     */
     public String readFile() {
         String readText = "";
 

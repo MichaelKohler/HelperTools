@@ -24,8 +24,8 @@ import helpertools.CSVExporter;
 import helpertools.FileReader;
 
 import java.io.File;
+
 import org.junit.*;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertEquals;
 
 public class CSVExporterTest  {
@@ -33,17 +33,29 @@ public class CSVExporterTest  {
     public static String _message;
     public static String _path;
 
-    public CSVExporterTest() {
-    }
-
     @BeforeClass
     public static void initTest() {
         _message = "";
         _path = "test.csv";
     }
 
+    @Test
+    public void getFileNameShouldReturnTheCorrectPath() {
+        String path = "testpath.csv";
+        CSVExporter exporter = new CSVExporter(path);
+        assertEquals("Failure: the path was not correct..", path, exporter.getCSVPath());
+    }
+
+    @Test
+    public void setFileNameShouldSetTheCorrectPath() {
+        String path = "new_test_path.csv";
+        CSVExporter exporter = new CSVExporter();
+        exporter.setCSVPath(path);
+        assertEquals("Failure: the set path was not the one we retrieved..", path, exporter.getCSVPath());
+    }
+
     @Ignore
-    public void testFileWriteCapabilityFromTable()  {
+    public void testFileWriteCapabilityFromTable() {
         
     }
 
@@ -53,7 +65,7 @@ public class CSVExporterTest  {
     }
 
     @AfterClass
-    public void cleanup() {
+    public static void cleanup() {
         File testCSV = new File(_path);
         testCSV.delete();
     }
