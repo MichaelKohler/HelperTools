@@ -47,8 +47,6 @@ public class DebuggerTest  {
             _nullObject.toString();
         }
         catch (Exception ex) {
-             Debugger.logMessage(ex);
-
             String message = ex.getMessage();
             assertTrue("Failure: it's not a nullpointer exception", message.contains("null"));
         }        
@@ -56,13 +54,19 @@ public class DebuggerTest  {
 
     @Test
     public void testErrorLog()  {
-        String loggedMessage = "";
+        String test = null;
+        try {
+            test.toString();
+        }
+        catch (Exception ex) {
+            Debugger.logMessage(ex);
+            String loggedMessage = "";
+            FileReader reader = new FileReader(Debugger.getLogFilename());
+            loggedMessage = reader.readFile();
 
-        FileReader reader = new FileReader(Debugger.getLogFilename());
-        loggedMessage = reader.readFile();
-
-        boolean containsExceptionInfo = loggedMessage.contains("null");
-        assertTrue("Failure: the logged message did not contain \"null\"..", containsExceptionInfo);
+            boolean containsExceptionInfo = loggedMessage.contains("null");
+            assertTrue("Failure: the logged message did not contain \"null\"..", containsExceptionInfo);
+        }
     }
 
     @Test
