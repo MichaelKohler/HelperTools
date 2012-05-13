@@ -17,15 +17,14 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.
  *
  */
-
-package helpertools;
+package info.michaelkohler.helpertools;
 
 import org.junit.*;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
-import helpertools.Debugger;
-import helpertools.FileReader;
+import info.michaelkohler.helpertools.Debugger;
+import info.michaelkohler.helpertools.FileReader;
 
 import java.io.File;
 

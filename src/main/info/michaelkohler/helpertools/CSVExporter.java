@@ -17,7 +17,7 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.
  *
  */
-package helpertools;
+package info.michaelkohler.helpertools;
 
 import javax.swing.JTable;
 

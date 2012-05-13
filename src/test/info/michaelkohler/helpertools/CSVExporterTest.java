@@ -17,16 +17,12 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.
  *
  */
-
-package helpertools;
-
-import helpertools.CSVExporter;
-import helpertools.FileReader;
+package info.michaelkohler.helpertools;
 
 import java.io.File;
-
 import org.junit.*;
 import static org.junit.Assert.assertEquals;
+import info.michaelkohler.helpertools.CSVExporter;
 
 public class CSVExporterTest  {
 

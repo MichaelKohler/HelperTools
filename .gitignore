@@ -4,7 +4,7 @@ Desktop.ini
 *.swp
 *.tmp
 
-java/.classpath
-java/.settings
-java/.project
-java/target
+.classpath
+.settings
+.project
+target
