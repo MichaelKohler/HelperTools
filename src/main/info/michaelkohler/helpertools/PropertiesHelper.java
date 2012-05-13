@@ -134,8 +134,8 @@ public class PropertiesHelper {
      * Checks whether a given Property exists or not
      * 
      * @param aKey of the requested Property
-     * @return whether thThis is just the
-     * file name and not the path!e Property exists or not
+     * @return whether the Property exists or not - This is just the
+     *              file name and not the path!
      */
     public static boolean propertyExists(String aKey) {
         loadPropertiesFile();

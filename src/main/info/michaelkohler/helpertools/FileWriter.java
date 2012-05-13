@@ -23,7 +23,7 @@ import java.io.BufferedWriter;
 
 /**
  * A |FileWriter| writes data to a file.
- * Once a |FileWriter| is instanciated it can only
+ * Once a |FileWriter| is instantiated it can only
  * used for this path and this specific appending
  * option. If you need to write to an other file, you need
  * to create a new instance of the object.
@@ -40,8 +40,8 @@ public class FileWriter {
      * Constructor which sets the path and whether the
      * message should be appended to the file or not.
      * 
-     * @param full qualified path where we need to write the information to
-     * @param whether the message should be appended or not
+     * @param aPath fully qualified path where we need to write the information to
+     * @param aAppend whether the message should be appended or not
      */
     public FileWriter(String aPath, boolean aAppend) {
         _path = aPath;
