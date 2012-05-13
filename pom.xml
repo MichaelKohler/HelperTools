@@ -10,7 +10,7 @@
   <properties><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding></properties>
 
   <build>
-    <sourceDirectory>${basedir}/src</sourceDirectory>
+    <sourceDirectory>${basedir}/src/main</sourceDirectory>
     <resources>
       <resource>
         <directory>src/resources</directory>
