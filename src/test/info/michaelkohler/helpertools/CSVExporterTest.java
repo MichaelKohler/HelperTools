@@ -19,45 +19,65 @@
  */
 package info.michaelkohler.helpertools;
 
-import java.io.File;
-import org.junit.*;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import info.michaelkohler.helpertools.io.CSVExporter;
+import info.michaelkohler.helpertools.io.FileReader;
+
+import java.io.File;
+
+import javax.swing.JTable;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class CSVExporterTest  {
 
     public static String _message;
     public static String _path;
+    public static CSVExporter _exporter;
+    public static CSVExporter _exporterWithDefaultPath;
 
     @BeforeClass
     public static void initTest() {
         _message = "";
         _path = "test.csv";
+        _exporter = new CSVExporter();
+        _exporterWithDefaultPath = new CSVExporter(_path);
     }
 
     @Test
     public void getFileNameShouldReturnTheCorrectPath() {
-        String path = "testpath.csv";
-        CSVExporter exporter = new CSVExporter(path);
-        assertEquals("Failure: the path was not correct..", path, exporter.getCSVPath());
+        assertEquals("Failure: the path was not correct..", _path, _exporterWithDefaultPath.getCSVPath());
     }
 
     @Test
     public void setFileNameShouldSetTheCorrectPath() {
-        String path = "new_test_path.csv";
-        CSVExporter exporter = new CSVExporter();
-        exporter.setCSVPath(path);
-        assertEquals("Failure: the set path was not the one we retrieved..", path, exporter.getCSVPath());
+        String newPath = _path + "_bak";
+        _exporter.setCSVPath(newPath);
+        assertEquals("Failure: the set path was not the one we retrieved..", newPath, _exporter.getCSVPath());
     }
 
-    @Ignore
+    @Test
     public void testFileWriteCapabilityFromTable() {
+        Object[][] data = {
+                { "foo", new Integer(6) },
+                { "bar", new Integer(10) }
+        };
+        String[] columnNames = { "Test1", "Test2" };
+        JTable table = new JTable(data, columnNames);
+        assertTrue("Data is inconsistent!", table.getRowCount() == 2 && table.getColumnCount() == 2);
         
-    }
-
-    @Ignore
-    public void testFileContentFormat() {
-        
+        _exporter.setCSVPath(_path);
+        _exporter.setSeparator(';');
+        _exporter.writeCSVFileFromJTable(table);
+        char separator = _exporter.getSeparator();
+        String fileContent = new FileReader(_path).readFile();
+        System.out.println("WAAAAAAAAAS:\n" + fileContent);
+        String expectedContent = "\"foo\"" + separator + "\"6\"\n\"bar\"" + separator + "\"10\"";
+        System.out.println("SOOOOLL:\n" + expectedContent);
+        assertEquals("Wrong content in CSV file!", expectedContent, fileContent);
     }
 
     @AfterClass

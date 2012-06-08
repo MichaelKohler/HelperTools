@@ -27,10 +27,17 @@ import javax.swing.JTable;
  * the resulting CSV file looks always the same.
  * 
  * @author Michael Kohler
- * @version 0.0.1a
+ * @version 0.0.2
  *
  */
 public class CSVExporter {
+
+    /**
+     * The separator which should be used to separate the values
+     * 
+     * @see getSeparator()
+     */
+    private char _separator;
 
     /**
      * The path where the resulting CSV file should be
@@ -55,6 +62,37 @@ public class CSVExporter {
      */
     public CSVExporter(String aPath) {
         _path = aPath;
+        _separator = ';';
+    }
+
+    /**
+     * Constructor which configures the specified
+     * path for the CSV and the separator.
+     * 
+     * @param aPath indicating the path for the CSV file
+     * @param aSeparator indicating which separator should be used for the values
+     */
+    public CSVExporter(String aPath, char aSeparator) {
+        _path = aPath;
+        _separator = aSeparator;
+    }
+
+    /**
+     * Returns the separator used to separate values in the resulting file
+     * 
+     * @return separator used in the file
+     */
+    public char getSeparator() {
+        return _separator;
+    }
+
+    /**
+     * Sets the separator which should be used to separate values in the file
+     * 
+     * @param aSeparator used to separate values
+     */
+    public void setSeparator(char aSeparator) {
+        _separator = aSeparator;
     }
 
     /**
@@ -81,10 +119,22 @@ public class CSVExporter {
      * is a line in the CSV. You get the data as seen in the JTable.
      * 
      * @param JTable to get the data from
+     * @see setSeparator()
      * @see javax.swing.JTable
      */
     public void writeCSVFileFromJTable(JTable aTable) {
+        String fileContent = "";
+        for (int i = 0; i < aTable.getRowCount(); i++) {
+            for (int j = 0; j < aTable.getColumnCount(); j++) {
+                if (j != 0) { fileContent += _separator; } // don't add separator on beginning
+                fileContent += "\"" + aTable.getModel().getValueAt(i, j) + "\"";
+            }
+            // don't add newline at the end of the file
+            if (i != aTable.getRowCount()-1) { fileContent += "\n"; }
+        }
 
+        FileWriter writer = new FileWriter(_path, true);
+        writer.writeFile(fileContent);
     }
 
 
