@@ -74,9 +74,7 @@ public class CSVExporterTest  {
         _exporter.writeCSVFileFromJTable(table);
         char separator = _exporter.getSeparator();
         String fileContent = new FileReader(_path).readFile();
-        System.out.println("WAAAAAAAAAS:\n" + fileContent);
-        String expectedContent = "\"foo\"" + separator + "\"6\"\n\"bar\"" + separator + "\"10\"";
-        System.out.println("SOOOOLL:\n" + expectedContent);
+        String expectedContent = "\"foo\"" + separator + "\"6\"\n\"bar\"" + separator + "\"10\"\n";
         assertEquals("Wrong content in CSV file!", expectedContent, fileContent);
     }
 
