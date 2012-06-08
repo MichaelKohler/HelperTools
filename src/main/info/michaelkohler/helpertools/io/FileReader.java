@@ -17,7 +17,7 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.
  *
  */
-package info.michaelkohler.helpertools;
+package info.michaelkohler.helpertools.io;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -29,7 +29,7 @@ import java.io.InputStreamReader;
  * a whole file. It returns the content as a String.
  * 
  * @author Michael Kohler
- * @version 0.0.1
+ * @version 0.0.2
  */
 public class FileReader {
 

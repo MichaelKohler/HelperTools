@@ -17,7 +17,9 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.
  *
  */
-package info.michaelkohler.helpertools;
+package info.michaelkohler.helpertools.properties;
+
+import info.michaelkohler.helpertools.logging.Debugger;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -31,7 +33,7 @@ import java.util.Properties;
  * do with Properties.
  * 
  * @author Michael Kohler
- * @version 0.0.1
+ * @version 0.0.2
  */
 public class PropertiesHelper {
 

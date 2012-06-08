@@ -22,7 +22,7 @@ package info.michaelkohler.helpertools;
 import java.io.File;
 import org.junit.*;
 import static org.junit.Assert.assertEquals;
-import info.michaelkohler.helpertools.CSVExporter;
+import info.michaelkohler.helpertools.io.CSVExporter;
 
 public class CSVExporterTest  {
 

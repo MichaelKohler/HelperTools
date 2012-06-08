@@ -17,7 +17,9 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.
  *
  */
-package info.michaelkohler.helpertools;
+package info.michaelkohler.helpertools.logging;
+
+import info.michaelkohler.helpertools.io.FileWriter;
 
 import java.io.File;
 import java.util.Date;
@@ -27,7 +29,7 @@ import java.util.Date;
  * It can just be used to log Exceptions to a specified file.
  * 
  * @author Michael Kohler
- * @version 0.0.1
+ * @version 0.0.2
  */
 public class Debugger {
 

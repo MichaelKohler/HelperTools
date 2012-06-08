@@ -22,8 +22,8 @@ package info.michaelkohler.helpertools;
 import java.io.File;
 import org.junit.*;
 import static org.junit.Assert.assertEquals;
-import info.michaelkohler.helpertools.FileReader;
-import info.michaelkohler.helpertools.FileWriter;
+import info.michaelkohler.helpertools.io.FileReader;
+import info.michaelkohler.helpertools.io.FileWriter;
 
 public class FileReaderWriterTest  {
     private static String _path;
