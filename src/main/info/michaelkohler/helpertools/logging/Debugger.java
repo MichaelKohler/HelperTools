@@ -63,7 +63,7 @@ public class Debugger {
      * Logs the Exception in a error file. The Exception
      * is saved in full text, i.e. with StackTrace and date.
      * 
-     * @param Exception which needs to be logged
+     * @param ex Exception which needs to be logged
      */
     public static void logMessage(Exception ex) {
         System.out.println("Message: " + ex.getMessage() + "....\n");
@@ -97,7 +97,7 @@ public class Debugger {
      * Deletes the log file according to the variable defined for the
      * pass.
      * 
-     * @see _errorLogFilename
+     * @see #_errorLogFilename
      */
     public static void deleteLogFile() {
         File logFile = new File(_errorLogFilename);

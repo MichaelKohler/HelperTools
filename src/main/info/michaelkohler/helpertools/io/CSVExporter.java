@@ -107,7 +107,7 @@ public class CSVExporter {
     /**
      * Sets the path to the CSV file.
      * 
-     * @param path to the CSV file
+     * @param aPath path to the CSV file
      */
     public void setCSVPath(String aPath) {
         _path = aPath;
@@ -118,8 +118,8 @@ public class CSVExporter {
      * of the JTable is a entity in the CSV. Every line of the JTable
      * is a line in the CSV. You get the data as seen in the JTable.
      * 
-     * @param JTable to get the data from
-     * @see setSeparator()
+     * @param aTable to get the data from
+     * @see #setSeparator(char)
      * @see javax.swing.JTable
      */
     public void writeCSVFileFromJTable(JTable aTable) {
