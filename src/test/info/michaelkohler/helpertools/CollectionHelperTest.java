@@ -28,6 +28,7 @@ import java.util.List;
 
 import org.junit.*;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import info.michaelkohler.helpertools.collections.CollectionHelper;
 import info.michaelkohler.helpertools.collections.IFunction;
 
