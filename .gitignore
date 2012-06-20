@@ -3,6 +3,8 @@ Desktop.ini
 *~
 *.swp
 *.tmp
+*.class
+*.log
 
 .classpath
 .settings
