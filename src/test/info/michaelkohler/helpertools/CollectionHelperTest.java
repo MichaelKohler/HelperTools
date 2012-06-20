@@ -32,6 +32,10 @@ import info.michaelkohler.helpertools.collections.CollectionHelper;
 import info.michaelkohler.helpertools.collections.IFunction;
 
 public class CollectionHelperTest {
+  /**
+   * This class is only used to test the {@link #all(Collection<T>,String)
+   * method. This proves that public as well as private and public fields can be accessed.
+   */
   private class MyClass {
     public final int a;
     private final int b;
