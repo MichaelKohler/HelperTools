@@ -70,8 +70,8 @@ public class DebuggerTest  {
 
     @Test
     public void shouldDeleteLog() {
-	Debugger.deleteLogFile();
-	File logFile = new File(Debugger.getLogFilename());
+        Debugger.deleteLogFile();
+        File logFile = new File(Debugger.getLogFilename());
         assertFalse("Failure: log file was still existent!", logFile.exists());
     }
 
@@ -79,6 +79,6 @@ public class DebuggerTest  {
     public static void cleanup() {
         File logFile = new File(Debugger.getLogFilename());
         if (logFile.exists())
-	    logFile.delete();
+        logFile.delete();
     }
 }
