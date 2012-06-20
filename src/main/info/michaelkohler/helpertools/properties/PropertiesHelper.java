@@ -123,7 +123,7 @@ public class PropertiesHelper {
      * Returns the value of a Property.
      * 
      * @param aKey of the Property
-     * @return
+     * @return the value of the Property
      */
     public static String getProperty(String aKey) {
         loadPropertiesFile();
