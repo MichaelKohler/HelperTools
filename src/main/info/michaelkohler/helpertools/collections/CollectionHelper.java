@@ -89,8 +89,9 @@ public final class CollectionHelper {
      * // contains a property named myProperty of type |String|.
      * CollectionHelper.each(stringCollection, new IFunction() {
      *   public void execute(Object o, int index ) {
-     *   String s = (String) o;
-     *     System.out.println("myProperty of element at index "+index+" has value "+s);
+     *     String s = (String) o;
+     *     System.out.println("myProperty of element at index "+index+
+     *                               " has value "+s.myProperty);
      *   }
      * });
      * }
