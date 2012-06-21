@@ -100,10 +100,10 @@ public class PropertiesHelper {
         }
 
         _props = new Properties();
-         try {
-             FileInputStream fis = new FileInputStream(_propertyFile);
-             _props.load(fis);
-             fis.close();
+        try {
+            FileInputStream fis = new FileInputStream(_propertyFile);
+            _props.load(fis);
+            fis.close();
         } catch (IOException ex) {
             Debugger.logMessage(ex);
         }
