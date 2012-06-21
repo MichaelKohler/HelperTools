@@ -20,6 +20,7 @@
 package info.michaelkohler.helpertools.io;
 
 import java.io.BufferedWriter;
+import java.io.IOException;
 
 /**
  * A |FileWriter| writes data to a file.
@@ -53,15 +54,13 @@ public class FileWriter {
      * the _path variable.
      * 
      * @param aText which needs to be written to the file
+     * @throws IOException
      */
-    public void writeFile(String aText) {
-        try {
-            java.io.FileWriter writer = new java.io.FileWriter(_path, _append);
-            BufferedWriter out = new BufferedWriter(writer);
-            out.write(aText);
-            out.close();
-        } catch (Exception ex) {
-        }
+    public void writeFile(String aText) throws IOException {
+        java.io.FileWriter writer = new java.io.FileWriter(_path, _append);
+        BufferedWriter out = new BufferedWriter(writer);
+        out.write(aText);
+         out.close();
     }
 
 }

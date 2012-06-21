@@ -22,6 +22,8 @@ package info.michaelkohler.helpertools.io;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
@@ -54,19 +56,17 @@ public class FileReader {
      * content as a String.
      * 
      * @return String representation of the text which was read
+     * @throws FileNotFoundException , IOException
      */
-    public String readFile() {
+    public String readFile() throws FileNotFoundException, IOException {
         String readText = "";
 
-        try {
-            FileInputStream fstream = new FileInputStream(_path);
-            DataInputStream dataStream = new DataInputStream(fstream);
-            BufferedReader br = new BufferedReader(new InputStreamReader(dataStream));
-            String strLine = "";
-            while ((strLine = br.readLine()) != null)
-                readText += strLine + "\n";
-        } catch (Exception ex) {
-        }
+        FileInputStream fstream = new FileInputStream(_path);
+        DataInputStream dataStream = new DataInputStream(fstream);
+        BufferedReader br = new BufferedReader(new InputStreamReader(dataStream));
+        String strLine = "";
+        while ((strLine = br.readLine()) != null)
+            readText += strLine + "\n";
 
         return readText;
     }
