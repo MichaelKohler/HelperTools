@@ -2,19 +2,20 @@ package info.michaelkohler.helpertools.collections;
 
 /**
  * The |IFunction| is an interface to be used
- * with {@link CollectionHelper}
- * 
+ * with {@link CollectionHelper}.
+ *
  * @author Lukas Diener
  * @version 0.0.1
  */
 public interface IFunction {
-	
-	/**
+
+    /**
      * This method will be executed for every element in
-     * a collection when you use {@link CollectionHelper#each(java.util.Collection, IFunction)}
-     * 
+     * a collection when you use
+     * {@link CollectionHelper#each(java.util.Collection, IFunction)}.
+     *
      * @param element the current element
      * @param index the current index in the collection
      */
-	public void execute(Object element, int index);
+    void execute(Object element, int index);
 }

@@ -22,47 +22,55 @@ package info.michaelkohler.helpertools.logging;
 import info.michaelkohler.helpertools.io.FileWriter;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 
 /**
  * The |Debugger| can be use as a simple Exception logger.
  * It can just be used to log Exceptions to a specified file.
- * 
+ *
  * @author Michael Kohler
  * @version 0.0.2
  */
-public class Debugger {
+public final class Debugger {
 
     /**
      * Filename of the error log file. This is just the file
      * name and NOT the full path.
      */
-    private static String _errorLogFilename = "error.log";
+    private static String errorLogFilename = "error.log";
 
     /**
-     * Constructor which sets the error log filename to
-     * the specified filename.
-     * 
-     * @param aFilename to be written to
+     * Private constructor since we don't want other classes
+     * to instantiate this class.
      */
-    public Debugger(String aFilename) {
-        _errorLogFilename = aFilename;
+    private Debugger() {
+    }
+
+    /**
+     * Sets the error log's filename. This is just the file
+     * name and NOT the full path.
+     *
+     * @param aFilename the error log filename (relative path)
+     */
+    public static void setLogFilename(String aFilename) {
+        errorLogFilename = aFilename;
     }
 
     /**
      * Returns the error log's filename. This is just the file
      * name and NOT the full path.
-     * 
+     *
      * @return String representation of the error log filename
      */
     public static String getLogFilename() {
-        return _errorLogFilename;
+        return errorLogFilename;
     }
 
     /**
      * Logs the Exception in a error file. The Exception
      * is saved in full text, i.e. with StackTrace and date.
-     * 
+     *
      * @param ex Exception which needs to be logged
      */
     public static void logMessage(Exception ex) {
@@ -85,22 +93,26 @@ public class Debugger {
      * Opens a FileWriter and writes the log to the file.
      * The file name of the log is taken from _errorLogFilename
      * which is defined in this class and can be set using the constructor.
-     * 
+     *
      * @param aLog which needs to be written
      */
     private static void writeLogFile(String aLog) {
-        FileWriter writer = new FileWriter(_errorLogFilename, true);
-        writer.writeFile(aLog);
+        FileWriter writer = new FileWriter(errorLogFilename, true);
+        try {
+            writer.writeFile(aLog);
+        } catch (IOException ex) {
+            System.out.println("Could not save the stacktrace..");
+        }
     }
 
     /**
      * Deletes the log file according to the variable defined for the
      * pass.
-     * 
+     *
      * @see #_errorLogFilename
      */
     public static void deleteLogFile() {
-        File logFile = new File(_errorLogFilename);
+        File logFile = new File(errorLogFilename);
         if (logFile.exists())
             logFile.delete();
     }
