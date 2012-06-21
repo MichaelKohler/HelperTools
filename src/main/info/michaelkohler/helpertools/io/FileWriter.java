@@ -60,7 +60,8 @@ public class FileWriter {
         java.io.FileWriter writer = new java.io.FileWriter(_path, _append);
         BufferedWriter out = new BufferedWriter(writer);
         out.write(aText);
-         out.close();
+        out.close();
+        writer.close();
     }
 
 }

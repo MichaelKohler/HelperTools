@@ -101,7 +101,9 @@ public class PropertiesHelper {
 
         _props = new Properties();
          try {
-            _props.load(new FileInputStream(_propertyFile));
+             FileInputStream fis = new FileInputStream(_propertyFile);
+             _props.load(fis);
+             fis.close();
         } catch (IOException ex) {
             Debugger.logMessage(ex);
         }
@@ -164,7 +166,9 @@ public class PropertiesHelper {
      */
     private static void storePropsFile() {
         try {
-            _props.store(new FileOutputStream(_propertyFile), null);
+            FileOutputStream fos = new FileOutputStream(_propertyFile);
+            _props.store(fos, null);
+            fos.close();
         } catch (IOException ex) {
             Debugger.logMessage(ex);
         }
