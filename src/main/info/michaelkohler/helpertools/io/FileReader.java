@@ -67,7 +67,9 @@ public class FileReader {
         String strLine = "";
         while ((strLine = br.readLine()) != null)
             readText += strLine + "\n";
-
+        br.close();
+        dataStream.close();
+        fstream.close();
         return readText;
     }
 
