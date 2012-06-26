@@ -20,7 +20,11 @@
 package info.michaelkohler.helpertools.io;
 
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 /**
  * A |FileWriter| writes data to a file.
@@ -71,4 +75,23 @@ public class FileWriter {
         writer.close();
     }
 
+    /**
+     * Writes the specified stream to the file specified in
+     * the _path variable.
+     *
+     * @param aStream stream which needs to be written to the file
+     * @throws IOException if there was an error opening/accessing/writing to the file
+     */
+    public final void writeFile(InputStream aStream) throws IOException {
+        final int chunkSize = 1024;
+        OutputStream out = new FileOutputStream(new File(this.path));
+        int read = 0;
+        byte[] bytes = new byte[chunkSize];
+        while ((read = aStream.read(bytes)) != -1) {
+            out.write(bytes, 0, read);
+        }
+        aStream.close();
+        out.flush();
+        out.close();
+    }
 }
