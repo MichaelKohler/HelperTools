@@ -27,62 +27,62 @@ import java.util.Collection;
 /**
  * The |CollectionHelper| is a static class which helps
  * performing batch operations on collections.
- * 
+ *
  * @author Lukas Diener
  * @version 0.0.1
  */
 public final class CollectionHelper {
 
     /**
-     * Empty private constructor, no instantiation 
+     * Empty private constructor, no instantiation
      * needed.
      */
     private CollectionHelper() {
-        
     }
 
     /**
      * Collects a specific property of elements in a collection
      * and returns them as a Collection. It's possible to access
      * private properties.
-     * 
+     *
      * @throws NoSuchFieldException Signals that the class doesn't
-     * have a field of a specified name. 
-     * 
+     * have a field of a specified name.
+     *
      * @param collection the collection to be traversed
      * @param property the name of the property to be extracted
-     * 
+     *
      * @return a Collection of the selected properties
      */
-    public static <T> Collection<Object> all(Collection<T> collection, String property) throws NoSuchFieldException {
-      Collection<Object> properties = new ArrayList<Object>();
-      for(T element : collection) {
-        Class<? extends Object> elementClass = element.getClass();
-        Field field = elementClass.getDeclaredField(property);
-    
-        //Make the field accessible even if private
-        if(!field.isAccessible()) {
-          field.setAccessible(true);
+    public static <T> Collection<Object> all(Collection<T> collection, String property)
+        throws NoSuchFieldException {
+        Collection<Object> properties = new ArrayList<Object>();
+        for (T element : collection) {
+            Class<? extends Object> elementClass = element.getClass();
+            Field field = elementClass.getDeclaredField(property);
+
+            //Make the field accessible even if private
+            if (!field.isAccessible()) {
+                field.setAccessible(true);
+            }
+
+            try {
+                properties.add(field.get(element));
+            } catch (IllegalArgumentException e) {
+                // this won't ever happen.
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                // this as well.
+                e.printStackTrace();
+            }
         }
-        
-        try {
-          properties.add(field.get(element));
-        } catch (IllegalArgumentException e) {
-          // this won't ever happen.
-          e.printStackTrace();
-        } catch (IllegalAccessException e) {
-          // this as well.
-          e.printStackTrace();
-        }
-      }
-      return properties;
+        return properties;
     }
-    
+
     /**
      * Calls a function for every element in a collection
      * with the element as first parameter and the index as
      * the second.
-     * 
+     *
      * <pre>
      * {@code
      * // be myCollection a |Collection| of class myClass, which
@@ -96,15 +96,15 @@ public final class CollectionHelper {
      * });
      * }
      * </pre>
-     * 
+     *
      * @param collection the collection to be traversed
      * @param function the method to be executed
      */
     public static <T> void each(Collection<T> collection, IFunction function) {
-      int index = 0;
-      for (Object element : collection) {
-	      function.execute(element, index);
-        index++;
-      }
+        int index = 0;
+        for (Object element : collection) {
+            function.execute(element, index);
+            index++;
+        }
     }
 }

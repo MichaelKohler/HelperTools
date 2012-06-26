@@ -36,34 +36,40 @@ import javax.swing.UIManager;
 /**
  * GUI Helper for the project. It makes different helper methods available
  * to the other classes.
- * 
+ *
  * @author Michael Kohler <michaelkohler@linux.com>
  * @version 0.0.1
  *
  */
-public class GUIHelper {
+public final class GUIHelper {
+
+    /**
+     * Private constructor since we don't want other classes
+     * to instantiate this class.
+     */
+    private GUIHelper() {
+    }
 
     /**
      * makes the component visible.
-     * 
+     *
      * @param aComponent which component should be visible
      */
-    public static void showComponent(Component aComponent) {
+    public static void showComponent(final Component aComponent) {
         aComponent.setVisible(true);
     }
 
     /**
      * makes the component invisible.
-     * 
+     *
      * @param aComponent which component should be invisible
      */
-    public static void hideComponent(Component aComponent) {
+    public static void hideComponent(final Component aComponent) {
         aComponent.setVisible(false);
     }
-    
+
     /**
      * makes the application pretty using the standard OS design.
-     * 
      */
     public static void prettify() {
         try {
@@ -74,8 +80,8 @@ public class GUIHelper {
     }
 
     /**
-     * sizes the JFrame
-     * 
+     * sizes and centers the JFrame.
+     *
      * @param aFrame which needs to be sized
      * @param aWidth defining the width of the window
      * @param aHeight defining the height of the window
@@ -87,22 +93,21 @@ public class GUIHelper {
 
     /**
      * makes the JFrame closeable with ESC key.
-     * 
+     *
      * @param aFrame which needs to be closeable with the ESC key
      */
     @SuppressWarnings("serial")
     public static void setESCCloseable(final JFrame aFrame) {
-        KeyStroke escapeKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0,
-                                                                                  false);
+        KeyStroke escapeKS = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0,  false);
         Action escapeAction = new AbstractAction() {
-            public void actionPerformed(ActionEvent ae) {
+            public void actionPerformed(final ActionEvent ae) {
                 aFrame.dispose();
             }
-        }; 
+        };
         aFrame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-                  .put(escapeKeyStroke, "ESCAPE");
+                  .put(escapeKS, "ESCAPE");
         aFrame.getRootPane().getActionMap().put("ESCAPE", escapeAction);
-        
+
     }
 
 }

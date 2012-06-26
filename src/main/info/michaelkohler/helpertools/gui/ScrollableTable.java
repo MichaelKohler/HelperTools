@@ -20,8 +20,6 @@
 
 package info.michaelkohler.helpertools.gui;
 
-import java.awt.Color;
-
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -32,7 +30,7 @@ import javax.swing.table.TableRowSorter;
  * The ScrollableTable is responsible to produce a scrollable table with
  * the given data input. It automatically adds a JTable to a JScrollPane
  * which then can be used further.
- * 
+ *
  * @author Michael Kohler <michaelkohler@linux.com>
  * @version 0.0.1
  *
@@ -43,7 +41,7 @@ public class ScrollableTable extends JScrollPane {
 
     /**
      * Constructor which initializes the component.
-     * 
+     *
      * @param aData specifying the data which should be displayed in the table
      * @param aColumnNames specifying the column names
      */
@@ -52,24 +50,24 @@ public class ScrollableTable extends JScrollPane {
 
         TableModel model = getTableModel(aData, aColumnNames);
         JTable overviewTable = new JTable(model);
-        overviewTable.setGridColor(new Color(240, 240, 240));
         TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(model);
         overviewTable.setRowSorter(sorter);
 
         this.setViewportView(overviewTable);
     }
-    
+
     /**
      * Produces the TableModel which is used by the table. This is a standard
      * model.
-     * 
+     *
      * @param aData specifying the data which should be displayed in the table
      * @param aColumnNames specifying the column names
      * @return model which was produced
      */
     private TableModel getTableModel(String[][] aData, String[] aColumnNames) {
         TableModel model = new DefaultTableModel(aData, aColumnNames) {
-            public Class<?> getColumnClass(int column) {
+            @Override
+            public Class<?> getColumnClass(final int column) {
                 return getValueAt(0, column).getClass();
             }
         };

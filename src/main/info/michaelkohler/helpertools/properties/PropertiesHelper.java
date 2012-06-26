@@ -31,59 +31,60 @@ import java.util.Properties;
  * The |PropertiesHelper| is a full API for Java's
  * Properties. It supports every action you can
  * do with Properties.
- * 
+ *
  * @author Michael Kohler
  * @version 0.0.2
  */
-public class PropertiesHelper {
+public final class PropertiesHelper {
 
     /**
      * The Properties instance we use internally.
      */
-    private static Properties _props;
+    private static Properties props;
 
     /**
      * Filename of the Properties file. This is NOT
      * the full qualified path, but just the filename!
      * It can be set using the setPropertyFilename()
      * method.
-     * 
+     *
      * @see setPropertyFilename()
      */
-    private static String _propertyFileName;
+    private static String propertyFileName;
 
     /**
      * The Properties file which is stored on the
      * hard drive.
      */
-    private static String _propertyFile;
+    private static String propertyFile;
 
     /**
-     * Empty Constructor
+     * Private constructor since we don't want other classes
+     * to instantiate this class.
      */
-    public PropertiesHelper() {
+    private PropertiesHelper() {
     }
 
     /**
      * Returns the filename of the Properties file. This is just the
      * file name and not the path!
-     * 
+     *
      * @return filename under which the Properties file is saved
      */
     public static String getPropertyFilename() {
-        if (_propertyFileName == null)
+        if (propertyFileName == null)
             setPropertyFilename("");
-        return _propertyFileName;
+        return propertyFileName;
     }
 
     /**
      * Sets the filename of the Properties file. This is just the
      * file name and not the path!
-     * 
+     *
      * @param aFileName of the Properties file
      */
     public static void setPropertyFilename(String aFileName) {
-        _propertyFileName = aFileName;
+        propertyFileName = aFileName;
     }
 
     /**
@@ -92,16 +93,19 @@ public class PropertiesHelper {
      */
     private static void loadPropertiesFile() {
         String currentDir = new File("").getAbsolutePath();
-        _propertyFile = currentDir + "/" + _propertyFileName;
-        File propFile = new File(_propertyFile);
+        propertyFile = currentDir + "/" + propertyFileName;
+        File propFile = new File(propertyFile);
         try {
             propFile.createNewFile();
         } catch (IOException ex) {
+            Debugger.logMessage(ex);
         }
 
-        _props = new Properties();
-         try {
-            _props.load(new FileInputStream(_propertyFile));
+        props = new Properties();
+        try {
+            FileInputStream fis = new FileInputStream(propertyFile);
+            props.load(fis);
+            fis.close();
         } catch (IOException ex) {
             Debugger.logMessage(ex);
         }
@@ -109,51 +113,51 @@ public class PropertiesHelper {
 
     /**
      * Sets a Property.
-     * 
+     *
      * @param aKey of the Property
      * @param aValue of the Property
      */
     public static void setProperty(String aKey, String aValue) {
         loadPropertiesFile();
-        _props.setProperty(aKey, aValue);
+        props.setProperty(aKey, aValue);
         storePropsFile();
     }
 
     /**
      * Returns the value of a Property.
-     * 
+     *
      * @param aKey of the Property
      * @return the value of the Property
      */
     public static String getProperty(String aKey) {
         loadPropertiesFile();
         String propValue = "";
-        propValue = _props.getProperty(aKey);
+        propValue = props.getProperty(aKey);
         return propValue;
     }
 
     /**
-     * Checks whether a given Property exists or not
-     * 
+     * Checks whether a given Property exists or not.
+     *
      * @param aKey of the requested Property
      * @return whether the Property exists or not - This is just the
      *              file name and not the path!
      */
     public static boolean propertyExists(String aKey) {
         loadPropertiesFile();
-        boolean exists = _props.containsKey(aKey);
+        boolean exists = props.containsKey(aKey);
         return exists;
     }
 
     /**
-     * Removes a Property from the Properties file
-     * 
+     * Removes a Property from the Properties file.
+     *
      * @param aKey of the Property to remove
      */
     public static void removeProperty(String aKey) {
         loadPropertiesFile();
-        if (_props.containsKey(aKey))
-            _props.remove(aKey);
+        if (props.containsKey(aKey))
+            props.remove(aKey);
         storePropsFile();
     }
 
@@ -164,7 +168,9 @@ public class PropertiesHelper {
      */
     private static void storePropsFile() {
         try {
-            _props.store(new FileOutputStream(_propertyFile), null);
+            FileOutputStream fos = new FileOutputStream(propertyFile);
+            props.store(fos, null);
+            fos.close();
         } catch (IOException ex) {
             Debugger.logMessage(ex);
         }
@@ -175,7 +181,7 @@ public class PropertiesHelper {
      * Properties file name.
      */
     public static void deleteSettingsFile() {
-        File settingsFile = new File(_propertyFileName);
+        File settingsFile = new File(propertyFileName);
         if (settingsFile.exists())
             settingsFile.delete();
     }

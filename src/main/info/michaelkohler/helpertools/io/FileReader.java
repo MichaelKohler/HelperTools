@@ -22,12 +22,13 @@ package info.michaelkohler.helpertools.io;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
  * The |FileReader| is responsible to read the content of
  * a whole file. It returns the content as a String.
- * 
+ *
  * @author Michael Kohler
  * @version 0.0.2
  */
@@ -37,37 +38,39 @@ public class FileReader {
      * Path to the file which needs to be read. This is not just
      * the file name, but the full qualified path.
      */
-    private String _path;
+    private String path;
 
     /**
      * Constructor which sets the specified path to the
      * _path variable.
-     * 
+     *
      * @param aPath to the file to be read
      */
     public FileReader(String aPath) {
-        _path = aPath;
+        this.path = aPath;
     }
 
     /**
      * Reads the file line after line and returns the whole file
      * content as a String.
-     * 
+     *
      * @return String representation of the text which was read
+     * @throws IOException if there was an error opening/accessing/reading the file
      */
-    public String readFile() {
+    public final String readFile() throws IOException {
         String readText = "";
 
-        try {
-            FileInputStream fstream = new FileInputStream(_path);
-            DataInputStream dataStream = new DataInputStream(fstream);
-            BufferedReader br = new BufferedReader(new InputStreamReader(dataStream));
-            String strLine = "";
-            while ((strLine = br.readLine()) != null)
-                readText += strLine + "\n";
-        } catch (Exception ex) {
-        }
+        FileInputStream fstream = new FileInputStream(this.path);
+        DataInputStream dataStream = new DataInputStream(fstream);
+        BufferedReader br = new BufferedReader(new InputStreamReader(dataStream));
 
+        String strLine = "";
+        while ((strLine = br.readLine()) != null)
+            readText += strLine + "\n";
+
+        br.close();
+        dataStream.close();
+        fstream.close();
         return readText;
     }
 

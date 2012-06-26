@@ -20,6 +20,11 @@
 package info.michaelkohler.helpertools.io;
 
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 /**
  * A |FileWriter| writes data to a file.
@@ -27,41 +32,66 @@ import java.io.BufferedWriter;
  * used for this path and this specific appending
  * option. If you need to write to an other file, you need
  * to create a new instance of the object.
- * 
+ *
  * @author Michael Kohler
  * @version 0.0.2
  */
 public class FileWriter {
 
-    private String _path;
-    private boolean _append;
+    /**
+     * Variable holding the path to the file to write to.
+     */
+    private String path;
+
+    /**
+     * Variable whether we want to append the text to the file or override the content.
+     */
+    private boolean append;
 
     /**
      * Constructor which sets the path and whether the
      * message should be appended to the file or not.
-     * 
+     *
      * @param aPath fully qualified path where we need to write the information to
      * @param aAppend whether the message should be appended or not
      */
     public FileWriter(String aPath, boolean aAppend) {
-        _path = aPath;
-        _append = aAppend;
+        this.path = aPath;
+        this.append = aAppend;
     }
 
     /**
      * Writes the specified text to the file specified in
      * the _path variable.
-     * 
+     *
      * @param aText which needs to be written to the file
+     * @throws IOException if there was an error opening/accessing/writing to the file
      */
-    public void writeFile(String aText) {
-        try {
-            java.io.FileWriter writer = new java.io.FileWriter(_path, _append);
-            BufferedWriter out = new BufferedWriter(writer);
-            out.write(aText);
-            out.close();
-        } catch (Exception ex) {
-        }
+    public final void writeFile(String aText) throws IOException {
+        java.io.FileWriter writer = new java.io.FileWriter(this.path, this.append);
+        BufferedWriter out = new BufferedWriter(writer);
+        out.write(aText);
+        out.close();
+        writer.close();
     }
 
+    /**
+     * Writes the specified stream to the file specified in
+     * the _path variable.
+     *
+     * @param aStream stream which needs to be written to the file
+     * @throws IOException if there was an error opening/accessing/writing to the file
+     */
+    public final void writeFile(InputStream aStream) throws IOException {
+        final int chunkSize = 1024;
+        OutputStream out = new FileOutputStream(new File(this.path));
+        int read = 0;
+        byte[] bytes = new byte[chunkSize];
+        while ((read = aStream.read(bytes)) != -1) {
+            out.write(bytes, 0, read);
+        }
+        aStream.close();
+        out.flush();
+        out.close();
+    }
 }
