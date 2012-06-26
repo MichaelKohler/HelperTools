@@ -20,9 +20,10 @@
 
 package info.michaelkohler.helpertools.io;
 
+import info.michaelkohler.helpertools.string.StringHelper;
+
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ import java.util.regex.Pattern;
 
 /**
  * The |FileHelper| is a static class which helps managing file paths.
- * 
+ *
  * @author Lukas Diener
  * @version 0.0.1
  */
@@ -43,18 +44,18 @@ public final class FileHelper {
     private FileHelper() {
 
     }
-    
+
     /**
      * Copies a file or a directory to another. Example:
      * <code>copy(new File(userDir, ".htaccess"), new File(httpdir, ".htaccess")</code>
-     * 
+     *
      * @param from Source file
      * @param to Destination file
      * @return whether the copy action was successful
      * @throws IOException Signals that the copy failed.
      */
     public static boolean copy(final File from, final File to)
-            throws IOException {
+        throws IOException {
         if (from.isDirectory()) {
             for (final String name : Arrays.asList(from.list())) {
                 if (!copy(from, to, name)) {
@@ -81,7 +82,7 @@ public final class FileHelper {
     /**
      * Copies a file or a directory from one directory to another. Example:
      * <code>copy(new File("c:\\Users"), new File("c:\\Admin"), "Users.xml")</code>
-     * 
+     *
      * @param from Source file
      * @param to Destination file
      * @param what file or directory to be copied
@@ -89,28 +90,29 @@ public final class FileHelper {
      * @throws IOException Signals that the copy failed.
      */
     public static boolean copy(final File from, final File to, final String what)
-            throws IOException {
+        throws IOException {
         return copy(new File(from, what), new File(to, what));
     }
 
     /**
      * Copies a file or a directory to another. Example:
-     * <code>copy(new File("C:\\windows.exe"), new File("C:\\Users\\CNorris\\Games\\pinball.exe")</code>
-     * 
+     * <code>copy(new File("C:\\windows.exe"),
+     * new File("C:\\Users\\CNorris\\Games\\pinball.exe")</code>
+     *
      * @param from Source file
      * @param to Destination file
      * @return whether the copy action was successful
      * @throws IOException Signals that the copy failed.
      */
     public static boolean copy(final String from, final String to)
-            throws IOException {
+        throws IOException {
         return copy(new File(from), new File(to));
     }
 
     /**
      * Copies a file or a directory from one directory to another. Example:
      * <code>copy("c:\\Users", "c:\\Admin", "Users.xml")</code>
-     * 
+     *
      * @param from Source file
      * @param to Destination file
      * @param what file or directory to be copied
@@ -126,7 +128,7 @@ public final class FileHelper {
      * Gets the filename of the given path. Example:
      * <code>fileName("C:\\Users\\ChuckNorris\\passwords.txt")
      * </code> returns "passwords.txt"
-     * 
+     *
      * @param path a file path
      * @return the filename
      */
@@ -138,15 +140,15 @@ public final class FileHelper {
     }
 
     /**
-     * Lists files and directories with a name matching the regexp recursively
-     * 
+     * Lists files and directories with a name matching the regexp recursively.
+     *
      * @param subdir starting directory
      * @param pattern Regular expression to match
      * @return List of names of the matching files/directories
      */
     public static List<String> find(final File subdir, final Pattern pattern) {
         final List<String> resultSet = new ArrayList<String>();
-        final File contents[] = subdir.listFiles();
+        final File[] contents = subdir.listFiles();
 
         for (final File file : contents) {
             String path = file.getAbsolutePath();
@@ -166,8 +168,8 @@ public final class FileHelper {
     }
 
     /**
-     * Lists files and directories matching the RegExp recursively
-     * 
+     * Lists files and directories matching the RegExp recursively.
+     *
      * @param subdir starting directory
      * @param pattern Regular expression to match
      * @return List of names of the matching files/directories
@@ -177,8 +179,8 @@ public final class FileHelper {
     }
 
     /**
-     * Lists files and directories matching the RegExp recursively
-     * 
+     * Lists files and directories matching the RegExp recursively.
+     *
      * @param subdir starting directory
      * @param pattern Regular expression to match
      * @return List of names of the matching files/directories
@@ -193,8 +195,8 @@ public final class FileHelper {
     }
 
     /**
-     * Checks if a folder is empty
-     * 
+     * Checks if a folder is empty.
+     *
      * @param directory folder to check
      * @return whether the folder is empty
      */
@@ -210,8 +212,8 @@ public final class FileHelper {
     }
 
     /**
-     * Checks if a folder is empty
-     * 
+     * Checks if a folder is empty.
+     *
      * @param directory folder to check
      * @return whether the folder is empty
      */
@@ -223,12 +225,10 @@ public final class FileHelper {
     /**
      * Creates or opens a file for output. If subdirectories in the path do not
      * exist, they are created too.
-     * 
+     *
      * @param file File object of the file to create
      * @return FileOutputStream for the new file
      * @throws IOException Signals that the OutputStream could not be created
-     * @throws FileNotFoundException Signals that the OutputStream could not be
-     *         created
      */
     public static FileOutputStream makeFile(final File file) throws IOException {
         return makeFile(file.getCanonicalPath());
@@ -237,30 +237,26 @@ public final class FileHelper {
     /**
      * Creates or opens a file for output. If sub-directories in the path do not
      * exist, they are created too.
-     * 
+     *
      * @param path Path of the file to create
      * @return FileOutputStream for the new file
      * @throws IOException Signals that the OutputStream could not be created
-     * @throws FileNotFoundException Signals that the OutputStream could not be
-     *         created
      */
     public static FileOutputStream makeFile(final String path)
-            throws IOException {
+        throws IOException {
         return makeFile(splitPath(path));
     }
 
     /**
      * Creates or opens a file for output. If sub-directories in the path do not
      * exist, they are created too.
-     * 
+     *
      * @param path array of folders representing the path of the file to create
      * @return FileOutputStream for the new file
      * @throws IOException Signals that the OutputStream could not be created
-     * @throws FileNotFoundException Signals that the OutputStream could not be
-     *         created
      */
     public static FileOutputStream makeFile(final String... path)
-            throws IOException {
+        throws IOException {
         return path.length < 1 ? null : path.length < 2 ? makeFile(path[0])
                 : path.length < 3 ? makeFile(path[0], path[1])
                         : makeFile(StringHelper.join(path, File.separator));
@@ -271,18 +267,16 @@ public final class FileHelper {
      * exist, they are created too. If the file exists, it is overwritten,
      * unless <code>append</code> is <b>true</b>. <code>append</code> determines
      * whether to open in <i>append</i> mode.
-     * 
+     *
      * @param dirname path to the file
      * @param filename name of the file to create
      * @param append whether to append or overwrite the file if it exists
      * @return FileOutputStream for the new file
-     * @throws FileNotFoundException Signals that the OutputStream could not be
-     *         created
      * @throws IOException Signals that the OutputStream could not be created
      */
     public static FileOutputStream makeFile(final String dirname,
             final String filename, final boolean append)
-            throws FileNotFoundException, IOException {
+        throws IOException {
         if (folderIsEmpty(new File(dirname))) {
             return new FileOutputStream(new File(filename), append);
         } else {
@@ -291,7 +285,6 @@ public final class FileHelper {
                 if (dir.exists())
                     dir.delete();
                 dir.mkdirs();
-            } else {
             }
             return new FileOutputStream(new File(dirname, filename), append);
         }
@@ -301,7 +294,7 @@ public final class FileHelper {
      * Gets the path name of the given path. Example:
      * <code>fileName("C:\\Users\\ChuckNorris\\passwords.txt")
      * </code> returns "C:\Users\ChuckNorris"
-     * 
+     *
      * @param path a file path
      * @return the path name
      */
@@ -318,12 +311,13 @@ public final class FileHelper {
 
     /**
      * Splits a path and a filename in two parts. Example:
-     * <code>splitPath("C:\\Users\\John\\Image.jpg") returns ["C:\Users\John", "Image.jpg"]</code>
-     * 
+     * <code>splitPath("C:\\Users\\John\\Image.jpg")
+     * returns ["C:\Users\John", "Image.jpg"]</code>
+     *
      * @param path input path
      * @return String array consinsting of path and filename
      */
     public static String[] splitPath(final String path) {
-        return new String[] { pathName(path), new File(path).getName() };
+        return new String[] {pathName(path), new File(path).getName() };
     }
 }

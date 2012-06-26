@@ -19,44 +19,42 @@
  */
 package info.michaelkohler.helpertools;
 
-import static org.junit.Assert.assertEquals;
 import info.michaelkohler.helpertools.io.FileHelper;
 import info.michaelkohler.helpertools.string.StringHelper;
-
-import java.io.File;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+
+import java.io.File;
 
 public class FileHelperTest  {
-	static String separator = new String(new char[]{File.separatorChar});
-	static String relativePath;
-	static String absolutePath;
-	static String fileName = "myFile.txt";
-	static String dirName = "myDir";
-	
-	
+    private static String separator = new String(new char[]{File.separatorChar});
+    private static String relativePath;
+    private static String fileName = "myFile.txt";
+    private static String dirName = "myDir";
+
     public FileHelperTest() {
     }
 
     @Before
-    public void setUp() {
+    public final void setUp() {
         relativePath = StringHelper.join(new String[]{dirName, fileName}, separator);
     }
 
     @Test
-    public void testFileName() {
+    public final void testFileName() {
         assertEquals(FileHelper.fileName(relativePath), fileName);
         assertEquals(FileHelper.fileName(fileName), fileName);
         assertEquals(FileHelper.fileName(dirName), dirName);
     }
-    
+
     @Test
-    public void testPathName() {
-    	assertEquals(FileHelper.pathName(relativePath), dirName);
-    	assertEquals(FileHelper.pathName(fileName), "");
-    	assertEquals(FileHelper.pathName(dirName), "");
+    public final void testPathName() {
+        assertEquals(FileHelper.pathName(relativePath), dirName);
+        assertEquals(FileHelper.pathName(fileName), "");
+        assertEquals(FileHelper.pathName(dirName), "");
     }
 
     @After
