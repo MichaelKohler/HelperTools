@@ -27,6 +27,7 @@ import info.michaelkohler.helpertools.logging.Debugger;
 import info.michaelkohler.helpertools.io.FileReader;
 
 import java.io.File;
+import java.io.IOException;
 
 public class DebuggerTest  {
     public static Object _nullObject;;
@@ -52,7 +53,7 @@ public class DebuggerTest  {
     }
 
     @Test
-    public void testErrorLog()  {
+    public void testErrorLog() throws IOException  {
         String test = null;
         try {
             test.toString();

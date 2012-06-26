@@ -20,6 +20,8 @@
 package info.michaelkohler.helpertools;
 
 import java.io.File;
+import java.io.IOException;
+
 import org.junit.*;
 import static org.junit.Assert.assertEquals;
 import info.michaelkohler.helpertools.io.FileReader;
@@ -41,7 +43,7 @@ public class FileReaderWriterTest  {
     }
 
     @Test
-    public void testReaderWriterNormal() {
+    public void testReaderWriterNormal() throws IOException {
         _append = false;
         _message = "blabla";
         FileWriter writer = new FileWriter(_path, _append);
@@ -53,7 +55,7 @@ public class FileReaderWriterTest  {
     }
 
     @Test
-    public void testReaderWriterAppend() {
+    public void testReaderWriterAppend() throws IOException {
         _append = true;
         _message = "blabla";
         FileWriter writer = new FileWriter(_path, _append);
