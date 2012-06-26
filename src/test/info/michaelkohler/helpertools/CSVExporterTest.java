@@ -25,6 +25,7 @@ import info.michaelkohler.helpertools.io.CSVExporter;
 import info.michaelkohler.helpertools.io.FileReader;
 
 import java.io.File;
+import java.io.IOException;
 
 import javax.swing.JTable;
 
@@ -60,7 +61,7 @@ public class CSVExporterTest  {
     }
 
     @Test
-    public void testFileWriteCapabilityFromTable() {
+    public void testFileWriteCapabilityFromTable() throws IOException {
         Object[][] data = {
                 { "foo", new Integer(6) },
                 { "bar", new Integer(10) }
