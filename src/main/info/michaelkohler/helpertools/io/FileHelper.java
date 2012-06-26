@@ -201,14 +201,7 @@ public final class FileHelper {
      * @return whether the folder is empty
      */
     public static boolean folderIsEmpty(final File directory) {
-        if (directory.isDirectory()) {
-            if (directory.list().length > 0) {
-                return false;
-            } else {
-                return true;
-            }
-        }
-        return false;
+        return (directory.isDirectory() && directory.list().length > 0);
     }
 
     /**
