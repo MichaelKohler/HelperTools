@@ -44,11 +44,11 @@ public class FileHelperTest  {
     public TemporaryFolder folder = new TemporaryFolder();
     
     private static String separator = new String(new char[]{File.separatorChar});
-    private static String relativePath;
     private static String fileName = "myFile.txt";
     private static String dirName = "myDir";
+    private static String relativePath = StringHelper.join(new String[]{dirName, fileName}, separator);
     
-    private static File currentDir;
+    private static File tempDir;
     private static File testFile;
     private static File subFolder;
     private static File testFile2;
@@ -57,66 +57,68 @@ public class FileHelperTest  {
     public FileHelperTest() {
     }
 
+    /**
+     * This creates a folder structure to test against. Looks like
+     * -temp
+     * --myFile.txt
+     * --myFolder
+     * ---bla.txt
+     * ---(myFile.txt)
+     * The myFile.txt in myFolder is only a reference and no existing
+     * file. Can be used to test copy/create operations.
+     */
     @Before
     public final void setUp() throws IOException {
-        relativePath = StringHelper.join(new String[]{dirName, fileName}, separator);
-    }
-    
-    public void createStructure() throws IOException{
-        currentDir = FileHelper.append(FileHelper.currentDir(), "temp");
-        currentDir.mkdir();
-        testFile = FileHelper.append(currentDir, "myFile.txt");
+        tempDir = FileHelper.append(FileHelper.currentDir(), "temp");
+        tempDir.mkdir();
+        testFile = FileHelper.append(tempDir, "myFile.txt");
         testFile.createNewFile();
-        subFolder = FileHelper.append(currentDir, "myFolder");
+        subFolder = FileHelper.append(tempDir, "myFolder");
         subFolder.mkdir();
         testFile2 = FileHelper.append(subFolder, "bla.txt");
         testFile2.createNewFile();
         targetFile = FileHelper.append(subFolder, "myFile.txt");
     }
     
-    public void clearStructure(File...additional) {
+    /**
+     * This methode deletes all files and folders mentioned in {@link #setUp()}.
+     */
+    @After
+    public void tearDown() {
         testFile.delete();
-        for(File file : additional) file.delete();
         testFile2.delete();
         if(targetFile.exists()) targetFile.delete();
         subFolder.delete();
+        tempDir.delete();
     }
     
     @Test
     public final void testCopyFileFile() throws IOException {  
-        createStructure();
         FileHelper.copy(testFile, targetFile);
         assertTrue(targetFile.exists());
-        clearStructure();
     }
     
     @Test
     public final void testCopyFileFileStr() throws IOException {
-        createStructure();
-        FileHelper.copy(currentDir, subFolder, "myFile.txt");
+        FileHelper.copy(tempDir, subFolder, "myFile.txt");
         assertTrue(targetFile.exists());
-        clearStructure();
     }
     
     @Test
     public final void testCopyStrStr() throws IOException {
-        createStructure();
         String source = testFile.getAbsolutePath();
         String target = targetFile.getAbsolutePath();
         FileHelper.copy(source,
                 target);
         assertTrue(targetFile.exists());
-        clearStructure();
     }
 
     @Test
     public final void testCopyStrStrStr() throws IOException {
-        createStructure();
-        FileHelper.copy(currentDir.getAbsolutePath(),
+        FileHelper.copy(tempDir.getAbsolutePath(),
                 subFolder.getAbsolutePath(),
                 "myFile.txt");
         assertTrue(targetFile.exists());
-        clearStructure();
     }
 
     @Test
@@ -128,31 +130,29 @@ public class FileHelperTest  {
     
     @Test
     public final void testFind() throws IOException {
-        createStructure();
         ArrayList<String> expectedResult = new ArrayList<String>();
-        List<String> actualResult = FileHelper.find(currentDir, Pattern.compile("blergh"));
+        List<String> actualResult = FileHelper.find(tempDir, Pattern.compile("blergh"));
         assertEquals(expectedResult, actualResult);
-        actualResult = FileHelper.find(currentDir.getAbsolutePath(), Pattern.compile("blergh"));
+        actualResult = FileHelper.find(tempDir.getAbsolutePath(), Pattern.compile("blergh"));
         assertEquals(expectedResult, actualResult);
-        actualResult = FileHelper.find(currentDir.getAbsolutePath(), "blergh");
+        actualResult = FileHelper.find(tempDir.getAbsolutePath(), "blergh");
         assertEquals(expectedResult, actualResult);
         
         expectedResult.add(testFile.getAbsolutePath());
-        actualResult = FileHelper.find(currentDir, Pattern.compile("myFile"));
+        actualResult = FileHelper.find(tempDir, Pattern.compile("myFile"));
         assertEquals(expectedResult, actualResult);
-        actualResult = FileHelper.find(currentDir.getAbsolutePath(), Pattern.compile("myFile"));
+        actualResult = FileHelper.find(tempDir.getAbsolutePath(), Pattern.compile("myFile"));
         assertEquals(expectedResult, actualResult);
-        actualResult = FileHelper.find(currentDir.getAbsolutePath(), "myFile");
+        actualResult = FileHelper.find(tempDir.getAbsolutePath(), "myFile");
         assertEquals(expectedResult, actualResult);
         
         expectedResult.add(testFile2.getAbsolutePath());
-        actualResult = FileHelper.find(currentDir, Pattern.compile(".+\\.txt"));
+        actualResult = FileHelper.find(tempDir, Pattern.compile(".+\\.txt"));
         assertEquals(expectedResult, actualResult);
-        actualResult = FileHelper.find(currentDir.getAbsolutePath(), Pattern.compile(".+\\.txt"));
+        actualResult = FileHelper.find(tempDir.getAbsolutePath(), Pattern.compile(".+\\.txt"));
         assertEquals(expectedResult, actualResult);
-        actualResult = FileHelper.find(currentDir.getAbsolutePath(), ".+\\.txt");
+        actualResult = FileHelper.find(tempDir.getAbsolutePath(), ".+\\.txt");
         assertEquals(expectedResult, actualResult);
-        clearStructure();
     }
     
     @Test
@@ -166,43 +166,35 @@ public class FileHelperTest  {
     
     @Test
     public final void testMakeFileStr() throws IOException {
-        createStructure();
         FileOutputStream fos = FileHelper.makeFile(targetFile);
         fos.write(12);
         fos.close();
         assertTrue(targetFile.exists());
-        clearStructure();
     }
     
     @Test
     public final void testMakeFileFile() throws IOException {
-        createStructure();
         FileOutputStream fos = FileHelper.makeFile(targetFile);
         fos.write(12);
         fos.close();
         assertTrue(targetFile.exists());
-        clearStructure();
     }
     
     @Test
     public final void testMakeFileStrArr() throws IOException {
-        createStructure();
         String[] path = targetFile.getAbsolutePath().split(Pattern.quote(File.separator));
         FileOutputStream fos = FileHelper.makeFile(path);
         fos.write(12);
         fos.close();
         assertTrue(targetFile.exists());
-        clearStructure();
     }
     
     @Test
     public final void testMakeFileStrStrBool() throws IOException {
-        createStructure();
         FileOutputStream fos = FileHelper.makeFile(subFolder.getAbsolutePath(), "myFile.txt", false);
         fos.write(12);
         fos.close();
         assertTrue(targetFile.exists());
-        targetFile.delete();
     }
 
     @Test
@@ -231,10 +223,5 @@ public class FileHelperTest  {
         
         File result2 = FileHelper.append(path2, file);
         assertEquals("C:\\Users\\CNorris\\Image.jpg", result2.getAbsolutePath());
-    }
-
-    @After
-    public void tearDown() {
-        //nothing to do here
     }
 }
