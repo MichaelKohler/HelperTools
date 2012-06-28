@@ -54,21 +54,20 @@ public final class FileHelper {
      * @return whether the copy action was successful
      * @throws IOException Signals that the copy failed.
      */
-    public static boolean copy(final File from, final File to)
-        throws IOException {
+    public static boolean copy(File from, File to) throws IOException {
         if (from.isDirectory()) {
-            for (final String name : Arrays.asList(from.list())) {
+            for (String name : Arrays.asList(from.list())) {
                 if (!copy(from, to, name)) {
                     throw new IOException("Failed to copy " + name + " from "
                             + from + " to " + to);
                 }
             }
         } else {
-            final FileInputStream is = new FileInputStream(from);
-            final FileOutputStream os = makeFile(to);
+            FileInputStream is = new FileInputStream(from);
+            FileOutputStream os = makeFile(to);
 
             // Transfer bytes from in to out
-            final byte[] buf = new byte[1024];
+            byte[] buf = new byte[1024];
             int len;
             while ((len = is.read(buf)) > 0) {
                 os.write(buf, 0, len);
@@ -89,22 +88,23 @@ public final class FileHelper {
      * @return whether the copy action was successful
      * @throws IOException Signals that the copy failed.
      */
-    public static boolean copy(final File from, final File to, final String what)
-        throws IOException {
-        return copy(new File(from, what), new File(to, what));
+    public static boolean copy(File from, File to, String what) throws IOException {
+        File fromFile = new File(from, what);
+        File toFile = new File(to, what);
+        return copy(fromFile, toFile);
     }
 
     /**
      * Copies a file or a directory to another. Example:
-     * <code>copy(new File("C:\\windows.exe"),
-     * new File("C:\\Users\\CNorris\\Games\\pinball.exe")</code>
+     * <code>copy("C:\\windows.exe",
+     * "C:\\Users\\CNorris\\Games\\pinball.exe")</code>
      *
      * @param from Source file
      * @param to Destination file
      * @return whether the copy action was successful
      * @throws IOException Signals that the copy failed.
      */
-    public static boolean copy(final String from, final String to)
+    public static boolean copy(String from, String to)
         throws IOException {
         return copy(new File(from), new File(to));
     }
@@ -119,8 +119,7 @@ public final class FileHelper {
      * @return whether the copy action was successful
      * @throws IOException Signals that the copy failed.
      */
-    public static boolean copy(final String from, final String to,
-            final String what) throws IOException {
+    public static boolean copy(String from, String to, String what) throws IOException {
         return copy(new File(from, what), new File(to, what));
     }
 
@@ -146,11 +145,11 @@ public final class FileHelper {
      * @param pattern Regular expression to match
      * @return List of names of the matching files/directories
      */
-    public static List<String> find(final File subdir, final Pattern pattern) {
-        final List<String> resultSet = new ArrayList<String>();
-        final File[] contents = subdir.listFiles();
+    public static List<String> find(File subdir, Pattern pattern) {
+        List<String> resultSet = new ArrayList<String>();
+        File[] contents = subdir.listFiles();
 
-        for (final File file : contents) {
+        for (File file : contents) {
             String path = file.getAbsolutePath();
             if (file.isDirectory()) {
                 resultSet.addAll(find(file, pattern));
@@ -174,7 +173,7 @@ public final class FileHelper {
      * @param pattern Regular expression to match
      * @return List of names of the matching files/directories
      */
-    public static List<String> find(final String subdir, final Pattern pattern) {
+    public static List<String> find(String subdir, Pattern pattern) {
         return find(new File(subdir), pattern);
     }
 
@@ -185,11 +184,11 @@ public final class FileHelper {
      * @param pattern Regular expression to match
      * @return List of names of the matching files/directories
      */
-    public static List<String> find(final String subdir, final String pattern) {
+    public static List<String> find(String subdir, String pattern) {
         try {
             return find(subdir,
-                    Pattern.compile(pattern, Pattern.CASE_INSENSITIVE));
-        } catch (final Exception e) {
+                    Pattern.compile(pattern));
+        } catch (Exception e) {
             return new ArrayList<String>();
         }
     }
@@ -200,8 +199,8 @@ public final class FileHelper {
      * @param directory folder to check
      * @return whether the folder is empty
      */
-    public static boolean folderIsEmpty(final File directory) {
-        return (directory.isDirectory() && directory.list().length > 0);
+    public static boolean folderIsEmpty(File directory) {
+        return (directory.isDirectory() && directory.list().length == 0);
     }
 
     /**
@@ -210,8 +209,8 @@ public final class FileHelper {
      * @param directory folder to check
      * @return whether the folder is empty
      */
-    public static boolean folderIsEmpty(final String directory) {
-        final File dir = new File(directory);
+    public static boolean folderIsEmpty(String directory) {
+        File dir = new File(directory);
         return folderIsEmpty(dir);
     }
 
@@ -223,8 +222,8 @@ public final class FileHelper {
      * @return FileOutputStream for the new file
      * @throws IOException Signals that the OutputStream could not be created
      */
-    public static FileOutputStream makeFile(final File file) throws IOException {
-        return makeFile(file.getCanonicalPath());
+    public static FileOutputStream makeFile(File file) throws IOException {
+        return makeFile(file.getAbsolutePath());
     }
 
     /**
@@ -235,9 +234,12 @@ public final class FileHelper {
      * @return FileOutputStream for the new file
      * @throws IOException Signals that the OutputStream could not be created
      */
-    public static FileOutputStream makeFile(final String path)
+    public static FileOutputStream makeFile(String path)
         throws IOException {
-        return makeFile(splitPath(path));
+        int sep = path.lastIndexOf(File.separator);
+        String folder = path.substring(0, sep);
+        String file = path.substring(sep + 1);
+        return makeFile(folder, file, false);
     }
 
     /**
@@ -248,11 +250,12 @@ public final class FileHelper {
      * @return FileOutputStream for the new file
      * @throws IOException Signals that the OutputStream could not be created
      */
-    public static FileOutputStream makeFile(final String... path)
+    public static FileOutputStream makeFile(String... path)
         throws IOException {
-        return path.length < 1 ? null : path.length < 2 ? makeFile(path[0])
-                : path.length < 3 ? makeFile(path[0], path[1])
-                        : makeFile(StringHelper.join(path, File.separator));
+        if (path.length < 1) return null;
+        else if (path.length < 2) return makeFile(path[0]);
+        else if (path.length < 3) return makeFile(path[0], path[1]);
+        else return makeFile(StringHelper.join(path, File.separator));
     }
 
     /**
@@ -267,19 +270,20 @@ public final class FileHelper {
      * @return FileOutputStream for the new file
      * @throws IOException Signals that the OutputStream could not be created
      */
-    public static FileOutputStream makeFile(final String dirname,
-            final String filename, final boolean append)
-        throws IOException {
+    public static FileOutputStream makeFile(String dirname,
+            String filename, boolean append) throws IOException {
         if (folderIsEmpty(new File(dirname))) {
             return new FileOutputStream(new File(filename), append);
         } else {
-            final File dir = new File(dirname);
-            if (!dir.isDirectory()) {
-                if (dir.exists())
-                    dir.delete();
-                dir.mkdirs();
-            }
+            File dir = new File(dirname);
+            createFolders(dir);
             return new FileOutputStream(new File(dirname, filename), append);
+        }
+    }
+
+    public static void createFolders(File path) {
+        if (!path.exists()) {
+            path.mkdirs();
         }
     }
 
@@ -303,14 +307,54 @@ public final class FileHelper {
     }
 
     /**
-     * Splits a path and a filename in two parts. Example:
+     * Splits a path and a filename in its parts. Example:
      * <code>splitPath("C:\\Users\\John\\Image.jpg")
-     * returns ["C:\Users\John", "Image.jpg"]</code>
+     * returns ["C:", "Users", "John", "Image.jpg"]</code>
      *
      * @param path input path
-     * @return String array consinsting of path and filename
+     * @return String array consisting of path and filename
      */
-    public static String[] splitPath(final String path) {
-        return new String[] {pathName(path), new File(path).getName() };
+    public static String[] splitPath(String path) {
+        return path.split(Pattern.quote(File.separator));
+    }
+
+    /**
+     * Returns a new file after adding the specified file/folder to the end
+     * of the path. Example:
+     * <code>append("C:\Users\John", "Image.jpg");
+     * returns File["C:\Users\John\Image.jpg"]</code>
+     *
+     * @param baseFile input path
+     * @param name name of file/folder to add
+     * @return the new object
+     */
+    public static File append(String baseFile, String name) {
+        StringBuilder sb = new StringBuilder(baseFile);
+        if (!baseFile.endsWith(File.pathSeparator)) sb.append(File.separatorChar);
+        sb.append(name);
+        return new File(sb.toString());
+    }
+
+    /**
+     * Returns a new file after adding the specified file/folder to the end
+     * of the path. Example:
+     * <code>append(new File("C:\Users\John"), "Image.jpg");
+     * returns File["C:\Users\John\Image.jpg"]</code>
+     *
+     * @param baseFile input path
+     * @param name name of file/folder to add
+     * @return the new object
+     */
+    public static File append(File baseFile, String name) {
+        return append(baseFile.getAbsolutePath(), name);
+    }
+
+    /**
+     * Returns the current directory as file object.
+     *
+     * @return the file object of the current dir
+     */
+    public static File currentDir() {
+        return new File(System.getProperty("user.dir"));
     }
 }
