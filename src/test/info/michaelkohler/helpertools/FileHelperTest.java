@@ -217,13 +217,14 @@ public class FileHelperTest  {
     @Test
     public final void testAppend() {
         String sep = File.separator;
-        String path = "C:"+sep+"Users"+sep+"CNorris";
-        String path2 = "C:"+sep+"Users"+sep+"CNorris\\";
+        String path = "some"+sep+"fake"+sep+"path";
+        String path2 = "some"+sep+"other"+sep+"path";
         String file = "Image.jpg";
+        
         File result = FileHelper.append(path, file);
-        assertEquals("C:"+sep+"Users"+sep+"CNorris"+sep+"Image.jpg", result.getAbsolutePath());
+        assertEquals(path + sep + file, result.getPath());
         
         File result2 = FileHelper.append(path2, file);
-        assertEquals("C:"+sep+"Users"+sep+"CNorris"+sep+"Image.jpg", result2.getAbsolutePath());
+        assertEquals(path2 + sep + file, result2.getPath());
     }
 }
