@@ -207,7 +207,8 @@ public class FileHelperTest  {
     @Test
     public final void testSplitPath() {
         String[] expectedResult = new String[]{"C:","Users","John","Image.jpg"};
-        String[] actualResult = FileHelper.splitPath("C:\\Users\\John\\Image.jpg");
+        String sep = File.separator;
+        String[] actualResult = FileHelper.splitPath("C:"+sep+"Users"+sep+"John"+sep+"Image.jpg");
         for(int i=0; i<expectedResult.length; i++) {
             assertEquals(expectedResult[i], actualResult[i]);
         }
@@ -215,13 +216,14 @@ public class FileHelperTest  {
     
     @Test
     public final void testAppend() {
-        String path = "C:\\Users\\CNorris";
-        String path2 = "C:\\Users\\CNorris\\";
+        String sep = File.separator;
+        String path = "C:"+sep+"Users"+sep+"CNorris";
+        String path2 = "C:"+sep+"Users"+sep+"CNorris\\";
         String file = "Image.jpg";
         File result = FileHelper.append(path, file);
-        assertEquals("C:\\Users\\CNorris\\Image.jpg", result.getAbsolutePath());
+        assertEquals("C:"+sep+"Users"+sep+"CNorris"+sep+"Image.jpg", result.getAbsolutePath());
         
         File result2 = FileHelper.append(path2, file);
-        assertEquals("C:\\Users\\CNorris\\Image.jpg", result2.getAbsolutePath());
+        assertEquals("C:"+sep+"Users"+sep+"CNorris"+sep+"Image.jpg", result2.getAbsolutePath());
     }
 }

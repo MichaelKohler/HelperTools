@@ -346,7 +346,7 @@ public final class FileHelper {
      * @return the new object
      */
     public static File append(File baseFile, String name) {
-        return append(baseFile.getAbsolutePath(), name);
+        return append(baseFile, name);
     }
 
     /**
