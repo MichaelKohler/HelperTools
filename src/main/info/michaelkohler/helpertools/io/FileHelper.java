@@ -42,7 +42,7 @@ public final class FileHelper {
      * Empty private constructor, no instantiation needed.
      */
     private FileHelper() {
-
+    	throw new AssertionError("Cannot instantiate this class");
     }
 
     /**
