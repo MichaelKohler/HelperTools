@@ -35,6 +35,7 @@ public final class NetHelper {
      * Empty Constructor.
      */
     private NetHelper() {
+    	throw new AssertionError("Cannot instantiate this class");
     }
 
     /**

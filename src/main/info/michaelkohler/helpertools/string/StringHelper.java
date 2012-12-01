@@ -35,6 +35,7 @@ public final class StringHelper {
      * needed.
      */
     private StringHelper() {
+    	throw new AssertionError("Cannot instantiate this class");
     }
 
     /**
