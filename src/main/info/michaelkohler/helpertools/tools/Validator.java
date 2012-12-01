@@ -36,6 +36,10 @@ package info.michaelkohler.helpertools.tools;
  */
 public class Validator {
 
+	private Validator() {
+		throw new AssertionError("Cannot instantiate this class");
+	}
+	
 	/**
 	 * Validates that an expression is true and throws an error if it false.
 	 * This is meant to be used in validating arguments for public methods.

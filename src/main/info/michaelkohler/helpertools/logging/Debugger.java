@@ -45,6 +45,7 @@ public final class Debugger {
      * to instantiate this class.
      */
     private Debugger() {
+    	throw new AssertionError("Cannot instantiate this class");
     }
 
     /**

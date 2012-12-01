@@ -32,12 +32,12 @@ import java.util.Collection;
  * @version 0.0.1
  */
 public final class CollectionHelper {
-
+	
     /**
-     * Empty private constructor, no instantiation
-     * needed.
+     * Empty private constructor, no instantiation needed.
      */
     private CollectionHelper() {
+    	throw new AssertionError("Cannot instantiate this class");
     }
 
     /**
