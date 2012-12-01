@@ -48,6 +48,7 @@ public final class GUIHelper {
      * to instantiate this class.
      */
     private GUIHelper() {
+    	throw new AssertionError("Cannot instantiate this class");
     }
 
     /**

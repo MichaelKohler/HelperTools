@@ -63,6 +63,7 @@ public final class PropertiesHelper {
      * to instantiate this class.
      */
     private PropertiesHelper() {
+    	throw new AssertionError("Cannot instantiate this class");
     }
 
     /**
