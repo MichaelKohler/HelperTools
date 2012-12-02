@@ -34,15 +34,6 @@ public class StringHelperTest {
 	private static String two = "myStringTwo";
 	private static String three = "myThirdString";
 
-	public StringHelperTest() {
-
-	}
-
-	@Before
-	public void setUp() {
-		// nothing yet
-	}
-
 	@Test
 	public void nullOrEmptyShouldWorkAsExpected() {
 		assertEquals(StringHelper.isNullOrEmpty(nil), true);
@@ -107,8 +98,58 @@ public class StringHelperTest {
 		assertEquals(StringHelper.postpad("asdf", 3, 'a'), "asdf");
 	}
 
-	@After
-	public void tearDown() {
-		// nothing to do here
+	@Test(expected = IllegalArgumentException.class)
+	public void testNullJoinItems() {
+		StringHelper.join(null, ",");
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testEmptyJoinItems() {
+		StringHelper.join(new String[]{}, ",");
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testNullCountCharArg() {
+		StringHelper.countChar(null, 'a');
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testNullPrepadArg() {
+		StringHelper.prepad(null, 10, 'e');
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testNullPostpadArg() {
+		StringHelper.postpad(null, 10, 'e');
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testNullTextReplace() {
+		StringHelper.replaceWithoutRepetition(null, "find", "replace");
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testNullFindReplace() {
+		StringHelper.replaceWithoutRepetition("text", null, "replace");
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testNullReplaceArg() {
+		StringHelper.replaceWithoutRepetition("text", "find", null);
+	}
+	
+	@Test
+	public void testEmptyTextReplace() {
+		StringHelper.replaceWithoutRepetition("", "find", "replace");
+	}
+	
+	@Test
+	public void testEmptyFindReplace() {
+		StringHelper.replaceWithoutRepetition("text", "", "replace");
+	}
+	
+	@Test
+	public void testEmptyReplaceArg() {
+		StringHelper.replaceWithoutRepetition("text", "find", "");
 	}
 }

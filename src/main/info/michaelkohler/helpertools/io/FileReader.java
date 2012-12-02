@@ -19,6 +19,9 @@
  */
 package info.michaelkohler.helpertools.io;
 
+import static info.michaelkohler.helpertools.string.StringHelper.isNullOrEmpty;
+import static info.michaelkohler.helpertools.tools.Validator.checkArgument;
+
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
@@ -38,7 +41,7 @@ public class FileReader {
      * Path to the file which needs to be read. This is not just
      * the file name, but the full qualified path.
      */
-    private String path;
+    private final String path;
 
     /**
      * Constructor which sets the specified path to the
@@ -47,6 +50,7 @@ public class FileReader {
      * @param aPath to the file to be read
      */
     public FileReader(String aPath) {
+    	checkArgument(!isNullOrEmpty(aPath), "aPath cannot be null or empty");
         this.path = aPath;
     }
 

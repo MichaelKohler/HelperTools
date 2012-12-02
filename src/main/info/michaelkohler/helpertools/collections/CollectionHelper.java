@@ -20,6 +20,10 @@
 
 package info.michaelkohler.helpertools.collections;
 
+import static info.michaelkohler.helpertools.tools.Validator.checkArgument;
+import static info.michaelkohler.helpertools.tools.Validator.checkNotNull;
+import info.michaelkohler.helpertools.string.StringHelper;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -55,6 +59,9 @@ public final class CollectionHelper {
      */
     public static <T> Collection<Object> all(Collection<T> collection, String property)
         throws NoSuchFieldException {
+    	checkNotNull(collection, "collection cannot be null");
+    	checkArgument(!StringHelper.isNullOrEmpty(property), "property cannot be null or empty");
+    	
         Collection<Object> properties = new ArrayList<Object>();
         for (T element : collection) {
             Class<? extends Object> elementClass = element.getClass();
@@ -75,6 +82,7 @@ public final class CollectionHelper {
                 e.printStackTrace();
             }
         }
+        
         return properties;
     }
 
@@ -101,6 +109,9 @@ public final class CollectionHelper {
      * @param function the method to be executed
      */
     public static <T> void each(Collection<T> collection, IFunction function) {
+    	checkNotNull(collection, "collection cannot be null");
+    	checkNotNull(function, "function cannot be null");
+    	
         int index = 0;
         for (Object element : collection) {
             function.execute(element, index);

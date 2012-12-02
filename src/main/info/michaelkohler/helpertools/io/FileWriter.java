@@ -19,6 +19,10 @@
  */
 package info.michaelkohler.helpertools.io;
 
+import static info.michaelkohler.helpertools.string.StringHelper.isNullOrEmpty;
+import static info.michaelkohler.helpertools.tools.Validator.checkArgument;
+import static info.michaelkohler.helpertools.tools.Validator.checkNotNull;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -41,12 +45,12 @@ public class FileWriter {
     /**
      * Variable holding the path to the file to write to.
      */
-    private String path;
+    private final String path;
 
     /**
      * Variable whether we want to append the text to the file or override the content.
      */
-    private boolean append;
+    private final boolean append;
 
     /**
      * Constructor which sets the path and whether the
@@ -56,6 +60,7 @@ public class FileWriter {
      * @param aAppend whether the message should be appended or not
      */
     public FileWriter(String aPath, boolean aAppend) {
+    	checkArgument(!isNullOrEmpty(aPath), "aPath cannot be null or empty");
         this.path = aPath;
         this.append = aAppend;
     }
@@ -68,6 +73,7 @@ public class FileWriter {
      * @throws IOException if there was an error opening/accessing/writing to the file
      */
     public final void writeFile(String aText) throws IOException {
+    	checkArgument(!isNullOrEmpty(aText), "text cannot be null or empty");
         java.io.FileWriter writer = new java.io.FileWriter(this.path, this.append);
         BufferedWriter out = new BufferedWriter(writer);
         out.write(aText);
@@ -83,6 +89,8 @@ public class FileWriter {
      * @throws IOException if there was an error opening/accessing/writing to the file
      */
     public final void writeFile(InputStream aStream) throws IOException {
+    	checkNotNull(aStream, "aStream cannot be null");
+    	
         final int chunkSize = 1024;
         OutputStream out = new FileOutputStream(new File(this.path));
         int read = 0;
@@ -90,6 +98,7 @@ public class FileWriter {
         while ((read = aStream.read(bytes)) != -1) {
             out.write(bytes, 0, read);
         }
+        
         aStream.close();
         out.flush();
         out.close();

@@ -20,6 +20,9 @@
 
 package info.michaelkohler.helpertools.string;
 
+import static info.michaelkohler.helpertools.tools.Validator.checkArgument;
+import static info.michaelkohler.helpertools.tools.Validator.checkNotNull;
+
 /**
  * The |StringHelper| is a static class which helps
  * performing useful operations on strings easily and
@@ -56,6 +59,9 @@ public final class StringHelper {
      * @return joined string
      */
     public static String join(String[] items, String separator) {
+    	checkNotNull(items, "items cannot be null");
+    	checkArgument(items.length > 0, "items cannot be empty");
+    	
         StringBuilder sb = new StringBuilder();
         sb.append(items[0]);
         for (int i = 1; i < items.length; i++) {
@@ -73,10 +79,19 @@ public final class StringHelper {
      * @return number of occurrences
      */
     public static int countChar(String text, char character) {
+    	checkNotNull(text, "text cannot be null");
+    	
+    	if (text.indexOf(character) < 0) {
+    		// If text doesn't contain character, will return -1
+    		return 0;
+    	}
+    	
         int n = 0;
         char[] characters = text.toCharArray();
         for (int i = text.indexOf(character); i < characters.length; i++) {
-            if (characters[i] == character) n++;
+            if (characters[i] == character) {
+            	n++;
+            }
         }
         return n;
     }
@@ -87,21 +102,23 @@ public final class StringHelper {
      * than the specified length, the string is returned
      * as-is.
      *
-     * @param s the source string
+     * @param string the source string
      * @param length the desired length of the final string
      * @param c the character to fill in
      * @return the pre-padded string
      */
-    public static String prepad(String s, int length, char c) {
-        int needed = length - s.length();
+    public static String prepad(String string, int length, char c) {
+    	checkNotNull(string, "string cannot be null");
+        int needed = length - string.length();
         if (needed <= 0) {
-            return s;
+            return string;
         }
+        
         char[] padding = new char[needed];
         java.util.Arrays.fill(padding, c);
         StringBuffer sb = new StringBuffer(length);
         sb.append(padding);
-        sb.append(s);
+        sb.append(string);
         return sb.toString();
     }
 
@@ -125,20 +142,22 @@ public final class StringHelper {
      * than the specified length, the string is returned
      * as-is.
      *
-     * @param s the source string
+     * @param string the source string
      * @param length the desired length of the final string
      * @param c the character to fill in
      * @return the post-padded string
      */
-    public static String postpad(String s, int length, char c) {
-        int needed = length - s.length();
+    public static String postpad(String string, int length, char c) {
+    	checkNotNull(string, "string cannot be null");
+        int needed = length - string.length();
         if (needed <= 0) {
-            return s;
+            return string;
         }
+        
         char[] padding = new char[needed];
         java.util.Arrays.fill(padding, c);
         StringBuffer sb = new StringBuffer(length);
-        sb.append(s);
+        sb.append(string);
         sb.append(padding);
         return sb.toString();
     }
@@ -146,8 +165,8 @@ public final class StringHelper {
     /**
      * Replace all occurrences of a String within another without repeating
      * parts of the string. Example: Replacing "Obama" with "Barack Obama" in
-     * "Barack Obama is the president of the U, S and A. Obama has a dog."
-     * results in "Barack Obama is the president of the U, S and A. Barack Obama
+     * "Obama is the president of the U, S of A. Obama has a dog."
+     * results in "Barack Obama is the president of the U, S of A. Barack Obama
      * has a dog."
      *
      * @param text the text in which to search
@@ -157,6 +176,10 @@ public final class StringHelper {
      */
     public static String replaceWithoutRepetition(String text, String find,
                                                                   String replace) {
+    	checkNotNull(text, "text cannot be null");
+    	checkNotNull(find, "find cannot be null");
+    	checkNotNull(replace, "replace cannot be null");
+    	
         String notMatch = replace.replace(find, "");
 
         String out = text.replaceAll(find, replace);

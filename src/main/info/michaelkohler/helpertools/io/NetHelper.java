@@ -19,6 +19,8 @@
  */
 package info.michaelkohler.helpertools.io;
 
+import static info.michaelkohler.helpertools.tools.Validator.checkNotNull;
+
 import java.io.InputStream;
 
 /**
@@ -64,6 +66,7 @@ public final class NetHelper {
      */
     public static InputStream getUrlInputStream(java.net.URL url)
         throws java.io.IOException, java.lang.InstantiationException {
+    	checkNotNull(url, "url cannot be null");
         InputStream input = url.openStream();
         if (input == null) {
             throw new java.lang.InstantiationException("Url " + url

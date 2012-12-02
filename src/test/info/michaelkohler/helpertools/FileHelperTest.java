@@ -54,9 +54,6 @@ public class FileHelperTest  {
     private static File testFile2;
     private static File targetFile;
 
-    public FileHelperTest() {
-    }
-
     /**
      * This creates a folder structure to test against. Looks like
      * -temp
@@ -226,5 +223,97 @@ public class FileHelperTest  {
         
         File result2 = FileHelper.append(path2, file);
         assertEquals(path2 + sep + file, result2.getPath());
+    }
+        
+    @Test
+    public void testMakeFileNullCausesStackOverflow() throws IOException {
+    	// Regression test to prevent MakeFile from going into an infinite loop
+    	// if the size of its inputs are two
+    	FileHelper.makeFile("a", "b");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testCopyNullFromFile() throws IOException {
+    	FileHelper.copy(null, new File("something"));
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testCopyNullToFile() throws IOException {
+    	FileHelper.copy(new File("something"), null);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testCopyNullWhat() throws IOException {
+    	FileHelper.copy(new File("A"), new File("B"), null);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testFindNullFile() throws IOException {
+    	File f = null;
+    	FileHelper.find(f, Pattern.compile(""));
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testFindNullPattern() throws IOException {
+    	File f = null;
+    	FileHelper.find(f, Pattern.compile(""));
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testFindNullSubdir() throws IOException {
+    	String s = null;
+    	FileHelper.find(s, Pattern.compile(""));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testFolderIsEmptyNullFile() throws IOException {
+    	File f = null;
+    	FileHelper.folderIsEmpty(f);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testFolderIsEmptyNullString() throws IOException {
+    	String s = null;
+    	FileHelper.folderIsEmpty(s);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testFolderIsEmptyNull() throws IOException {
+    	File f = null;
+    	FileHelper.folderIsEmpty(f);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testMakeFileNullArgs() throws IOException {
+    	String[] s = null;
+    	FileHelper.makeFile(s);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testMakeFileNullArg() throws IOException {
+    	String s = null;
+    	FileHelper.makeFile(s);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testMakeFileNullDir() throws IOException {
+    	FileHelper.makeFile(null, "file", false);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testMakeFileNullFile() throws IOException {
+    	FileHelper.makeFile("dir", null, false);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testAppendNullBase() throws IOException {
+    	String s = null;
+    	FileHelper.append(s, "name");
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testAppendNullBaseFile() throws IOException {
+    	File f = null;
+    	FileHelper.append(f, "name");
     }
 }

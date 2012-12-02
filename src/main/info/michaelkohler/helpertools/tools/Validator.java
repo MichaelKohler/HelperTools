@@ -51,7 +51,7 @@ public class Validator {
 	 */
 	public static void checkArgument(boolean expression, String errorMessage) {
 		if (!expression) {
-			throw new IllegalArgumentException(errorMessage);
+			throw new IllegalArgumentException(errorMessage.toString());
 		}
 	}
 
@@ -68,7 +68,7 @@ public class Validator {
 	 *             itself.
 	 * @see Validator#checkArgument(boolean, String)
 	 */
-	public static Object checkNotNull(Object toCheck, String errorMessage) {
+	public static <T> T checkNotNull(T toCheck, String errorMessage) {
 		checkArgument(null != toCheck, errorMessage);
 		return toCheck;
 	}
