@@ -36,12 +36,12 @@ import java.util.Collection;
  * @version 0.0.1
  */
 public final class CollectionHelper {
-	
+
     /**
      * Empty private constructor, no instantiation needed.
      */
     private CollectionHelper() {
-    	throw new AssertionError("Cannot instantiate this class");
+        throw new AssertionError("Cannot instantiate this class");
     }
 
     /**
@@ -59,9 +59,9 @@ public final class CollectionHelper {
      */
     public static <T> Collection<Object> all(Collection<T> collection, String property)
         throws NoSuchFieldException {
-    	checkNotNull(collection, "collection cannot be null");
-    	checkArgument(!StringHelper.isNullOrEmpty(property), "property cannot be null or empty");
-    	
+        checkNotNull(collection, "collection cannot be null");
+        checkArgument(!StringHelper.isNullOrEmpty(property), "property cannot be null or empty");
+
         Collection<Object> properties = new ArrayList<Object>();
         for (T element : collection) {
             Class<? extends Object> elementClass = element.getClass();
@@ -109,9 +109,9 @@ public final class CollectionHelper {
      * @param function the method to be executed
      */
     public static <T> void each(Collection<T> collection, IFunction function) {
-    	checkNotNull(collection, "collection cannot be null");
-    	checkNotNull(function, "function cannot be null");
-    	
+        checkNotNull(collection, "collection cannot be null");
+        checkNotNull(function, "function cannot be null");
+
         int index = 0;
         for (Object element : collection) {
             function.execute(element, index);

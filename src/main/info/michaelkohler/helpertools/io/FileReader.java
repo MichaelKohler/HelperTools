@@ -50,7 +50,7 @@ public class FileReader {
      * @param aPath to the file to be read
      */
     public FileReader(String aPath) {
-    	checkArgument(!isNullOrEmpty(aPath), "aPath cannot be null or empty");
+        checkArgument(!isNullOrEmpty(aPath), "aPath cannot be null or empty");
         this.path = aPath;
     }
 

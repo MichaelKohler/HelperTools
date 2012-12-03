@@ -29,7 +29,7 @@ import info.michaelkohler.helpertools.io.FileReader;
 import info.michaelkohler.helpertools.io.FileWriter;
 
 public class FileReaderWriterTest  {
-	
+    
     private static String _path;
     private static boolean _append;
     private static String _message;
@@ -73,44 +73,44 @@ public class FileReaderWriterTest  {
 
     @Test(expected = IllegalArgumentException.class)
     public void testNullReaderConstructorArg() {
-    	new FileReader(null);
+        new FileReader(null);
     }
     
     @Test(expected = IllegalArgumentException.class)
     public void testEmptyReaderConstructorArg() {
-    	new FileReader("");
+        new FileReader("");
     }
     
     @Test(expected = IllegalArgumentException.class)
     public void testNullWriterConstructorArg() {
-    	new FileWriter(null, true);
+        new FileWriter(null, true);
     }
     
     @Test(expected = IllegalArgumentException.class)
     public void testEmptyWriterConstructorArg() {
-    	new FileWriter("", false);
+        new FileWriter("", false);
     }
     
     @Test(expected = IllegalArgumentException.class)
     public void testNullStrWriteFile() throws IOException {
-    	FileWriter writer = new FileWriter(_path, _append);
-    	String s = null;
-    	writer.writeFile(s);
+        FileWriter writer = new FileWriter(_path, _append);
+        String s = null;
+        writer.writeFile(s);
     }
     
     @Test(expected = IllegalArgumentException.class)
     public void testEmptyWriteFile() throws IOException {
-    	FileWriter writer = new FileWriter(_path, _append);
-    	writer.writeFile("");
+        FileWriter writer = new FileWriter(_path, _append);
+        writer.writeFile("");
     }
     
     @Test(expected = IllegalArgumentException.class)
     public void testNullInputWriteFile() throws IOException {
-    	FileWriter writer = new FileWriter(_path, _append);
-    	InputStream is = null;
-    	writer.writeFile(is);
+        FileWriter writer = new FileWriter(_path, _append);
+        InputStream is = null;
+        writer.writeFile(is);
     }
-	
+    
     @After
     public void cleanup() {
         File file = new File(_path);

@@ -37,7 +37,7 @@ public final class NetHelper {
      * Empty Constructor.
      */
     private NetHelper() {
-    	throw new AssertionError("Cannot instantiate this class");
+        throw new AssertionError("Cannot instantiate this class");
     }
 
     /**
@@ -66,7 +66,7 @@ public final class NetHelper {
      */
     public static InputStream getUrlInputStream(java.net.URL url)
         throws java.io.IOException, java.lang.InstantiationException {
-    	checkNotNull(url, "url cannot be null");
+        checkNotNull(url, "url cannot be null");
         InputStream input = url.openStream();
         if (input == null) {
             throw new java.lang.InstantiationException("Url " + url

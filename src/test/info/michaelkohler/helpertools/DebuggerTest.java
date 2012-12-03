@@ -75,14 +75,14 @@ public class DebuggerTest  {
 
     @Test(expected = IllegalArgumentException.class)
     public void testNullLogArg() {
-    	Debugger.logMessage(null);
+        Debugger.logMessage(null);
     }
     
     @AfterClass
     public static void cleanup() {
         File logFile = new File(Debugger.getLogFilename());
         if (logFile.exists()) {
-        	logFile.delete();
+            logFile.delete();
         }
     }
 }

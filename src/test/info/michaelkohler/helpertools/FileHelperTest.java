@@ -227,93 +227,93 @@ public class FileHelperTest  {
         
     @Test
     public void testMakeFileNullCausesStackOverflow() throws IOException {
-    	// Regression test to prevent MakeFile from going into an infinite loop
-    	// if the size of its inputs are two
-    	FileHelper.makeFile("a", "b");
+        // Regression test to prevent MakeFile from going into an infinite loop
+        // if the size of its inputs are two
+        FileHelper.makeFile("a", "b");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testCopyNullFromFile() throws IOException {
-    	FileHelper.copy(null, new File("something"));
+        FileHelper.copy(null, new File("something"));
     }
     
     @Test(expected = IllegalArgumentException.class)
     public void testCopyNullToFile() throws IOException {
-    	FileHelper.copy(new File("something"), null);
+        FileHelper.copy(new File("something"), null);
     }
     
     @Test(expected = IllegalArgumentException.class)
     public void testCopyNullWhat() throws IOException {
-    	FileHelper.copy(new File("A"), new File("B"), null);
+        FileHelper.copy(new File("A"), new File("B"), null);
     }
     
     @Test(expected = IllegalArgumentException.class)
     public void testFindNullFile() throws IOException {
-    	File f = null;
-    	FileHelper.find(f, Pattern.compile(""));
+        File f = null;
+        FileHelper.find(f, Pattern.compile(""));
     }
     
     @Test(expected = IllegalArgumentException.class)
     public void testFindNullPattern() throws IOException {
-    	File f = null;
-    	FileHelper.find(f, Pattern.compile(""));
+        File f = null;
+        FileHelper.find(f, Pattern.compile(""));
     }
     
     @Test(expected = IllegalArgumentException.class)
     public void testFindNullSubdir() throws IOException {
-    	String s = null;
-    	FileHelper.find(s, Pattern.compile(""));
+        String s = null;
+        FileHelper.find(s, Pattern.compile(""));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testFolderIsEmptyNullFile() throws IOException {
-    	File f = null;
-    	FileHelper.folderIsEmpty(f);
+        File f = null;
+        FileHelper.folderIsEmpty(f);
     }
     
     @Test(expected = IllegalArgumentException.class)
     public void testFolderIsEmptyNullString() throws IOException {
-    	String s = null;
-    	FileHelper.folderIsEmpty(s);
+        String s = null;
+        FileHelper.folderIsEmpty(s);
     }
     
     @Test(expected = IllegalArgumentException.class)
     public void testFolderIsEmptyNull() throws IOException {
-    	File f = null;
-    	FileHelper.folderIsEmpty(f);
+        File f = null;
+        FileHelper.folderIsEmpty(f);
     }
     
     @Test(expected = IllegalArgumentException.class)
     public void testMakeFileNullArgs() throws IOException {
-    	String[] s = null;
-    	FileHelper.makeFile(s);
+        String[] s = null;
+        FileHelper.makeFile(s);
     }
     
     @Test(expected = IllegalArgumentException.class)
     public void testMakeFileNullArg() throws IOException {
-    	String s = null;
-    	FileHelper.makeFile(s);
+        String s = null;
+        FileHelper.makeFile(s);
     }
     
     @Test(expected = IllegalArgumentException.class)
     public void testMakeFileNullDir() throws IOException {
-    	FileHelper.makeFile(null, "file", false);
+        FileHelper.makeFile(null, "file", false);
     }
     
     @Test(expected = IllegalArgumentException.class)
     public void testMakeFileNullFile() throws IOException {
-    	FileHelper.makeFile("dir", null, false);
+        FileHelper.makeFile("dir", null, false);
     }
     
     @Test(expected = IllegalArgumentException.class)
     public void testAppendNullBase() throws IOException {
-    	String s = null;
-    	FileHelper.append(s, "name");
+        String s = null;
+        FileHelper.append(s, "name");
     }
     
     @Test(expected = IllegalArgumentException.class)
     public void testAppendNullBaseFile() throws IOException {
-    	File f = null;
-    	FileHelper.append(f, "name");
+        File f = null;
+        FileHelper.append(f, "name");
     }
 }

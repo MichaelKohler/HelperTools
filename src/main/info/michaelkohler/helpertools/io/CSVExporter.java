@@ -57,7 +57,7 @@ public class CSVExporter {
      * |CSVExporter|.
      */
     public CSVExporter() {
-    	
+
     }
 
     /**
@@ -129,8 +129,8 @@ public class CSVExporter {
      * @see javax.swing.JTable
      */
     public final void writeCSVFileFromJTable(JTable aTable) {
-    	checkNotNull(aTable, "aTable cannot be null");
-    	
+        checkNotNull(aTable, "aTable cannot be null");
+
         String fileContent = "";
         for (int i = 0; i < aTable.getRowCount(); i++) {
             for (int j = 0; j < aTable.getColumnCount(); j++) {

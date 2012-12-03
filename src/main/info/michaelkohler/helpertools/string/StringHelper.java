@@ -38,7 +38,7 @@ public final class StringHelper {
      * needed.
      */
     private StringHelper() {
-    	throw new AssertionError("Cannot instantiate this class");
+        throw new AssertionError("Cannot instantiate this class");
     }
 
     /**
@@ -59,9 +59,9 @@ public final class StringHelper {
      * @return joined string
      */
     public static String join(String[] items, String separator) {
-    	checkNotNull(items, "items cannot be null");
-    	checkArgument(items.length > 0, "items cannot be empty");
-    	
+        checkNotNull(items, "items cannot be null");
+        checkArgument(items.length > 0, "items cannot be empty");
+        
         StringBuilder sb = new StringBuilder();
         sb.append(items[0]);
         for (int i = 1; i < items.length; i++) {
@@ -79,18 +79,19 @@ public final class StringHelper {
      * @return number of occurrences
      */
     public static int countChar(String text, char character) {
-    	checkNotNull(text, "text cannot be null");
-    	
-    	if (text.indexOf(character) < 0) {
-    		// If text doesn't contain character, will return -1
-    		return 0;
-    	}
-    	
+        checkNotNull(text, "text cannot be null");
+        
+        if (text.indexOf(character) < 0) {
+            // If text doesn't contain character, String#indexOf returns -1, so
+            // prevent ArrayIndexOutOfBounds by returning now.
+            return 0;
+        }
+        
         int n = 0;
         char[] characters = text.toCharArray();
         for (int i = text.indexOf(character); i < characters.length; i++) {
             if (characters[i] == character) {
-            	n++;
+                n++;
             }
         }
         return n;
@@ -108,7 +109,7 @@ public final class StringHelper {
      * @return the pre-padded string
      */
     public static String prepad(String string, int length, char c) {
-    	checkNotNull(string, "string cannot be null");
+        checkNotNull(string, "string cannot be null");
         int needed = length - string.length();
         if (needed <= 0) {
             return string;
@@ -148,7 +149,7 @@ public final class StringHelper {
      * @return the post-padded string
      */
     public static String postpad(String string, int length, char c) {
-    	checkNotNull(string, "string cannot be null");
+        checkNotNull(string, "string cannot be null");
         int needed = length - string.length();
         if (needed <= 0) {
             return string;
@@ -176,10 +177,10 @@ public final class StringHelper {
      */
     public static String replaceWithoutRepetition(String text, String find,
                                                                   String replace) {
-    	checkNotNull(text, "text cannot be null");
-    	checkNotNull(find, "find cannot be null");
-    	checkNotNull(replace, "replace cannot be null");
-    	
+        checkNotNull(text, "text cannot be null");
+        checkNotNull(find, "find cannot be null");
+        checkNotNull(replace, "replace cannot be null");
+        
         String notMatch = replace.replace(find, "");
 
         String out = text.replaceAll(find, replace);

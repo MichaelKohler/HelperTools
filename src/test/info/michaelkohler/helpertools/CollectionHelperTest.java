@@ -38,6 +38,7 @@ public class CollectionHelperTest {
    * method. This proves that public as well as private and public fields can be accessed.
    */
   private class MyClass {
+    
     public final int a;
     private final int b;
     public MyClass(int a, int b) {
@@ -64,7 +65,7 @@ public class CollectionHelperTest {
 
   @Test
   public void stringCollectionEach() {
-	   CollectionHelper.each(stringCollection, new IFunction() {
+       CollectionHelper.each(stringCollection, new IFunction() {
       public void execute(Object o, int index ) {
         String s = (String) o;
         if(index == 0) assertEquals(s.length(), 11);
@@ -98,25 +99,25 @@ public class CollectionHelperTest {
   
   @Test(expected = IllegalArgumentException.class)
   public void testAllNullCollection() throws NoSuchFieldException {
-	CollectionHelper.all(null, "a");  
+    CollectionHelper.all(null, "a");  
   }
   
   @Test(expected = IllegalArgumentException.class)
   public void testAllNullString() throws NoSuchFieldException {
-	  CollectionHelper.all(myClassCollection, null);
+      CollectionHelper.all(myClassCollection, null);
   }
   
   @Test(expected = IllegalArgumentException.class)
   public void testEachNullCollection() {
-	  CollectionHelper.each(null, new IFunction() {		
-		public void execute(Object element, int index) {
-			// Dont need to do anything
-		}
-	});
+      CollectionHelper.each(null, new IFunction() {
+        public void execute(Object element, int index) {
+            // Dont need to do anything
+        }
+    });
   }
   
   @Test(expected = IllegalArgumentException.class)
   public void testEachNullIFunction() {
-	  CollectionHelper.each(myClassCollection, null);
+      CollectionHelper.each(myClassCollection, null);
   }
 }

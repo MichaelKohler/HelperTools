@@ -46,7 +46,7 @@ public final class Debugger {
      * to instantiate this class.
      */
     private Debugger() {
-    	throw new AssertionError("Cannot instantiate this class");
+        throw new AssertionError("Cannot instantiate this class");
     }
 
     /**
@@ -76,7 +76,7 @@ public final class Debugger {
      * @param ex Exception which needs to be logged
      */
     public static void logMessage(Exception ex) {
-    	checkNotNull(ex, "ex cannot be null");
+        checkNotNull(ex, "ex cannot be null");
         System.out.println("Message: " + ex.getMessage() + "....\n");
         System.out.println("Stacktrace: ");
         StackTraceElement[] ste = ex.getStackTrace();

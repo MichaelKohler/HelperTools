@@ -34,7 +34,7 @@ import org.junit.Test;
 
 public class NetHelperTest {
 
-	private final int FILE_SIZE = 7007;
+    private final int FILE_SIZE = 7007;
     private final int CHUNK_SIZE = 4096;
 
     @Test
@@ -73,6 +73,6 @@ public class NetHelperTest {
     
     @Test(expected = IllegalArgumentException.class)
     public void testNullGetUrilInput() throws IOException, InstantiationException {
-    	NetHelper.getUrlInputStream(null);
+        NetHelper.getUrlInputStream(null);
     }
 }

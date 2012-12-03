@@ -39,12 +39,12 @@ import java.util.regex.Pattern;
  * @version 0.0.1
  */
 public final class FileHelper {
-	
+
     /**
      * Empty private constructor, no instantiation needed.
      */
     private FileHelper() {
-    	throw new AssertionError("Cannot instantiate this class");
+        throw new AssertionError("Cannot instantiate this class");
     }
 
     /**
@@ -57,9 +57,9 @@ public final class FileHelper {
      * @throws IOException Signals that the copy failed.
      */
     public static boolean copy(File from, File to) throws IOException {
-    	checkNotNull(from, "from cannot be null");
-    	checkNotNull(to, "to cannot be null");
-    	
+        checkNotNull(from, "from cannot be null");
+        checkNotNull(to, "to cannot be null");
+
         if (from.isDirectory()) {
             for (String name : Arrays.asList(from.list())) {
                 if (!copy(from, to, name)) {
@@ -94,10 +94,10 @@ public final class FileHelper {
      * @throws IOException Signals that the copy failed.
      */
     public static boolean copy(File from, File to, String what) throws IOException {
-    	checkNotNull(from, "from cannot be null");
-    	checkNotNull(to, "to cannot be null");
-    	checkNotNull(what, "what cannot be null");
-    	
+        checkNotNull(from, "from cannot be null");
+        checkNotNull(to, "to cannot be null");
+        checkNotNull(what, "what cannot be null");
+
         File fromFile = new File(from, what);
         File toFile = new File(to, what);
         return copy(fromFile, toFile);
@@ -114,8 +114,8 @@ public final class FileHelper {
      * @throws IOException Signals that the copy failed.
      */
     public static boolean copy(String from, String to) throws IOException {
-    	checkNotNull(from, "from cannot be null");
-    	checkNotNull(to, "to cannot be null");
+        checkNotNull(from, "from cannot be null");
+        checkNotNull(to, "to cannot be null");
         return copy(new File(from), new File(to));
     }
 
@@ -130,9 +130,9 @@ public final class FileHelper {
      * @throws IOException Signals that the copy failed.
      */
     public static boolean copy(String from, String to, String what) throws IOException {
-    	checkNotNull(from, "from cannot be null");
-    	checkNotNull(to, "to cannot be null");
-    	checkNotNull(what, "what cannot be null");
+        checkNotNull(from, "from cannot be null");
+        checkNotNull(to, "to cannot be null");
+        checkNotNull(what, "what cannot be null");
         return copy(new File(from, what), new File(to, what));
     }
 
@@ -159,8 +159,8 @@ public final class FileHelper {
      * @return List of names of the matching files/directories
      */
     public static List<String> find(File subdir, Pattern pattern) {
-    	checkNotNull(subdir, "subdir cannot be null");
-    	checkNotNull(pattern, "pattern cannot be null");
+        checkNotNull(subdir, "subdir cannot be null");
+        checkNotNull(pattern, "pattern cannot be null");
         List<String> resultSet = new ArrayList<String>();
         File[] contents = subdir.listFiles();
 
@@ -189,8 +189,8 @@ public final class FileHelper {
      * @return List of names of the matching files/directories
      */
     public static List<String> find(String subdir, Pattern pattern) {
-    	checkNotNull(subdir, "subdir cannot be null");
-    	checkNotNull(pattern, "pattern cannot be null");
+        checkNotNull(subdir, "subdir cannot be null");
+        checkNotNull(pattern, "pattern cannot be null");
         return find(new File(subdir), pattern);
     }
 
@@ -202,8 +202,8 @@ public final class FileHelper {
      * @return List of names of the matching files/directories
      */
     public static List<String> find(String subdir, String pattern) {
-    	checkNotNull(subdir, "subdir cannot be null");
-    	checkNotNull(pattern, "pattern cannot be null");
+        checkNotNull(subdir, "subdir cannot be null");
+        checkNotNull(pattern, "pattern cannot be null");
         try {
             return find(subdir,
                     Pattern.compile(pattern));
@@ -219,7 +219,7 @@ public final class FileHelper {
      * @return whether the folder is empty
      */
     public static boolean folderIsEmpty(File directory) {
-    	checkNotNull(directory, "directory cannot be null");
+        checkNotNull(directory, "directory cannot be null");
         return (directory.isDirectory() && directory.list().length == 0);
     }
 
@@ -230,7 +230,7 @@ public final class FileHelper {
      * @return whether the folder is empty
      */
     public static boolean folderIsEmpty(String directory) {
-    	checkNotNull(directory, "directory cannot be null");
+        checkNotNull(directory, "directory cannot be null");
         File dir = new File(directory);
         return folderIsEmpty(dir);
     }
@@ -244,7 +244,7 @@ public final class FileHelper {
      * @throws IOException Signals that the OutputStream could not be created
      */
     public static FileOutputStream makeFile(File file) throws IOException {
-    	checkNotNull(file, "file cannot be null");
+        checkNotNull(file, "file cannot be null");
         return makeFile(file.getAbsolutePath());
     }
 
@@ -257,7 +257,7 @@ public final class FileHelper {
      * @throws IOException Signals that the OutputStream could not be created
      */
     public static FileOutputStream makeFile(String path) throws IOException {
-    	checkNotNull(path, "path cannot be null");
+        checkNotNull(path, "path cannot be null");
         int sep = path.lastIndexOf(File.separator);
         String folder = path.substring(0, sep);
         String file = path.substring(sep + 1);
@@ -273,7 +273,7 @@ public final class FileHelper {
      * @throws IOException Signals that the OutputStream could not be created
      */
     public static FileOutputStream makeFile(String... path) throws IOException {
-    	checkNotNull(path, "path cannot be null");
+        checkNotNull(path, "path cannot be null");
         if (path.length < 1) return null;
         else if (path.length < 2) return makeFile(path[0]);
         else return makeFile(StringHelper.join(path, File.separator));
@@ -293,9 +293,9 @@ public final class FileHelper {
      */
     public static FileOutputStream makeFile(String dirname,
             String filename, boolean append) throws IOException {
-    	checkNotNull(dirname, "dirname cannot be null");
-    	checkNotNull(filename, "filename cannot be null");
-    	
+        checkNotNull(dirname, "dirname cannot be null");
+        checkNotNull(filename, "filename cannot be null");
+
         if (folderIsEmpty(new File(dirname))) {
             return new FileOutputStream(new File(filename), append);
         } else {
@@ -306,7 +306,7 @@ public final class FileHelper {
     }
 
     public static void createFolders(File path) {
-    	checkNotNull(path, "path cannot be null");
+        checkNotNull(path, "path cannot be null");
         if (!path.exists()) {
             path.mkdirs();
         }
@@ -340,7 +340,7 @@ public final class FileHelper {
      * @return String array consisting of path and filename
      */
     public static String[] splitPath(String path) {
-    	checkNotNull(path, "path cannot be null");
+        checkNotNull(path, "path cannot be null");
         return path.split(Pattern.quote(File.separator));
     }
 
@@ -355,9 +355,9 @@ public final class FileHelper {
      * @return the new object
      */
     public static File append(String baseFile, String name) {
-    	checkNotNull(baseFile, "baseFile cannot be null");
-    	checkNotNull(name, "name cannot be null");
-    	
+        checkNotNull(baseFile, "baseFile cannot be null");
+        checkNotNull(name, "name cannot be null");
+
         StringBuilder sb = new StringBuilder(baseFile);
         if (!baseFile.endsWith(File.pathSeparator)) sb.append(File.separatorChar);
         sb.append(name);
@@ -375,9 +375,9 @@ public final class FileHelper {
      * @return the new object
      */
     public static File append(File baseFile, String name) {
-    	checkNotNull(baseFile, "baseFile cannot be null");
-    	checkNotNull(name, "name cannot be null");
-    	
+        checkNotNull(baseFile, "baseFile cannot be null");
+        checkNotNull(name, "name cannot be null");
+
         return append(baseFile.getPath(), name);
     }
 
