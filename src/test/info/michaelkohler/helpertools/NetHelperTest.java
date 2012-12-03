@@ -19,13 +19,9 @@
  */
 package info.michaelkohler.helpertools;
 
-import info.michaelkohler.helpertools.io.NetHelper;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import info.michaelkohler.helpertools.io.NetHelper;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -34,17 +30,12 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.junit.Test;
+
 public class NetHelperTest {
+
     private final int FILE_SIZE = 7007;
     private final int CHUNK_SIZE = 4096;
-
-    public NetHelperTest() {
-    }
-
-    @Before
-    public void setUp() {
-        // nothing yet
-    }
 
     @Test
     public final void downloadFileTest() throws MalformedURLException {
@@ -79,9 +70,9 @@ public class NetHelperTest {
         }
         assertEquals(baos.size(), FILE_SIZE);
     }
-
-    @After
-    public void tearDown() {
-		// nothing to do here
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testNullGetUrilInput() throws IOException, InstantiationException {
+        NetHelper.getUrlInputStream(null);
     }
 }

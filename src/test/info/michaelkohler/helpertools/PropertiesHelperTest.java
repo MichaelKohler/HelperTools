@@ -28,12 +28,10 @@ import info.michaelkohler.helpertools.properties.PropertiesHelper;
 import java.io.File;
 
 public class PropertiesHelperTest  {
+
     private static String _testString;
     private static String _key;
     private static String _filename;
-
-    public PropertiesHelperTest() {
-    }
 
     @BeforeClass
     public static void initTest() {
@@ -74,6 +72,39 @@ public class PropertiesHelperTest  {
         assertFalse("Failure: settings file is still existent!", settingsFile.exists());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testNullLoadPropFile() {
+        // Although this is a private method, test by calling one of the four 
+        // public methods that calls this.
+        PropertiesHelper.setPropertyFilename(null);
+        PropertiesHelper.getProperty("prop");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetNullPropFile() {
+        PropertiesHelper.setPropertyFilename(null);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetNullPropKey() {
+        PropertiesHelper.setProperty(null, "val");
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetNullValueKey() {
+        PropertiesHelper.setProperty("key", null);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetNullProp() {
+        PropertiesHelper.getProperty(null);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testRemoveNullProp() {
+        PropertiesHelper.removeProperty(null);
+    }
+    
     @AfterClass
     public static void cleanup() {
         File settingsFile = new File(_filename);

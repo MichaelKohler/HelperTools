@@ -21,6 +21,7 @@ package info.michaelkohler.helpertools;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 import org.junit.*;
 import static org.junit.Assert.assertEquals;
@@ -28,12 +29,11 @@ import info.michaelkohler.helpertools.io.FileReader;
 import info.michaelkohler.helpertools.io.FileWriter;
 
 public class FileReaderWriterTest  {
+    
     private static String _path;
     private static boolean _append;
     private static String _message;
 
-    public FileReaderWriterTest() {
-    }
 
     @BeforeClass
     public static void initTest() {
@@ -71,10 +71,49 @@ public class FileReaderWriterTest  {
         assertEquals("read text was not the written text..", _message, readText);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testNullReaderConstructorArg() {
+        new FileReader(null);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testEmptyReaderConstructorArg() {
+        new FileReader("");
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testNullWriterConstructorArg() {
+        new FileWriter(null, true);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testEmptyWriterConstructorArg() {
+        new FileWriter("", false);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testNullStrWriteFile() throws IOException {
+        FileWriter writer = new FileWriter(_path, _append);
+        String s = null;
+        writer.writeFile(s);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testEmptyWriteFile() throws IOException {
+        FileWriter writer = new FileWriter(_path, _append);
+        writer.writeFile("");
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testNullInputWriteFile() throws IOException {
+        FileWriter writer = new FileWriter(_path, _append);
+        InputStream is = null;
+        writer.writeFile(is);
+    }
+    
     @After
     public void cleanup() {
         File file = new File(_path);
         file.delete();
     }
-
 }

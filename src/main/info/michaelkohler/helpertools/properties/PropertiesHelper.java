@@ -19,6 +19,9 @@
  */
 package info.michaelkohler.helpertools.properties;
 
+import static info.michaelkohler.helpertools.string.StringHelper.isNullOrEmpty;
+import static info.michaelkohler.helpertools.tools.Validator.checkArgument;
+import static info.michaelkohler.helpertools.tools.Validator.checkNotNull;
 import info.michaelkohler.helpertools.logging.Debugger;
 
 import java.io.File;
@@ -63,7 +66,7 @@ public final class PropertiesHelper {
      * to instantiate this class.
      */
     private PropertiesHelper() {
-    	throw new AssertionError("Cannot instantiate this class");
+        throw new AssertionError("Cannot instantiate this class");
     }
 
     /**
@@ -73,8 +76,10 @@ public final class PropertiesHelper {
      * @return filename under which the Properties file is saved
      */
     public static String getPropertyFilename() {
-        if (propertyFileName == null)
+        if (propertyFileName == null) {
             setPropertyFilename("");
+        }
+        
         return propertyFileName;
     }
 
@@ -85,6 +90,7 @@ public final class PropertiesHelper {
      * @param aFileName of the Properties file
      */
     public static void setPropertyFilename(String aFileName) {
+        checkNotNull(aFileName, "aFileName cannot be null");
         propertyFileName = aFileName;
     }
 
@@ -93,6 +99,7 @@ public final class PropertiesHelper {
      * edit it.
      */
     private static void loadPropertiesFile() {
+        checkNotNull(propertyFileName, "propertyFileName cannot be null");
         String currentDir = new File("").getAbsolutePath();
         propertyFile = currentDir + "/" + propertyFileName;
         File propFile = new File(propertyFile);
@@ -119,6 +126,9 @@ public final class PropertiesHelper {
      * @param aValue of the Property
      */
     public static void setProperty(String aKey, String aValue) {
+        checkArgument(!isNullOrEmpty(aKey), "aKey cannot be null or empty");
+        checkArgument(!isNullOrEmpty(aValue), "aValue cannot be null or empty");
+        
         loadPropertiesFile();
         props.setProperty(aKey, aValue);
         storePropsFile();
@@ -131,6 +141,8 @@ public final class PropertiesHelper {
      * @return the value of the Property
      */
     public static String getProperty(String aKey) {
+        checkArgument(!isNullOrEmpty(aKey), "aKey cannot be null or empty");
+        
         loadPropertiesFile();
         String propValue = "";
         propValue = props.getProperty(aKey);
@@ -145,6 +157,8 @@ public final class PropertiesHelper {
      *              file name and not the path!
      */
     public static boolean propertyExists(String aKey) {
+        checkArgument(!isNullOrEmpty(aKey), "aKey cannot be null or empty");
+        
         loadPropertiesFile();
         boolean exists = props.containsKey(aKey);
         return exists;
@@ -156,6 +170,8 @@ public final class PropertiesHelper {
      * @param aKey of the Property to remove
      */
     public static void removeProperty(String aKey) {
+        checkArgument(!isNullOrEmpty(aKey), "aKey cannot be null or empty");
+        
         loadPropertiesFile();
         if (props.containsKey(aKey))
             props.remove(aKey);
