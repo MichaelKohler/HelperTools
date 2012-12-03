@@ -32,15 +32,12 @@ import java.io.IOException;
 public class DebuggerTest  {
     public static Object _nullObject;;
 
-    public DebuggerTest() {
-    }
-
     @BeforeClass
     public static void initTest() {
         _nullObject = null;
     }
 
-    @Test (expected=NullPointerException.class)
+    @Test(expected = NullPointerException.class)
     public void testDebugger() {
         assertNull("Failure: object was not null..", _nullObject);
         try {
@@ -76,10 +73,16 @@ public class DebuggerTest  {
         assertFalse("Failure: log file was still existent!", logFile.exists());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testNullLogArg() {
+        Debugger.logMessage(null);
+    }
+    
     @AfterClass
     public static void cleanup() {
         File logFile = new File(Debugger.getLogFilename());
-        if (logFile.exists())
-        logFile.delete();
+        if (logFile.exists()) {
+            logFile.delete();
+        }
     }
 }

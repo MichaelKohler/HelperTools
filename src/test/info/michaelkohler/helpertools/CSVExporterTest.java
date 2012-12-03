@@ -79,11 +79,29 @@ public class CSVExporterTest  {
         assertEquals("Wrong content in CSV file!", expectedContent, fileContent);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructorNullPath() {
+        new CSVExporter(null);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructorNullPath2() {
+        new CSVExporter(null, ',');
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetPathNullArg() {
+        _exporter.setCSVPath(null);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testNullCsvFromJTable() {
+        _exporter.writeCSVFileFromJTable(null);
+    }
+    
     @AfterClass
     public static void cleanup() {
         File testCSV = new File(_path);
         testCSV.delete();
     }
-
-
 }

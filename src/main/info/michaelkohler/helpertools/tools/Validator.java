@@ -36,40 +36,40 @@ package info.michaelkohler.helpertools.tools;
  */
 public class Validator {
 
-	private Validator() {
-		throw new AssertionError("Cannot instantiate this class");
-	}
-	
-	/**
-	 * Validates that an expression is true and throws an error if it false.
-	 * This is meant to be used in validating arguments for public methods.
-	 * 
-	 * @param expression The expression to evaluate as true, an assertion
-	 * @param errorMessage The error message to provide for the thrown exception
-	 * @throws IllegalArgumentException 
-	 * 		with the provided errorMessage if expression is false
-	 */
-	public static void checkArgument(boolean expression, String errorMessage) {
-		if (!expression) {
-			throw new IllegalArgumentException(errorMessage);
-		}
-	}
+    private Validator() {
+        throw new AssertionError("Cannot instantiate this class");
+    }
+    
+    /**
+     * Validates that an expression is true and throws an error if it false.
+     * This is meant to be used in validating arguments for public methods.
+     * 
+     * @param expression The expression to evaluate as true, an assertion
+     * @param errorMessage The error message to provide for the thrown exception
+     * @throws IllegalArgumentException 
+     *         with the provided errorMessage if expression is false
+     */
+    public static void checkArgument(boolean expression, String errorMessage) {
+        if (!expression) {
+            throw new IllegalArgumentException(errorMessage.toString());
+        }
+    }
 
-	/**
-	 * Convenience method to validate an argument is not null. Rather than throw
-	 * a NullPointerError, throw an
-	 * 
-	 * @param toCheck The object to confirm is not null
-	 * @param errorMessage The error message to provide for the thrown exception
-	 * @return toCheck as a convenience for assignment
-	 * @throws IllegalArgumentException
-	 *             to make it clear that there is a problem with the argument
-	 *             being supplied to the method rather than a bug in the method
-	 *             itself.
-	 * @see Validator#checkArgument(boolean, String)
-	 */
-	public static Object checkNotNull(Object toCheck, String errorMessage) {
-		checkArgument(null != toCheck, errorMessage);
-		return toCheck;
-	}
+    /**
+     * Convenience method to validate an argument is not null. Rather than throw
+     * a NullPointerError, throw an
+     * 
+     * @param toCheck The object to confirm is not null
+     * @param errorMessage The error message to provide for the thrown exception
+     * @return toCheck as a convenience for assignment
+     * @throws IllegalArgumentException
+     *             to make it clear that there is a problem with the argument
+     *             being supplied to the method rather than a bug in the method
+     *             itself.
+     * @see Validator#checkArgument(boolean, String)
+     */
+    public static <T> T checkNotNull(T toCheck, String errorMessage) {
+        checkArgument(null != toCheck, errorMessage);
+        return toCheck;
+    }
 }

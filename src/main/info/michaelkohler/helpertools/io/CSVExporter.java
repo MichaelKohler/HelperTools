@@ -19,6 +19,7 @@
  */
 package info.michaelkohler.helpertools.io;
 
+import static info.michaelkohler.helpertools.tools.Validator.checkNotNull;
 import info.michaelkohler.helpertools.logging.Debugger;
 
 import java.io.IOException;
@@ -56,6 +57,7 @@ public class CSVExporter {
      * |CSVExporter|.
      */
     public CSVExporter() {
+
     }
 
     /**
@@ -65,7 +67,7 @@ public class CSVExporter {
      * @param aPath indicating the path for the CSV file
      */
     public CSVExporter(String aPath) {
-        this.path = aPath;
+        this.path = checkNotNull(aPath, "aPath cannot be null");
         this.separator = ';';
     }
 
@@ -77,7 +79,7 @@ public class CSVExporter {
      * @param aSeparator indicating which separator should be used for the values
      */
     public CSVExporter(String aPath, char aSeparator) {
-        this.path = aPath;
+        this.path = checkNotNull(aPath, "aPath cannot be null");
         this.separator = aSeparator;
     }
 
@@ -114,7 +116,7 @@ public class CSVExporter {
      * @param aPath path to the CSV file
      */
     public final void setCSVPath(String aPath) {
-        this.path = aPath;
+        this.path = checkNotNull(aPath, "aPath cannot be null");
     }
 
     /**
@@ -127,6 +129,8 @@ public class CSVExporter {
      * @see javax.swing.JTable
      */
     public final void writeCSVFileFromJTable(JTable aTable) {
+        checkNotNull(aTable, "aTable cannot be null");
+
         String fileContent = "";
         for (int i = 0; i < aTable.getRowCount(); i++) {
             for (int j = 0; j < aTable.getColumnCount(); j++) {
