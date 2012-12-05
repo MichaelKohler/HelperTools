@@ -158,6 +158,11 @@ public final class FileHelper {
      * @param pattern Regular expression to match
      * @return List of names of the matching files/directories
      */
+	/*
+	 * XXX: returning a List is most likely a bad Idea since there is no
+	 * guarantee on order of items returned. A Set would be more appropriate. Or
+	 * even a Collection<String>.
+	 */
     public static List<String> find(File subdir, Pattern pattern) {
         checkNotNull(subdir, "subdir cannot be null");
         checkNotNull(pattern, "pattern cannot be null");
@@ -378,7 +383,7 @@ public final class FileHelper {
         checkNotNull(baseFile, "baseFile cannot be null");
         checkNotNull(name, "name cannot be null");
 
-        return append(baseFile.getPath(), name);
+		return new File(baseFile, name);
     }
 
     /**
