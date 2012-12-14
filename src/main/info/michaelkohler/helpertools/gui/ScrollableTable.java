@@ -20,6 +20,8 @@
 
 package info.michaelkohler.helpertools.gui;
 
+import info.michaelkohler.helpertools.tools.Validator;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -47,7 +49,9 @@ public class ScrollableTable extends JScrollPane {
      */
     public ScrollableTable(String[][] aData, String[] aColumnNames) {
         super();
-
+        
+        Validator.checkNotNull(aData, "Illegal NULL data set");
+        Validator.checkNotNull(aColumnNames, "Illegal NULL columns");
         TableModel model = getTableModel(aData, aColumnNames);
         JTable overviewTable = new JTable(model);
         TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(model);
