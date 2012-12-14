@@ -27,14 +27,12 @@ public class DateHelper {
      * @return A {@link Date} object representation of the given string.
      */
     public static Date strToDate(String dateStr) {
-        if(dateStr.equalsIgnoreCase(TODAY))
+        if(queryForTodayDate(dateStr))
             return todayDate();
-        else if(dateStr.equalsIgnoreCase(YESTERDAY)) {
+        else if(queryForYesterdayDate(dateStr))
             return yesterdayDate();
-        }
-        else if(dateStr.equalsIgnoreCase(TOMORROW)) {
+        else if(queryForTomorrowDate(dateStr))
             return tomorrowDate();
-        }
         
         try {
             return dateFormatter.parse(dateStr);
@@ -61,5 +59,17 @@ public class DateHelper {
         Calendar cal = new GregorianCalendar();
         cal.roll(Calendar.DATE, true);
         return cal.getTime();
+    }
+    
+    private static boolean queryForTodayDate(String dateStr) {
+      return dateStr.equalsIgnoreCase(TODAY);
+    }
+    
+    private static boolean queryForYesterdayDate(String dateStr) {
+      return dateStr.equalsIgnoreCase(YESTERDAY);
+    }
+    
+    private static boolean queryForTomorrowDate(String dateStr) {
+      return dateStr.equalsIgnoreCase(TOMORROW);
     }
 }
