@@ -9,7 +9,7 @@ import java.util.GregorianCalendar;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class DateHelperTest {
+public class DateHelperTest_DateConversion {
 
   @Test
   public void testStrToDate_NotNull() {
