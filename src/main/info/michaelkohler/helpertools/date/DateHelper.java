@@ -1,5 +1,6 @@
 package info.michaelkohler.helpertools.date;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -34,10 +35,11 @@ public class DateHelper {
     }
     
     try {
-      return new SimpleDateFormat(SIMPLE_DATE_FORMAT, DEFAULT_LOCALE).parse(dateStr);
+      DateFormat dateFormatter = new SimpleDateFormat(SIMPLE_DATE_FORMAT, DEFAULT_LOCALE);
+      dateFormatter.setLenient(false);
+      return dateFormatter.parse(dateStr);
     } catch (ParseException e) {
-      e.printStackTrace();
-      return null;
+      throw new RuntimeException(e);
     }
   }
 }
