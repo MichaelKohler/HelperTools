@@ -74,4 +74,40 @@ public class DateHelperTest {
     Date expected = cal.getTime();
     Assert.assertTrue(actual.equals(expected));
   }
+  
+  @Test
+  public void testStrToDate_18001213() {
+    String fixture = "1800/12/13";
+    Date actual = DateHelper.strToDate(fixture);
+    Calendar cal = new GregorianCalendar(1800, 11, 13);
+    Date expected = cal.getTime();
+    Assert.assertTrue(actual.equals(expected));
+  }
+  
+  @Test
+  public void testStrToDate_18900330() {
+    String fixture = "1890/03/30";
+    Date actual = DateHelper.strToDate(fixture);
+    Calendar cal = new GregorianCalendar(1890, 2, 30);
+    Date expected = cal.getTime();
+    Assert.assertTrue(actual.equals(expected));
+  }
+  
+  @Test
+  public void testStrToDate_17000215() {
+    String fixture = "1700/02/15";
+    Date actual = DateHelper.strToDate(fixture);
+    Calendar cal = new GregorianCalendar(1700, 1, 15);
+    Date expected = cal.getTime();
+    Assert.assertTrue(actual.equals(expected));
+  }
+  
+  @Test
+  public void testStrToDate_17170605() {
+    String fixture = "1717/06/25";
+    Date actual = DateHelper.strToDate(fixture);
+    Calendar cal = new GregorianCalendar(1717, 5, 25);
+    Date expected = cal.getTime();
+    Assert.assertTrue(actual.equals(expected));
+  }
 }
