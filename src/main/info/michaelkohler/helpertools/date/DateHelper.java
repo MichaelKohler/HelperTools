@@ -28,16 +28,12 @@ public class DateHelper {
      */
     public static Date strToDate(String dateStr) {
         if(dateStr.equalsIgnoreCase(TODAY))
-            return new Date();
+            return todayDate();
         else if(dateStr.equalsIgnoreCase(YESTERDAY)) {
-            Calendar cal = new GregorianCalendar();
-            cal.roll(Calendar.DATE, false);
-            return cal.getTime();
+            return yesterdayDate();
         }
         else if(dateStr.equalsIgnoreCase(TOMORROW)) {
-            Calendar cal = new GregorianCalendar();
-            cal.roll(Calendar.DATE, true);
-            return cal.getTime();
+            return tomorrowDate();
         }
         
         try {
@@ -49,5 +45,21 @@ public class DateHelper {
 
     public static String dateToStr(Date date) {
         return dateFormatter.format(date);
+    }
+    
+    public static Date todayDate() {
+        return new Date();
+    }
+    
+    public static Date yesterdayDate() {
+        Calendar cal = new GregorianCalendar();
+        cal.roll(Calendar.DATE, false);
+        return cal.getTime();
+    }
+    
+    public static Date tomorrowDate() {
+        Calendar cal = new GregorianCalendar();
+        cal.roll(Calendar.DATE, true);
+        return cal.getTime();
     }
 }
