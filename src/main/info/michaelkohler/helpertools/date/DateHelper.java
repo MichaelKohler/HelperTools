@@ -14,6 +14,12 @@ public class DateHelper {
   private static final String TOMORROW = "tomorrow";
   private static final String YESTERDAY = "yesterday";
   private static final String TODAY = "today";
+  private static DateFormat dateFormatter;
+  
+  static{
+    dateFormatter = new SimpleDateFormat(SIMPLE_DATE_FORMAT, DEFAULT_LOCALE);
+    dateFormatter.setLenient(false);
+  }
 
   /**
    * Convert string to date
@@ -35,8 +41,6 @@ public class DateHelper {
     }
     
     try {
-      DateFormat dateFormatter = new SimpleDateFormat(SIMPLE_DATE_FORMAT, DEFAULT_LOCALE);
-      dateFormatter.setLenient(false);
       return dateFormatter.parse(dateStr);
     } catch (ParseException e) {
       throw new RuntimeException(e);
