@@ -48,8 +48,6 @@ public class DateHelper {
   }
 
   public static String dateToStr(Date date) {
-    String dateStr = "2012/05/12";
-    return dateStr;
-    
+    return dateFormatter.format(date);
   }
 }
