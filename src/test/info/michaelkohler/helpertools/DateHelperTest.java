@@ -19,36 +19,6 @@ public class DateHelperTest {
   }
   
   @Test
-  public void testStrToDate_Today() {
-    String fixture = "today";
-    Date actual = DateHelper.strToDate(fixture);
-    Date expected = new Date();
-    Assert.assertTrue(actual.equals(expected));
-  }
-  
-  @Test
-  public void testStrToDate_Yesterday() {
-    String fixture = "yesterday";
-    Date actual = DateHelper.strToDate(fixture);
-    
-    Calendar cal = new GregorianCalendar();
-    cal.roll(Calendar.DATE, false);
-    Date expected = cal.getTime();
-    Assert.assertTrue(actual.equals(expected));
-  }
-  
-  @Test
-  public void testStrToDate_Tomorrow() {
-    String fixture = "tomorrow";
-    Date actual = DateHelper.strToDate(fixture);
-    
-    Calendar cal = new GregorianCalendar();
-    cal.roll(Calendar.DATE, true);
-    Date expected = cal.getTime();
-    Assert.assertTrue(actual.equals(expected));
-  }
-  
-  @Test
   public void testStrToDate_20120503() {
     String fixture = "2012/05/30";
     Date actual = DateHelper.strToDate(fixture);
