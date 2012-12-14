@@ -29,7 +29,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class DateHelperTest_ConvenientDates {
-  @Test
+    @Test
     public void testGetTodayDate() {
         Date expected = new Date();
         Date actual = DateHelper.todayDate();
