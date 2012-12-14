@@ -21,6 +21,7 @@
 package info.michaelkohler.helpertools.gui;
 
 import info.michaelkohler.helpertools.logging.Debugger;
+import info.michaelkohler.helpertools.tools.Validator;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -48,7 +49,7 @@ public final class GUIHelper {
      * to instantiate this class.
      */
     private GUIHelper() {
-    	throw new AssertionError("Cannot instantiate this class");
+        throw new AssertionError("Cannot instantiate this class");
     }
 
     /**
@@ -57,6 +58,7 @@ public final class GUIHelper {
      * @param aComponent which component should be visible
      */
     public static void showComponent(final Component aComponent) {
+        Validator.checkNotNull(aComponent, "Illegal NULL component");
         aComponent.setVisible(true);
     }
 
@@ -66,6 +68,7 @@ public final class GUIHelper {
      * @param aComponent which component should be invisible
      */
     public static void hideComponent(final Component aComponent) {
+        Validator.checkNotNull(aComponent, "Illegal NULL component");
         aComponent.setVisible(false);
     }
 
@@ -88,6 +91,9 @@ public final class GUIHelper {
      * @param aHeight defining the height of the window
      */
     public static void sizeAndCenterFrame(JFrame aFrame, int aWidth, int aHeight) {
+        Validator.checkNotNull(aFrame, "Illegal NULL frame");
+        Validator.checkArgument(aWidth > 0, "Illegal frame width value");
+        Validator.checkArgument(aHeight > 0, "Illegal frame height value");
         aFrame.setSize(aWidth, aHeight);
         aFrame.setLocationRelativeTo(null);
     }
@@ -99,6 +105,7 @@ public final class GUIHelper {
      */
     @SuppressWarnings("serial")
     public static void setESCCloseable(final JFrame aFrame) {
+        Validator.checkNotNull(aFrame, "Illegal NULL frame");
         KeyStroke escapeKS = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0,  false);
         Action escapeAction = new AbstractAction() {
             public void actionPerformed(final ActionEvent ae) {
