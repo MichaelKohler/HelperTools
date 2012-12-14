@@ -1,6 +1,5 @@
 package info.michaelkohler.helpertools.date;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -14,7 +13,7 @@ public class DateHelper {
     private static final String TOMORROW = "tomorrow";
     private static final String YESTERDAY = "yesterday";
     private static final String TODAY = "today";
-    private static DateFormat dateFormatter;
+    private static SimpleDateFormat dateFormatter;
     
     static{
         dateFormatter = new SimpleDateFormat(SIMPLE_DATE_FORMAT, DEFAULT_LOCALE);
@@ -59,6 +58,10 @@ public class DateHelper {
         Calendar cal = new GregorianCalendar();
         cal.roll(Calendar.DATE, true);
         return cal.getTime();
+    }
+    
+    public static void applyFormat(String format){
+        dateFormatter.applyPattern(format);
     }
     
     private static boolean queryForTodayDate(String dateStr) {
