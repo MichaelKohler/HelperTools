@@ -33,91 +33,91 @@ import info.michaelkohler.helpertools.collections.CollectionHelper;
 import info.michaelkohler.helpertools.collections.IFunction;
 
 public class CollectionHelperTest {
-  /**
-   * This class is only used to test the {@link #all(Collection<T>,String)
-   * method. This proves that public as well as private and public fields can be accessed.
-   */
-  private class MyClass {
-    
-    public final int a;
-    private final int b;
-    public MyClass(int a, int b) {
-      this.a = a;
-      this.b = b;
-    }
-  }
-
-  private List<String> stringCollection = new ArrayList<String>();
-  private List<MyClass> myClassCollection = new ArrayList<MyClass>();
-  
-  @Before
-  public void setUp() {
-    String s1 = new String("firstString");
-    String s2 = new String("second");
-    String s3 = new String("thisIsTheThird");
-    stringCollection = Arrays.asList(s1, s2, s3);
-    
-    MyClass m1 = new MyClass(0, 0);
-    MyClass m2 = new MyClass(1, 2);
-    MyClass m3 = new MyClass(2, 4);
-    myClassCollection = Arrays.asList(m1, m2, m3);
-  }
-
-  @Test
-  public void stringCollectionEach() {
-       CollectionHelper.each(stringCollection, new IFunction() {
-      public void execute(Object o, int index ) {
-        String s = (String) o;
-        if(index == 0) assertEquals(s.length(), 11);
-        if(index == 1) assertEquals(s.length(), 6);
-        if(index == 2) assertEquals(s.length(), 14);
-      }
-    });
-  }
-
-  @Test
-  public void myClassCollection() {
-    try {
-      Collection<Object> collectionOfA = CollectionHelper.all(myClassCollection, "a");
-      Collection<Object> collectionOfB = CollectionHelper.all(myClassCollection, "b");
-      for(int i=0; i<collectionOfA.size(); i++) {
-        int valOfA = (Integer)collectionOfA.toArray()[i];
-        int valOfB = (Integer)collectionOfB.toArray()[i];
-        assertEquals(valOfA, i);
-        assertEquals(valOfB, i*2);
-      }
-    } catch (NoSuchFieldException e) {
-      fail("NoSuchFieldException occured.");
-    }
-  }
-  
-  @Test(expected = NoSuchFieldException.class)
-  public void inexistentFieldShouldThrow() throws NoSuchFieldException {
-    Collection<Object> collectionOfC = CollectionHelper.all(myClassCollection, "c");
-    assertEquals(collectionOfC, null);
-  }
-  
-  @Test(expected = IllegalArgumentException.class)
-  public void testAllNullCollection() throws NoSuchFieldException {
-    CollectionHelper.all(null, "a");  
-  }
-  
-  @Test(expected = IllegalArgumentException.class)
-  public void testAllNullString() throws NoSuchFieldException {
-      CollectionHelper.all(myClassCollection, null);
-  }
-  
-  @Test(expected = IllegalArgumentException.class)
-  public void testEachNullCollection() {
-      CollectionHelper.each(null, new IFunction() {
-        public void execute(Object element, int index) {
-            // Dont need to do anything
+    /**
+     * This class is only used to test the {@link #all(Collection<T>,String)
+     * method. This proves that public as well as private and public fields can be accessed.
+     */
+    private class MyClass {
+        
+        public final int a;
+        private final int b;
+        public MyClass(int a, int b) {
+            this.a = a;
+            this.b = b;
         }
-    });
-  }
-  
-  @Test(expected = IllegalArgumentException.class)
-  public void testEachNullIFunction() {
-      CollectionHelper.each(myClassCollection, null);
-  }
+    }
+
+    private List<String> stringCollection = new ArrayList<String>();
+    private List<MyClass> myClassCollection = new ArrayList<MyClass>();
+    
+    @Before
+    public void setUp() {
+        String s1 = new String("firstString");
+        String s2 = new String("second");
+        String s3 = new String("thisIsTheThird");
+        stringCollection = Arrays.asList(s1, s2, s3);
+        
+        MyClass m1 = new MyClass(0, 0);
+        MyClass m2 = new MyClass(1, 2);
+        MyClass m3 = new MyClass(2, 4);
+        myClassCollection = Arrays.asList(m1, m2, m3);
+    }
+
+    @Test
+    public void stringCollectionEach() {
+        CollectionHelper.each(stringCollection, new IFunction() {
+            public void execute(Object o, int index ) {
+                String s = (String) o;
+                if(index == 0) assertEquals(s.length(), 11);
+                if(index == 1) assertEquals(s.length(), 6);
+                if(index == 2) assertEquals(s.length(), 14);
+            }
+        });
+    }
+
+    @Test
+    public void myClassCollection() {
+        try {
+            Collection<Object> collectionOfA = CollectionHelper.all(myClassCollection, "a");
+            Collection<Object> collectionOfB = CollectionHelper.all(myClassCollection, "b");
+            for(int i=0; i<collectionOfA.size(); i++) {
+                int valOfA = (Integer)collectionOfA.toArray()[i];
+                int valOfB = (Integer)collectionOfB.toArray()[i];
+                assertEquals(valOfA, i);
+                assertEquals(valOfB, i*2);
+            }
+        } catch (NoSuchFieldException e) {
+            fail("NoSuchFieldException occured.");
+        }
+    }
+    
+    @Test(expected = NoSuchFieldException.class)
+    public void inexistentFieldShouldThrow() throws NoSuchFieldException {
+        Collection<Object> collectionOfC = CollectionHelper.all(myClassCollection, "c");
+        assertEquals(collectionOfC, null);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testAllNullCollection() throws NoSuchFieldException {
+        CollectionHelper.all(null, "a");    
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testAllNullString() throws NoSuchFieldException {
+        CollectionHelper.all(myClassCollection, null);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testEachNullCollection() {
+        CollectionHelper.each(null, new IFunction() {
+            public void execute(Object element, int index) {
+                // Dont need to do anything
+            }
+        });
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testEachNullIFunction() {
+        CollectionHelper.each(myClassCollection, null);
+    }
 }
