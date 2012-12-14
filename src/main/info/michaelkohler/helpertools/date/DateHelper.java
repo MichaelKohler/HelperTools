@@ -48,20 +48,16 @@ public class DateHelper {
      * Convert string to date. The {@value DateHelper#SIMPLE_DATE_FORMAT} pattern is used as the default pattern. To change date pattern, @see {@link DateHelper#applyPattern(String)}.
      * @param dateStr String to be converted. Supported constants: today, yesterday, tomorrow.
      * @return A {@link Date} object representation of the given string.
+     * @throws ParseException - If the specified string cannot be parsed
      */
-    public static Date strToDate(String dateStr) {
+    public static Date strToDate(String dateStr) throws ParseException {
         if(queryForTodayDate(dateStr))
             return todayDate();
         else if(queryForYesterdayDate(dateStr))
             return yesterdayDate();
         else if(queryForTomorrowDate(dateStr))
             return tomorrowDate();
-        
-        try {
-            return dateFormatter.parse(dateStr);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
+        return dateFormatter.parse(dateStr);
     }
 
     /**
