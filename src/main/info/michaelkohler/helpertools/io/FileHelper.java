@@ -27,9 +27,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.regex.Pattern;
 
 /**
@@ -156,12 +156,12 @@ public final class FileHelper {
      *
      * @param subdir starting directory
      * @param pattern Regular expression to match
-     * @return List of names of the matching files/directories
+     * @return Collection of names of the matching files/directories
      */
-    public static List<String> find(File subdir, Pattern pattern) {
+    public static Collection<String> find(File subdir, Pattern pattern) {
         checkNotNull(subdir, "subdir cannot be null");
         checkNotNull(pattern, "pattern cannot be null");
-        List<String> resultSet = new ArrayList<String>();
+        Collection<String> resultSet = new HashSet<String>();
         File[] contents = subdir.listFiles();
 
         for (File file : contents) {
@@ -186,9 +186,9 @@ public final class FileHelper {
      *
      * @param subdir starting directory
      * @param pattern Regular expression to match
-     * @return List of names of the matching files/directories
+     * @return Collection of names of the matching files/directories
      */
-    public static List<String> find(String subdir, Pattern pattern) {
+    public static Collection<String> find(String subdir, Pattern pattern) {
         checkNotNull(subdir, "subdir cannot be null");
         checkNotNull(pattern, "pattern cannot be null");
         return find(new File(subdir), pattern);
@@ -199,16 +199,16 @@ public final class FileHelper {
      *
      * @param subdir starting directory
      * @param pattern Regular expression to match
-     * @return List of names of the matching files/directories
+     * @return Collection of names of the matching files/directories
      */
-    public static List<String> find(String subdir, String pattern) {
+    public static Collection<String> find(String subdir, String pattern) {
         checkNotNull(subdir, "subdir cannot be null");
         checkNotNull(pattern, "pattern cannot be null");
         try {
             return find(subdir,
                     Pattern.compile(pattern));
         } catch (Exception e) {
-            return new ArrayList<String>();
+            return new HashSet<String>();
         }
     }
 

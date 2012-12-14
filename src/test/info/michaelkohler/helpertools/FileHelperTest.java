@@ -28,8 +28,8 @@ import info.michaelkohler.helpertools.string.StringHelper;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.regex.Pattern;
 
 import org.junit.After;
@@ -66,7 +66,8 @@ public class FileHelperTest  {
      */
     @Before
     public final void setUp() throws IOException {
-        tempDir = FileHelper.append(FileHelper.currentDir(), "temp");
+        tempDir = FileHelper.append(new File(System.getProperty("java.io.tmpdir")),
+                                             "temp");
         tempDir.mkdir();
         testFile = FileHelper.append(tempDir, "myFile.txt");
         testFile.createNewFile();
@@ -127,8 +128,8 @@ public class FileHelperTest  {
     
     @Test
     public final void testFind() throws IOException {
-        ArrayList<String> expectedResult = new ArrayList<String>();
-        List<String> actualResult = FileHelper.find(tempDir, Pattern.compile("blergh"));
+        Collection<String> expectedResult = new HashSet<String>();
+        Collection<String> actualResult = FileHelper.find(tempDir, Pattern.compile("blergh"));
         assertEquals(expectedResult, actualResult);
         actualResult = FileHelper.find(tempDir.getAbsolutePath(), Pattern.compile("blergh"));
         assertEquals(expectedResult, actualResult);
