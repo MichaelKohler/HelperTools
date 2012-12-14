@@ -1,5 +1,5 @@
 /* ============== HelperTools ==============
- * Initial developer: Lukas Diener <lukas.diener@hotmail.com>
+ * Initial developer: Ivan Sim <ihcsim@gmail.com>
  *
  * =====
  * DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE - Version 2
