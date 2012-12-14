@@ -39,7 +39,7 @@ public class DateHelper {
     private static final String TODAY = "today";
     private static SimpleDateFormat dateFormatter;
     
-    static{
+    static {
         dateFormatter = new SimpleDateFormat(SIMPLE_DATE_FORMAT, DEFAULT_LOCALE);
         dateFormatter.setLenient(false);
     }
