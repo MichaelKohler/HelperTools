@@ -62,14 +62,14 @@ public class DateHelper {
     }
     
     private static boolean queryForTodayDate(String dateStr) {
-      return dateStr.equalsIgnoreCase(TODAY);
+        return dateStr.equalsIgnoreCase(TODAY);
     }
     
     private static boolean queryForYesterdayDate(String dateStr) {
-      return dateStr.equalsIgnoreCase(YESTERDAY);
+        return dateStr.equalsIgnoreCase(YESTERDAY);
     }
     
     private static boolean queryForTomorrowDate(String dateStr) {
-      return dateStr.equalsIgnoreCase(TOMORROW);
+        return dateStr.equalsIgnoreCase(TOMORROW);
     }
 }
