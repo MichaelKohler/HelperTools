@@ -46,8 +46,15 @@ public class CalendarHelper {
 
     public static Date datetime(int year, int month, int day, 
             int hour, int minute, int second) {
-        validateTimeArguments(hour, minute, second);
+        validateDateTimeArguments(year, month, day, hour, minute, second);
         return new GregorianCalendar(year, month - 1, day, hour, minute, second).getTime();
+    }
+
+    private static void validateDateTimeArguments(
+            int year, int month, int day,
+            int hour, int minute, int second) {
+        validateDateArguments(year, month, day);
+        validateTimeArguments(hour, minute, second);
     }
 
     private static void validateTimeArguments(int hour, int minute, int second) {

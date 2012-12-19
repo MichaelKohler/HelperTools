@@ -6,7 +6,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-public class CalendarHelperTest_CreateIllegalTimes {
+public class CalendarHelperTest_CreateIllegalDateTimes {
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
     
@@ -43,6 +43,44 @@ public class CalendarHelperTest_CreateIllegalTimes {
         int hour = 0;
         int minute = 0;
         int second = -1;
+        CalendarHelper.datetime(year, month, day, hour, minute, second);
+    }
+    
+    @Test
+    public void testCalendar_CreateDate_NegativeYear() {
+        expectedException.expect(IllegalArgumentException.class);
+        int year = -1;
+        int month = 12;
+        int day = 15;
+        int hour = 0;
+        int minute = 0;
+        int second = 0;
+        CalendarHelper.datetime(year, month, day, hour, minute, second);
+    }
+    
+    @Test
+    public void testCalendar_CreateDate_NegativeMonth() {
+        expectedException.expect(IllegalArgumentException.class);
+        int year = 2012;
+        int month = -5;
+        int day = 15;
+        int hour = 0;
+        int minute = 0;
+        int second = 0;
+        
+        CalendarHelper.datetime(year, month, day, hour, minute, second);
+    }
+    
+    @Test
+    public void testCalendar_CreateDate_NegativeDay() {
+        expectedException.expect(IllegalArgumentException.class);
+        int year = 2012;
+        int month = 5;
+        int day = -15;
+        int hour = 0;
+        int minute = 0;
+        int second = 0;
+        
         CalendarHelper.datetime(year, month, day, hour, minute, second);
     }
 }
