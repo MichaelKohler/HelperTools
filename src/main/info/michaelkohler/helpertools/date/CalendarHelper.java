@@ -58,18 +58,23 @@ public class CalendarHelper {
     }
 
     private static void validateTimeArguments(int hour, int minute, int second) {
-        if(hour < 0)
-            throw new IllegalArgumentException("Negative hour value cannot be used to create times");
-        if(hour > 24)
-            throw new IllegalArgumentException("Hour value must fall within the 24-hour range of 0 - 23");
-        if(minute < 0)
-            throw new IllegalArgumentException("Negative minute value cannot be used to create times");
-        if(minute > 60)
-            throw new IllegalArgumentException("Minute value must fall within the range of 0 - 59");
-        if(second < 0)
-            throw new IllegalArgumentException("Negative second value cannot be used to create times");
-        if(second > 60)
-            throw new IllegalArgumentException("Minute value must fall within the range of 0 - 59");
+        if(!hourWithinRange(hour))
+            throw new IllegalArgumentException("Hour argument falls outside supported range of 0 - 23");
+        if(!minuteWithinRange(minute))
+            throw new IllegalArgumentException("Minute argument falls outside supported range of 0 - 59");
+        if(!secondWithinRange(second))
+            throw new IllegalArgumentException("Second argument falls outside supported range of 0 - 59");
     }
 
+    private static boolean hourWithinRange(int hour) {
+        return hour >= 0 && hour <= 24;
+    }
+    
+    private static boolean minuteWithinRange(int minute) {
+        return minute >= 0 && minute <= 60;
+    }
+    
+    private static boolean secondWithinRange(int second) {
+        return second >= 0 && second <= 60;
+    }
 }
