@@ -43,7 +43,7 @@ public class CalendarHelperTest_CreateDates {
         int month = 12;
         int day = 15;
         Date actual = CalendarHelper.date(year, month, day);
-        Date expected = this.createDateInGregorianCalendar(year, month, day);
+        Date expected = new GregorianCalendar(2012, 11, 15).getTime();
         Assert.assertEquals(expected, actual);
     }
     
@@ -53,7 +53,7 @@ public class CalendarHelperTest_CreateDates {
         int month = 1;
         int day = 31;
         Date actual = CalendarHelper.date(year, month, day);
-        Date expected = this.createDateInGregorianCalendar(year, month, day);
+        Date expected = new GregorianCalendar(2000, 0, 31).getTime();
         Assert.assertEquals(expected, actual);
     }
     
@@ -63,7 +63,7 @@ public class CalendarHelperTest_CreateDates {
         int month = 10;
         int day = 11;
         Date actual = CalendarHelper.date(year, month, day);
-        Date expected = this.createDateInGregorianCalendar(year, month, day);
+        Date expected = new GregorianCalendar(1970, 9, 11).getTime();
         Assert.assertEquals(expected, actual);
     }
     
@@ -73,7 +73,7 @@ public class CalendarHelperTest_CreateDates {
         int month = 2;
         int day = 28;
         Date actual = CalendarHelper.date(year, month, day);
-        Date expected = this.createDateInGregorianCalendar(year, month, day);
+        Date expected = new GregorianCalendar(2020, 1, 28).getTime();
         Assert.assertEquals(expected, actual);
     }
     
@@ -83,17 +83,17 @@ public class CalendarHelperTest_CreateDates {
         int month = 10;
         int day = 11;
         Date actual = CalendarHelper.date(year, month, day);
-        Date expected = this.createDateInGregorianCalendar(year, month, day);
+        Date expected = new GregorianCalendar(2070, 9, 11).getTime();
         Assert.assertEquals(expected, actual);
     }
     
     @Test
     public void testCalendar_CreateDateInYear0_MatchesExpected() {
         int year = 0;
-        int month = 0;
+        int month = 1;
         int day = 0;
         Date actual = CalendarHelper.date(year, month, day);
-        Date expected = this.createDateInGregorianCalendar(year, month, day);
+        Date expected = new GregorianCalendar(0, 0, 0).getTime();
         Assert.assertEquals(expected, actual);
     }
     
@@ -103,12 +103,8 @@ public class CalendarHelperTest_CreateDates {
         int month = 12;
         int day = 12;
         Date actual = CalendarHelper.date(year, month, day);
-        Date expected = this.createDateInGregorianCalendar(year, month, day);
+        Date expected = new GregorianCalendar(30000, 11, 12).getTime();
         Assert.assertEquals(expected, actual);
-    }
-
-    private Date createDateInGregorianCalendar(int year, int month, int day){
-        return new GregorianCalendar(year, month - 1, day).getTime();
     }
 
 }
