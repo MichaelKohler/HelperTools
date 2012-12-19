@@ -21,6 +21,7 @@ package info.michaelkohler.helpertools.date;
 
 import java.util.Date;
 import java.util.GregorianCalendar;
+
 /**
  * A class that provides convenient methods to support dates generated based on the Gregorian calendar. @see {@link GregorianCalendar}.
  * @author isim
@@ -40,11 +41,11 @@ public class CalendarHelper {
     }
 
     private static void validateDateArguments(int year, int month, int day) {
-        if(yearWithinRange(year))
+        if(!yearWithinRange(year))
             throw new IllegalArgumentException("Year argument must be positive");
-        if(monthWithinRange(month))
+        if(!monthWithinRange(month))
             throw new IllegalArgumentException("Month argument falls outside of the supported range of 1 - 12");
-        if(dayWithinRange(day))
+        if(!dayWithinRange(day))
             throw new IllegalArgumentException("Day argument falls outside of the supported range of 1 - 31");
 
         if(isFebruary(month)) {
@@ -59,15 +60,15 @@ public class CalendarHelper {
     }
 
     private static boolean yearWithinRange(int year) {
-        return year < 0;
+        return year > 0;
     }
     
     private static boolean monthWithinRange(int month) {
-        return month <= 0 || month > 12;
+        return month > 0 && month <= 12;
     }
 
     private static boolean dayWithinRange(int day) {
-        return day <= 0 || day > 31;
+        return day > 0 && day <= 31;
     }
     
     private static boolean isFebruary(int month) {

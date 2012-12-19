@@ -89,11 +89,11 @@ public class CalendarHelperTest_CreateDates {
     
     @Test
     public void testCalendar_CreateDateInYear0_MatchesExpected() {
-        int year = 0;
+        int year = 1;
         int month = 1;
-        int day = 0;
+        int day = 1;
         Date actual = CalendarHelper.date(year, month, day);
-        Date expected = new GregorianCalendar(0, 0, 0).getTime();
+        Date expected = new GregorianCalendar(1, 0, 1).getTime();
         Assert.assertEquals(expected, actual);
     }
     
