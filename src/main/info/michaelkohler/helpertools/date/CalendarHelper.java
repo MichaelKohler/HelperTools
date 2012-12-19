@@ -21,7 +21,11 @@ package info.michaelkohler.helpertools.date;
 
 import java.util.Date;
 import java.util.GregorianCalendar;
-
+/**
+ * A class that provides convenient methods to support dates generated based on the Gregorian calendar. @see {@link GregorianCalendar}.
+ * @author isim
+ *
+ */
 public class CalendarHelper {
     /**
      * Create a date representation of the specified year, month and day based on the Gregorian calendar. @see {@link GregorianCalendar}.
