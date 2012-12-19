@@ -23,6 +23,30 @@ public class CalendarHelperTest_CreateIllegalDateTimes {
     }
     
     @Test
+    public void testCalendar_CreateDateTime_25thHour() {
+        expectedException.expect(IllegalArgumentException.class);
+        int year = 2012;
+        int month = 12;
+        int day = 15;
+        int hour = 25;
+        int minute = 0;
+        int second = 0;
+        CalendarHelper.datetime(year, month, day, hour, minute, second);
+    }
+    
+    @Test
+    public void testCalendar_CreateDateTime_30thHour() {
+        expectedException.expect(IllegalArgumentException.class);
+        int year = 2012;
+        int month = 12;
+        int day = 15;
+        int hour = 30;
+        int minute = 0;
+        int second = 0;
+        CalendarHelper.datetime(year, month, day, hour, minute, second);
+    }
+
+    @Test
     public void testCalendar_CreateDateTime_NegativeMinute() {
         expectedException.expect(IllegalArgumentException.class);
         int year = 2012;
@@ -30,6 +54,30 @@ public class CalendarHelperTest_CreateIllegalDateTimes {
         int day = 15;
         int hour = 0;
         int minute = -1;
+        int second = 0;
+        CalendarHelper.datetime(year, month, day, hour, minute, second);
+    }
+    
+    @Test
+    public void testCalendar_CreateDateTime_61stMinute() {
+        expectedException.expect(IllegalArgumentException.class);
+        int year = 2012;
+        int month = 12;
+        int day = 15;
+        int hour = 0;
+        int minute = 61;
+        int second = 0;
+        CalendarHelper.datetime(year, month, day, hour, minute, second);
+    }
+    
+    @Test
+    public void testCalendar_CreateDateTime_80thMinute() {
+        expectedException.expect(IllegalArgumentException.class);
+        int year = 2012;
+        int month = 12;
+        int day = 15;
+        int hour = 0;
+        int minute = 80;
         int second = 0;
         CalendarHelper.datetime(year, month, day, hour, minute, second);
     }
@@ -43,6 +91,30 @@ public class CalendarHelperTest_CreateIllegalDateTimes {
         int hour = 0;
         int minute = 0;
         int second = -1;
+        CalendarHelper.datetime(year, month, day, hour, minute, second);
+    }
+    
+    @Test
+    public void testCalendar_CreateDateTime_61stSecond() {
+        expectedException.expect(IllegalArgumentException.class);
+        int year = 2012;
+        int month = 12;
+        int day = 15;
+        int hour = 0;
+        int minute = 0;
+        int second = 61;
+        CalendarHelper.datetime(year, month, day, hour, minute, second);
+    }
+    
+    @Test
+    public void testCalendar_CreateDateTime_90thSecond() {
+        expectedException.expect(IllegalArgumentException.class);
+        int year = 2012;
+        int month = 12;
+        int day = 15;
+        int hour = 0;
+        int minute = 0;
+        int second = 90;
         CalendarHelper.datetime(year, month, day, hour, minute, second);
     }
     
@@ -67,7 +139,6 @@ public class CalendarHelperTest_CreateIllegalDateTimes {
         int hour = 0;
         int minute = 0;
         int second = 0;
-        
         CalendarHelper.datetime(year, month, day, hour, minute, second);
     }
     
@@ -80,7 +151,6 @@ public class CalendarHelperTest_CreateIllegalDateTimes {
         int hour = 0;
         int minute = 0;
         int second = 0;
-        
         CalendarHelper.datetime(year, month, day, hour, minute, second);
     }
 }
