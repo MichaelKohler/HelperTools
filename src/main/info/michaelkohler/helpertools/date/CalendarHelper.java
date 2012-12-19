@@ -44,4 +44,9 @@ public class CalendarHelper {
             throw new IllegalArgumentException("Negative day value cannot be used to create dates");
     }
 
+    public static Date datetime(int year, int month, int day, 
+            int hour, int minute, int second) {
+        return new GregorianCalendar(year, month - 1, day, hour, minute, second).getTime();
+    }
+
 }
