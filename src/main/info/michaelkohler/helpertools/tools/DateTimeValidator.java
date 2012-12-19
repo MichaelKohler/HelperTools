@@ -83,4 +83,32 @@ public class DateTimeValidator {
         GregorianCalendar calendar = new GregorianCalendar();
         return calendar.isLeapYear(year);
     }
+    
+    public static void validateDateTimeArguments(
+            int year, int month, int day,
+            int hour, int minute, int second) {
+        validateDateArguments(year, month, day);
+        validateTimeArguments(hour, minute, second);
+    }
+    
+    private static void validateTimeArguments(int hour, int minute, int second) {
+        if(!hourWithinRange(hour))
+            throw new IllegalArgumentException("Hour argument falls outside of the supported range of 0 - 23");
+        if(!minuteWithinRange(minute))
+            throw new IllegalArgumentException("Minute argument falls outside of the supported range of 0 - 59");
+        if(!secondWithinRange(second))
+            throw new IllegalArgumentException("Second argument falls outside of the supported range of 0 - 59");
+    }
+
+    private static boolean hourWithinRange(int hour) {
+        return hour >= 0 && hour <= 24;
+    }
+    
+    private static boolean minuteWithinRange(int minute) {
+        return minute >= 0 && minute <= 60;
+    }
+    
+    private static boolean secondWithinRange(int second) {
+        return second >= 0 && second <= 60;
+    }
 }
