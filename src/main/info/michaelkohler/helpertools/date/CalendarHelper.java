@@ -56,6 +56,16 @@ public class CalendarHelper {
         return day <= 0 || day > 31;
     }
 
+    /**
+     * Create a date representation of the specified year, month and day with hour, minute and second based on the Gregorian calendar. @see {@link GregorianCalendar}.
+     * @param year Year to be used.
+     * @param month Month to be used.
+     * @param day Day to be used.
+     * @param hour Hour to be used.
+     * @param minute Minute to be used.
+     * @param second Second to be used.
+     * @return A {@link Date} object representing the date of the specified year, month and day with hour, minute and second.
+     */
     public static Date datetime(int year, int month, int day, 
             int hour, int minute, int second) {
         validateDateTimeArguments(year, month, day, hour, minute, second);
