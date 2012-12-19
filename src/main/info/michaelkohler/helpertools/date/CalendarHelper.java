@@ -46,7 +46,17 @@ public class CalendarHelper {
 
     public static Date datetime(int year, int month, int day, 
             int hour, int minute, int second) {
+        validateTimeArguments(hour, minute, second);
         return new GregorianCalendar(year, month - 1, day, hour, minute, second).getTime();
+    }
+
+    private static void validateTimeArguments(int hour, int minute, int second) {
+        if(hour < 0)
+            throw new IllegalArgumentException("Negative hour value cannot be used to create times");
+        if(minute < 0)
+            throw new IllegalArgumentException("Negative minute value cannot be used to create times");
+        if(second < 0)
+            throw new IllegalArgumentException("Negative second value cannot be used to create times");
     }
 
 }
