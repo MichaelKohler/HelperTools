@@ -42,6 +42,16 @@ public class CalendarHelper {
             throw new IllegalArgumentException("Month argument falls outside of the supported range of 1 - 12");
         if(dayWithinRange(day))
             throw new IllegalArgumentException("Day argument falls outside of the supported range of 1 - 31");
+
+        if(isFebruary(month)) {
+            if(!isLeapYear(year) && day >= 29)
+                throw new IllegalArgumentException();
+            if(isLeapYear(year) && day >= 30)
+                throw new IllegalArgumentException();
+        }
+        else if(isApril(month) || isJune(month) || isSeptember(month) || isNovember(month))
+            if(day >= 31)
+                throw new IllegalArgumentException();
     }
 
     private static boolean yearWithinRange(int year) {
@@ -54,6 +64,31 @@ public class CalendarHelper {
 
     private static boolean dayWithinRange(int day) {
         return day <= 0 || day > 31;
+    }
+    
+    private static boolean isFebruary(int month) {
+        return month == 2;
+    }
+    
+    private static boolean isApril(int month) {
+        return month == 4;
+    }
+    
+    private static boolean isJune(int month) {
+        return month == 6;
+    }
+    
+    private static boolean isSeptember(int month) {
+        return month == 9;
+    }
+    
+    private static boolean isNovember(int month) {
+        return month == 11;
+    }
+
+    public static boolean isLeapYear(int year){
+        GregorianCalendar calendar = new GregorianCalendar();
+        return calendar.isLeapYear(year);
     }
 
     /**
