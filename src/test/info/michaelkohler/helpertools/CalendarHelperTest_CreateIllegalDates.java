@@ -48,11 +48,47 @@ public class CalendarHelperTest_CreateIllegalDates {
     }
     
     @Test
+    public void testCalendar_CreateDate_0thMonth() {
+        expectedException.expect(IllegalArgumentException.class);
+        int year = 2012;
+        int month = 0;
+        int day = 15;
+        CalendarHelper.date(year, month, day);
+    }
+    
+    @Test
+    public void testCalendar_CreateDate_13thMonth() {
+        expectedException.expect(IllegalArgumentException.class);
+        int year = 2012;
+        int month = 13;
+        int day = 15;
+        CalendarHelper.date(year, month, day);
+    }
+    
+    @Test
     public void testCalendar_CreateDate_NegativeDay() {
         expectedException.expect(IllegalArgumentException.class);
         int year = 2012;
         int month = 5;
         int day = -15;
+        CalendarHelper.date(year, month, day);
+    }
+    
+    @Test
+    public void testCalendar_CreateDate_0thDay() {
+        expectedException.expect(IllegalArgumentException.class);
+        int year = 2012;
+        int month = 5;
+        int day = 0;
+        CalendarHelper.date(year, month, day);
+    }
+    
+    @Test
+    public void testCalendar_CreateDate_32ndDay() {
+        expectedException.expect(IllegalArgumentException.class);
+        int year = 2012;
+        int month = 5;
+        int day = 32;
         CalendarHelper.date(year, month, day);
     }
 }

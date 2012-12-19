@@ -36,12 +36,24 @@ public class CalendarHelper {
     }
 
     private static void validateDateArguments(int year, int month, int day) {
-        if(year < 0)
-            throw new IllegalArgumentException("Negative year value cannot be used to create dates");
-        if(month < 0)
-            throw new IllegalArgumentException("Negative month value cannot be used to create dates");
-        if(day < 0)
-            throw new IllegalArgumentException("Negative day value cannot be used to create dates");
+        if(yearWithinRange(year))
+            throw new IllegalArgumentException("Year argument must be positive");
+        if(monthWithinRange(month))
+            throw new IllegalArgumentException("Month argument falls outside of the supported range of 1 - 12");
+        if(dayWithinRange(day))
+            throw new IllegalArgumentException("Day argument falls outside of the supported range of 1 - 31");
+    }
+
+    private static boolean yearWithinRange(int year) {
+        return year < 0;
+    }
+    
+    private static boolean monthWithinRange(int month) {
+        return month <= 0 || month > 12;
+    }
+
+    private static boolean dayWithinRange(int day) {
+        return day <= 0 || day > 31;
     }
 
     public static Date datetime(int year, int month, int day, 
@@ -59,11 +71,11 @@ public class CalendarHelper {
 
     private static void validateTimeArguments(int hour, int minute, int second) {
         if(!hourWithinRange(hour))
-            throw new IllegalArgumentException("Hour argument falls outside supported range of 0 - 23");
+            throw new IllegalArgumentException("Hour argument falls outside of the supported range of 0 - 23");
         if(!minuteWithinRange(minute))
-            throw new IllegalArgumentException("Minute argument falls outside supported range of 0 - 59");
+            throw new IllegalArgumentException("Minute argument falls outside of the supported range of 0 - 59");
         if(!secondWithinRange(second))
-            throw new IllegalArgumentException("Second argument falls outside supported range of 0 - 59");
+            throw new IllegalArgumentException("Second argument falls outside of the supported range of 0 - 59");
     }
 
     private static boolean hourWithinRange(int hour) {
