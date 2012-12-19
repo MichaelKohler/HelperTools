@@ -108,7 +108,7 @@ public class CalendarHelperTest_CreateDates {
     }
 
     private Date createDateInGregorianCalendar(int year, int month, int day){
-        return new GregorianCalendar(year, month + 1, day).getTime();
+        return new GregorianCalendar(year, month - 1, day).getTime();
     }
 
 }

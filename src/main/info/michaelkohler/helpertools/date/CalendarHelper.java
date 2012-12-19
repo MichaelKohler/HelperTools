@@ -32,7 +32,7 @@ public class CalendarHelper {
      * @return A {@link Date} object representing the date of the specified year, month and day.
      */
     public static Date date(int year, int month, int day) {
-        return new GregorianCalendar(year, month + 1, day).getTime();
+        return new GregorianCalendar(year, month - 1, day).getTime();
     }
 
 }
