@@ -27,7 +27,13 @@ import java.util.GregorianCalendar;
  *
  */
 public class DateTimeValidator {
-
+    /**
+     * Check to see if the specified year, month and day can be formulated into a legitimate date in the gregorian calendar.
+     * @param year Year to be checked.
+     * @param month Month to be checked.
+     * @param day Day to be checked.
+     * @throws Throws an {@link IllegalArgumentException} if the argument cannot be formulated into a legitimate date in the gregorian calendar.
+     */
     public static void validateDateArguments(int year, int month, int day) {
         if(!yearWithinRange(year))
             throw new IllegalArgumentException("Year argument must be positive");
@@ -84,6 +90,17 @@ public class DateTimeValidator {
         return calendar.isLeapYear(year);
     }
     
+    /**
+     * Check to see if the specified year, month, day, hour, minute and second can be formulated into a legitimate date-time in the gregorian calendar.
+     * @param year Year to be checked.
+     * @param month Month to be checked.
+     * @param day Day to be checked.
+     * @param hour Hour to be checked.
+     * @param minute Minute to be checked.
+     * @param second Second to be checked.
+     * @throws Throwss an {@link IllegalArgumentException} if the specified year, month, day, hour, minute and second cannot be formulated into a legitimate 
+     * date-time in the gregorian calendar.
+     */
     public static void validateDateTimeArguments(
             int year, int month, int day,
             int hour, int minute, int second) {
