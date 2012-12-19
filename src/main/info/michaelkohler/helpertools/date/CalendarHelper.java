@@ -23,7 +23,6 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class CalendarHelper {
-
     /**
      * Create a date representation of the specified year, month and day based on the Gregorian calendar. @see {@link GregorianCalendar}.
      * @param year Year to be used.
@@ -32,7 +31,17 @@ public class CalendarHelper {
      * @return A {@link Date} object representing the date of the specified year, month and day.
      */
     public static Date date(int year, int month, int day) {
+        validateDateArguments(year, month, day);
         return new GregorianCalendar(year, month - 1, day).getTime();
+    }
+
+    private static void validateDateArguments(int year, int month, int day) {
+        if(year < 0)
+            throw new IllegalArgumentException("Negative year value cannot be used to create dates");
+        if(month < 0)
+            throw new IllegalArgumentException("Negative month value cannot be used to create dates");
+        if(day < 0)
+            throw new IllegalArgumentException("Negative day value cannot be used to create dates");
     }
 
 }
