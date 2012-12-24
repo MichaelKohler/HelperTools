@@ -27,7 +27,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-public class DateHelperTest_IllegalDates {
+public class DateFormatHelperTest_IllegalDates {
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 
