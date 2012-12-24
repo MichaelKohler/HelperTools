@@ -19,7 +19,7 @@
  */
 package info.michaelkohler.helpertools;
 
-import info.michaelkohler.helpertools.date.DateHelper;
+import info.michaelkohler.helpertools.date.DateFormatHelper;
 
 import java.text.ParseException;
 import java.util.Calendar;
@@ -29,15 +29,14 @@ import java.util.GregorianCalendar;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class DateHelperTest_SupportedLiterals {
+public class DateFormatHelperTest_SupportedLiterals {
     @Test
     public void testStrToDate_Today() {
         Date expected = new Date();
-        
         String fixture = "today";
         try{
-            Date actual = DateHelper.strToDate(fixture);
-            Assert.assertTrue(actual.equals(expected));
+            Date actual = DateFormatHelper.strToDate(fixture);
+            Assert.assertTrue(compareDatesToTheMinutes(expected, actual));
         } catch(ParseException e){
             Assert.fail(e.getMessage());
         }
@@ -46,13 +45,12 @@ public class DateHelperTest_SupportedLiterals {
     @Test
     public void testStrToDate_Yesterday() {
         Calendar cal = new GregorianCalendar();
-        cal.roll(Calendar.DATE, false);
+        cal.roll(Calendar.DATE, -1);
         Date expected = cal.getTime();
-        
         String fixture = "yesterday";
         try{
-            Date actual = DateHelper.strToDate(fixture);
-            Assert.assertTrue(actual.equals(expected));
+            Date actual = DateFormatHelper.strToDate(fixture);
+            Assert.assertTrue(compareDatesToTheMinutes(expected, actual));
         } catch(ParseException e){
             Assert.fail(e.getMessage());
         }
@@ -61,15 +59,26 @@ public class DateHelperTest_SupportedLiterals {
     @Test
     public void testStrToDate_Tomorrow() {
         Calendar cal = new GregorianCalendar();
-        cal.roll(Calendar.DATE, true);
+        cal.roll(Calendar.DATE, 1);
         Date expected = cal.getTime();
-        
         String fixture = "tomorrow";
         try{
-            Date actual = DateHelper.strToDate(fixture);
-            Assert.assertTrue(actual.equals(expected));
+            Date actual = DateFormatHelper.strToDate(fixture);
+            Assert.assertTrue(compareDatesToTheMinutes(expected, actual));
         } catch(ParseException e){
             Assert.fail(e.getMessage());
         }
+    }
+    
+    private boolean compareDatesToTheMinutes(Date obj1, Date obj2){
+        Calendar cal1 = new GregorianCalendar();
+        cal1.setTimeInMillis(obj1.getTime());
+        Calendar cal2 = new GregorianCalendar();
+        cal2.setTimeInMillis(obj2.getTime());
+        
+        return (cal1.get(Calendar.DATE) == cal2.get(Calendar.DATE) 
+             && cal1.get(Calendar.HOUR) == cal2.get(Calendar.HOUR)
+             && cal1.get(Calendar.MINUTE) == cal2.get(Calendar.MINUTE)
+             && cal1.get(Calendar.SECOND) == cal2.get(Calendar.SECOND));
     }
 }

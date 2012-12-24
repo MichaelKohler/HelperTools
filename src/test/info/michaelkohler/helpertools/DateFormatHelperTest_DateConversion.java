@@ -19,7 +19,7 @@
  */
 package info.michaelkohler.helpertools;
 
-import info.michaelkohler.helpertools.date.DateHelper;
+import info.michaelkohler.helpertools.date.DateFormatHelper;
 
 import java.text.ParseException;
 import java.util.Calendar;
@@ -29,13 +29,12 @@ import java.util.GregorianCalendar;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class DateHelperTest_DateConversion {
-
+public class DateFormatHelperTest_DateConversion {
     @Test
     public void testStrToDate_NotNull() {
         String fixture = "2012/05/30";
         try {
-            Date actual = DateHelper.strToDate(fixture);
+            Date actual = DateFormatHelper.strToDate(fixture);
             Assert.assertTrue(actual != null);
         } catch (ParseException e) {
             Assert.fail(e.getMessage());
@@ -49,7 +48,7 @@ public class DateHelperTest_DateConversion {
         
         String fixture = "2012/05/30";
         try{
-            Date actual = DateHelper.strToDate(fixture);
+            Date actual = DateFormatHelper.strToDate(fixture);
             Assert.assertTrue(actual.equals(expected));
         } catch (ParseException e) {
             Assert.fail(e.getMessage());
@@ -63,7 +62,7 @@ public class DateHelperTest_DateConversion {
         
         String fixture = "2013/01/01";
         try{
-            Date actual = DateHelper.strToDate(fixture);
+            Date actual = DateFormatHelper.strToDate(fixture);
             Assert.assertTrue(actual.equals(expected));
         } catch (ParseException e) {
             Assert.fail(e.getMessage());
@@ -77,7 +76,7 @@ public class DateHelperTest_DateConversion {
         
         String fixture = "1970/05/31";
         try{
-            Date actual = DateHelper.strToDate(fixture);
+            Date actual = DateFormatHelper.strToDate(fixture);
             Assert.assertTrue(actual.equals(expected));
         } catch (ParseException e) {
             Assert.fail(e.getMessage());
@@ -91,7 +90,7 @@ public class DateHelperTest_DateConversion {
         
         String fixture = "1800/12/13";
         try{
-            Date actual = DateHelper.strToDate(fixture);
+            Date actual = DateFormatHelper.strToDate(fixture);
             Assert.assertTrue(actual.equals(expected));
         } catch (ParseException e) {
             Assert.fail(e.getMessage());
@@ -105,7 +104,7 @@ public class DateHelperTest_DateConversion {
         
         String fixture = "1890/03/30";
         try{
-            Date actual = DateHelper.strToDate(fixture);
+            Date actual = DateFormatHelper.strToDate(fixture);
             Assert.assertTrue(actual.equals(expected));
         } catch (ParseException e) {
             Assert.fail(e.getMessage());
@@ -119,7 +118,7 @@ public class DateHelperTest_DateConversion {
         
         String fixture = "1700/02/15";
         try{
-            Date actual = DateHelper.strToDate(fixture);
+            Date actual = DateFormatHelper.strToDate(fixture);
             Assert.assertTrue(actual.equals(expected));
         } catch (ParseException e) {
             Assert.fail(e.getMessage());
@@ -133,7 +132,7 @@ public class DateHelperTest_DateConversion {
         
         String fixture = "1717/06/25";
         try{
-            Date actual = DateHelper.strToDate(fixture);
+            Date actual = DateFormatHelper.strToDate(fixture);
             Assert.assertTrue(actual.equals(expected));
         }  catch (ParseException e) {
             Assert.fail(e.getMessage());
