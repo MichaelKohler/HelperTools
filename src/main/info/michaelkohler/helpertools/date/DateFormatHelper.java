@@ -57,6 +57,23 @@ public class DateFormatHelper {
         return dateFormatter.parse(dateStr);
     }
     
+    /**
+     * Convert date to string. The {@value DateHelper#SIMPLE_DATE_FORMAT} pattern is used as the default pattern. To change date pattern, @see {@link DateHelper#applyPattern(String)}.
+     * @param date Date to be converted
+     * @return A {@link String} representation of the given date.
+     */
+    public static String dateToStr(Date date) {
+        return dateFormatter.format(date);
+    }
+    
+    /**
+     * Changes the date pattern used for conversion.
+     * @param pattern A date pattern.
+     */
+    public static void applyPattern(String pattern){
+        dateFormatter.applyPattern(pattern);
+    }
+    
     private static boolean queryForTodayDate(String dateStr) {
         return dateStr.equalsIgnoreCase(TODAY);
     }

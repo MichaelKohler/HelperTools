@@ -19,7 +19,7 @@
  */
 package info.michaelkohler.helpertools;
 
-import info.michaelkohler.helpertools.date.DateHelper;
+import info.michaelkohler.helpertools.date.DateFormatHelper;
 import info.michaelkohler.helpertools.string.StringHelper;
 
 import java.util.Calendar;
@@ -33,14 +33,14 @@ public class DateHelperTest_StringConversion {
     @Test
     public void testDateToStr_NotNull() {
         Date fixture = new Date();
-        String actual = DateHelper.dateToStr(fixture);
+        String actual = DateFormatHelper.dateToStr(fixture);
         Assert.assertNotNull(actual);
     }
     
     @Test
     public void testDateToStr_NotEmpty() {
         Date fixture = new Date();
-        String actual = DateHelper.dateToStr(fixture);
+        String actual = DateFormatHelper.dateToStr(fixture);
         Assert.assertTrue(!StringHelper.isNullOrEmpty(actual));
     }
     
@@ -49,7 +49,7 @@ public class DateHelperTest_StringConversion {
         String expected = "2012/05/12";
         Calendar cal = new GregorianCalendar(2012, 4, 12);
         Date fixture = cal.getTime();
-        String actual = DateHelper.dateToStr(fixture);
+        String actual = DateFormatHelper.dateToStr(fixture);
         Assert.assertTrue(actual.equals(expected));
     }
     
@@ -58,7 +58,7 @@ public class DateHelperTest_StringConversion {
         String expected = "2012/12/12";
         Calendar cal = new GregorianCalendar(2012, 11, 12);
         Date fixture = cal.getTime();
-        String actual = DateHelper.dateToStr(fixture);
+        String actual = DateFormatHelper.dateToStr(fixture);
         Assert.assertTrue(actual.equals(expected));
     }
     
@@ -67,7 +67,7 @@ public class DateHelperTest_StringConversion {
         String expected = "2010/10/10";
         Calendar cal = new GregorianCalendar(2010, 9, 10);
         Date fixture = cal.getTime();
-        String actual = DateHelper.dateToStr(fixture);
+        String actual = DateFormatHelper.dateToStr(fixture);
         Assert.assertTrue(actual.equals(expected));
     }
     
@@ -76,7 +76,7 @@ public class DateHelperTest_StringConversion {
         String expected = "2005/01/31";
         Calendar cal = new GregorianCalendar(2005, 0, 31);
         Date fixture = cal.getTime();
-        String actual = DateHelper.dateToStr(fixture);
+        String actual = DateFormatHelper.dateToStr(fixture);
         Assert.assertTrue(actual.equals(expected));
     }
 }
