@@ -29,7 +29,7 @@ import java.util.GregorianCalendar;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class DateHelperTest_StringConversion {
+public class DateFormatHelperTest_StringConversion {
     @Test
     public void testDateToStr_NotNull() {
         Date fixture = new Date();
