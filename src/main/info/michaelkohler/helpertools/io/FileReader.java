@@ -23,7 +23,6 @@ import static info.michaelkohler.helpertools.string.StringHelper.isNullOrEmpty;
 import static info.michaelkohler.helpertools.tools.Validator.checkArgument;
 
 import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -65,17 +64,16 @@ public class FileReader {
         String readText = "";
 
         FileInputStream fstream = new FileInputStream(this.path);
-        DataInputStream dataStream = new DataInputStream(fstream);
-        BufferedReader br = new BufferedReader(new InputStreamReader(dataStream));
+        BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 
         String strLine = "";
         while ((strLine = br.readLine()) != null)
             readText += strLine + "\n";
 
         br.close();
-        dataStream.close();
         fstream.close();
         return readText;
     }
+    
 
 }
