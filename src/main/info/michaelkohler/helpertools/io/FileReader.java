@@ -68,9 +68,9 @@ public class FileReader {
         BufferedReader br = createBufferedReader();
 
         String strLine = "";
-        while ((strLine = br.readLine()) != null)
+        while ((strLine = br.readLine()) != null){
             readText += strLine + "\n";
-
+        }
         br.close();
         return readText;
     }
@@ -80,9 +80,8 @@ public class FileReader {
      * @param collection A collection where the lines read are going to be appended to. 
      * @throws IOException if there was an error opening/accessing/reading the file
      */
-	public final void readLines(final Collection<String> collection) throws IOException {
-		Validator.checkNotNull(collection,
-				"Collection supplied must not be null");
+    public final void readLines(final Collection<String> collection) throws IOException {
+        Validator.checkNotNull(collection,"Collection supplied must not be null");
 		BufferedReader br = null;
 		try {
 			br = createBufferedReader();
@@ -96,9 +95,9 @@ public class FileReader {
 			}
 		}
 	}
-    
+
     /**
-     * Reads the file line after line to a List of Strings. The file is always closed.  
+     * Reads the file line after line to a List of Strings. The file is always closed.
      * @return the List of Strings read from the file
      * @throws IOException if there was an error opening/accessing/reading the file
      */
@@ -107,7 +106,7 @@ public class FileReader {
         readLines(linesRead);
         return linesRead;
     }
-    
+
     /**
      * Creates a BufferedReader from the path supplied.
      * @return A BufferedReader for the path specified
@@ -118,6 +117,6 @@ public class FileReader {
         BufferedReader br = new BufferedReader(fReader);
         return br;
     }
-    
+
 
 }
