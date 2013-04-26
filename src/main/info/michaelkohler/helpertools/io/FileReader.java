@@ -24,8 +24,11 @@ import static info.michaelkohler.helpertools.tools.Validator.checkArgument;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The |FileReader| is responsible to read the content of
@@ -63,17 +66,21 @@ public class FileReader {
     public final String readFile() throws IOException {
         String readText = "";
 
-        FileInputStream fstream = new FileInputStream(this.path);
-        BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+        BufferedReader br = createBufferedReader();
 
         String strLine = "";
         while ((strLine = br.readLine()) != null)
             readText += strLine + "\n";
 
         br.close();
-        fstream.close();
         return readText;
     }
+    
+	private BufferedReader createBufferedReader() throws IOException {
+		java.io.FileReader fReader = new java.io.FileReader(this.path);
+		BufferedReader br = new BufferedReader(fReader);
+		return br;
+	}
     
 
 }
