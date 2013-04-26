@@ -21,19 +21,20 @@ package info.michaelkohler.helpertools.io;
 
 import static info.michaelkohler.helpertools.string.StringHelper.isNullOrEmpty;
 import static info.michaelkohler.helpertools.tools.Validator.checkArgument;
+import info.michaelkohler.helpertools.tools.Validator;
 
 import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * The |FileReader| is responsible to read the content of
  * a whole file. It returns the content as a String.
  *
- * @author Michael Kohler
- * @version 0.0.2
+ * @author Michael Kohler, Victor Reventos
+ * @version 0.0.3
  */
 public class FileReader {
 
@@ -64,18 +65,58 @@ public class FileReader {
     public final String readFile() throws IOException {
         String readText = "";
 
-        FileInputStream fstream = new FileInputStream(this.path);
-        DataInputStream dataStream = new DataInputStream(fstream);
-        BufferedReader br = new BufferedReader(new InputStreamReader(dataStream));
+        BufferedReader br = createBufferedReader();
 
         String strLine = "";
-        while ((strLine = br.readLine()) != null)
+        while ((strLine = br.readLine()) != null){
             readText += strLine + "\n";
-
+        }
         br.close();
-        dataStream.close();
-        fstream.close();
         return readText;
     }
+
+    /**
+     * Reads line after line to the supplied Collection of Strings 
+     * @param collection A collection where the lines read are going to be appended to. 
+     * @throws IOException if there was an error opening/accessing/reading the file
+     */
+    public final void readLines(final Collection<String> collection) throws IOException {
+        Validator.checkNotNull(collection,"Collection supplied must not be null");
+		BufferedReader br = null;
+		try {
+			br = createBufferedReader();
+			String strLine = "";
+			while ((strLine = br.readLine()) != null) {
+				collection.add(strLine);
+			}
+		} finally {
+			if (br != null) {
+				br.close();
+			}
+		}
+	}
+
+    /**
+     * Reads the file line after line to a List of Strings. The file is always closed.
+     * @return the List of Strings read from the file
+     * @throws IOException if there was an error opening/accessing/reading the file
+     */
+    public final List<String> readLines() throws IOException {
+        List<String> linesRead = new LinkedList<String>();
+        readLines(linesRead);
+        return linesRead;
+    }
+
+    /**
+     * Creates a BufferedReader from the path supplied.
+     * @return A BufferedReader for the path specified
+     * @throws IOException if file is not found
+     */
+    private BufferedReader createBufferedReader() throws IOException {
+        java.io.FileReader fReader = new java.io.FileReader(this.path);
+        BufferedReader br = new BufferedReader(fReader);
+        return br;
+    }
+
 
 }
