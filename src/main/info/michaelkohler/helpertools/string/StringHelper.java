@@ -74,6 +74,12 @@ public final class StringHelper {
         return sb.toString();
     }
     
+    /**
+     * Creates a continuous string out of a Iterable and a separator.
+     * @param items Iterable to iterate through
+     * @param separator the separator to use between elements
+     * @return joined string
+     */
     public static String join(Iterable<?> items, char separator){
         checkNotNull(items, "items cannot be null");
        
@@ -206,5 +212,15 @@ public final class StringHelper {
         out = out.replaceAll(replace + notMatch, replace);
         out = out.replaceAll(notMatch + replace, replace);
         return out;
+    }
+    
+    /**
+     * Reverses a string
+     * @param string String to be reversed
+     * @return reversed String
+     */
+    public static String reverse(String string){
+        StringBuilder sb = new StringBuilder(string);
+        return sb.reverse().toString();
     }
 }
