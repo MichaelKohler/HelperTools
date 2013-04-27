@@ -64,7 +64,7 @@ public final class StringHelper {
     public static String join(String[] items, String separator) {
         checkNotNull(items, "items cannot be null");
         checkArgument(items.length > 0, "items cannot be empty");
-        
+        checkNotNull(separator, "separator cannot be null");
         StringBuilder sb = new StringBuilder();
         sb.append(items[0]);
         for (int i = 1; i < items.length; i++) {
@@ -81,8 +81,10 @@ public final class StringHelper {
      * @return joined string
      */
     public static String join(Iterable<?> items, char separator){
-        checkNotNull(items, "items cannot be null");
-       
+        if(items == null){
+            return null;
+        }
+        
         StringBuilder sb = new StringBuilder();
         Iterator<?> iterator = items.iterator();
         if(iterator.hasNext()){
@@ -215,12 +217,18 @@ public final class StringHelper {
     }
     
     /**
-     * Reverses a string
+     * Reverses a string. It handles null by returning a null.
      * @param string String to be reversed
      * @return reversed String
      */
     public static String reverse(String string){
+        if(isNullOrEmpty(string)){
+            return string;
+        }
+        
         StringBuilder sb = new StringBuilder(string);
         return sb.reverse().toString();
     }
+    
+    
 }
