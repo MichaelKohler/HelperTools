@@ -238,10 +238,12 @@ public final class StringHelper {
     /**
      * Compares the CharSequences and returns
      * the index of the first difference.
+     * If no difference is found then -1 is returned.
      * 
      * @param s1 first CharSequence not null
      * @param s2 second CharSequence not null
-     * @return index of the first difference
+     * @return index of the first difference or if there is no
+     * difference then -1 is returned
      */
     public static int indexOfDifference(CharSequence s1, CharSequence s2) {
         checkNotNull(s1, "s1 cannot be null");
