@@ -200,5 +200,30 @@ public class StringHelperTest {
         assertEquals(expected,StringHelper.join(a,','));
     }
     
+    @Test
+    public void testIndexOfDifferenceWithDifferences(){
+        String s1 = "abc";
+        String s2 = "abcd";
+        assertEquals(3, StringHelper.indexOfDifference(s1, s2));
+        
+        s1 = "abc";
+        s2 = "adc";
+        assertEquals(1, StringHelper.indexOfDifference(s1, s2));
+        
+        s1 = "";
+        s2 = "adc";
+        assertEquals(0, StringHelper.indexOfDifference(s1, s2));
+    }
+    
+    @Test
+    public void testIndexOfDifferenceWithNoDifferences(){
+        String s1 = "";
+        String s2 = "";
+        assertEquals(-1, StringHelper.indexOfDifference(s1, s2));
+        
+        s1 = "abc";
+        s2 = "abc";
+        assertEquals(-1, StringHelper.indexOfDifference(s1, s2));
+    }
     
 }
