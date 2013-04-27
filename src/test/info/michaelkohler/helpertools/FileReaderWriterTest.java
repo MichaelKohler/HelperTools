@@ -19,14 +19,19 @@
  */
 package info.michaelkohler.helpertools;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-
-import org.junit.*;
 import static org.junit.Assert.assertEquals;
 import info.michaelkohler.helpertools.io.FileReader;
 import info.michaelkohler.helpertools.io.FileWriter;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.After;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class FileReaderWriterTest  {
     
@@ -109,6 +114,46 @@ public class FileReaderWriterTest  {
         FileWriter writer = new FileWriter(_path, _append);
         InputStream is = null;
         writer.writeFile(is);
+    }
+    
+    @Test
+    public void testReadLinesWithSuppliedCollection() throws IOException{
+        _append = false;
+        _message = "Hello!\nReadLines\n";
+        
+        FileWriter writer = new FileWriter(_path, _append);
+        writer.writeFile(_message);
+        
+        FileReader reader = new FileReader(_path);
+        List<String> lines = new ArrayList<String>(2);
+        reader.readLines(lines);
+        
+        String[] splittedLines = _message.split("\\n");
+        assertEquals("Number of lines must be equal to the number of lines in the message",splittedLines.length,lines.size());
+
+        for(int i=0; i < splittedLines.length; i++){
+            assertEquals("Elements must be equals", splittedLines[i], lines.get(i));
+        }
+
+    }
+    
+    @Test
+    public void testReadLinesToList() throws IOException{
+        _append = false;
+        _message = "Hello!\nReadLines\n";
+        
+        FileWriter writer = new FileWriter(_path, _append);
+        writer.writeFile(_message);
+        
+        FileReader reader = new FileReader(_path);
+        List<String> lines = reader.readLines();
+        
+        String[] splittedLines = _message.split("\\n");
+        assertEquals("Number of lines must be equal to the number of lines in the message",splittedLines.length,lines.size());
+
+        for(int i=0; i < splittedLines.length; i++){
+            assertEquals("Elements must be equals", splittedLines[i], lines.get(i));
+        }
     }
     
     @After
