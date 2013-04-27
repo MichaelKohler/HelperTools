@@ -23,6 +23,9 @@ package info.michaelkohler.helpertools.string;
 import static info.michaelkohler.helpertools.tools.Validator.checkArgument;
 import static info.michaelkohler.helpertools.tools.Validator.checkNotNull;
 
+import java.util.Collection;
+import java.util.Iterator;
+
 /**
  * The |StringHelper| is a static class which helps
  * performing useful operations on strings easily and
@@ -68,6 +71,22 @@ public final class StringHelper {
             sb.append(separator);
             sb.append(items[i]);
         }
+        return sb.toString();
+    }
+    
+    public static String join(Iterable<?> items, char separator){
+        checkNotNull(items, "items cannot be null");
+       
+        StringBuilder sb = new StringBuilder();
+        Iterator<?> iterator = items.iterator();
+        if(iterator.hasNext()){
+            sb.append(iterator.next());
+        }
+        while(iterator.hasNext()){
+            sb.append(separator);
+            sb.append(iterator.next());
+        }
+        
         return sb.toString();
     }
 
