@@ -34,7 +34,8 @@ import org.junit.Test;
 
 public class NetHelperTest {
 
-    private final int FILE_SIZE = 7007;
+    /** Can we compare the file size on the go instead of hardcoding it here? **/
+    private final int FILE_SIZE = 6748;
     private final int CHUNK_SIZE = 4096;
 
     @Test
