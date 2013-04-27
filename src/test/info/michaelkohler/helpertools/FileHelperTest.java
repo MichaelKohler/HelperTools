@@ -88,8 +88,17 @@ public class FileHelperTest  {
         if(targetFile.exists()) targetFile.delete();
         subFolder.delete();
         tempDir.delete();
+
+        File tmpTestfile = new File("a" + File.separator + "b");
+        if (tmpTestfile.exists()) {
+            tmpTestfile.delete();
+        }
+        File tmpTestfolder = new File("a");
+        if (tmpTestfolder.exists()) {
+            tmpTestfolder.delete();
+        }
     }
-    
+
     @Test
     public final void testCopyFileFile() throws IOException {  
         FileHelper.copy(testFile, targetFile);
