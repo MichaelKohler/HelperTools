@@ -23,13 +23,15 @@ package info.michaelkohler.helpertools.string;
 import static info.michaelkohler.helpertools.tools.Validator.checkArgument;
 import static info.michaelkohler.helpertools.tools.Validator.checkNotNull;
 
+import java.util.Iterator;
+
 /**
  * The |StringHelper| is a static class which helps
  * performing useful operations on strings easily and
  * efficiently.
  *
- * @author Lukas Diener
- * @version 0.0.1
+ * @author Lukas Diener, Victor J. Reventos
+ * @version 0.0.2
  */
 public final class StringHelper {
 
@@ -68,6 +70,34 @@ public final class StringHelper {
             sb.append(separator);
             sb.append(items[i]);
         }
+        return sb.toString();
+    }
+    
+    /**
+     * Creates a continuous string out of a Iterable and a separator. Handles
+     * null by returning null.
+     * 
+     * @param items
+     *            Iterable to iterate through
+     * @param separator
+     *            the separator to use between elements
+     * @return joined string
+     */
+    public static String join(Iterable<?> items, char separator) {
+        if (items == null) {
+            return null;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        Iterator<?> iterator = items.iterator();
+        if (iterator.hasNext()) {
+            sb.append(iterator.next());
+        }
+        while (iterator.hasNext()) {
+            sb.append(separator);
+            sb.append(iterator.next());
+        }
+
         return sb.toString();
     }
 
@@ -187,5 +217,54 @@ public final class StringHelper {
         out = out.replaceAll(replace + notMatch, replace);
         out = out.replaceAll(notMatch + replace, replace);
         return out;
+    }
+    
+    /**
+     * Reverses a string. It handles null by returning a null.
+     * 
+     * @param string
+     *            String to be reversed
+     * @return reversed String
+     */
+    public static String reverse(String string) {
+        if (isNullOrEmpty(string)) {
+            return string;
+        }
+
+        StringBuilder sb = new StringBuilder(string);
+        return sb.reverse().toString();
+    }
+
+    /**
+     * Compares the CharSequences and returns
+     * the index of the first difference.
+     * If no difference is found then -1 is returned.
+     * 
+     * @param s1 first CharSequence not null
+     * @param s2 second CharSequence not null
+     * @return index of the first difference or if there is no
+     * difference then -1 is returned
+     */
+    public static int indexOfDifference(CharSequence s1, CharSequence s2) {
+        checkNotNull(s1, "s1 cannot be null");
+        checkNotNull(s2, "s2 cannot be null");
+
+        final int NOT_FOUND = -1;
+        if (s1 == s2) {
+            return NOT_FOUND;
+        }
+        
+        final int shortest = (s1.length() < s2.length()) ? s1.length() : s2.length();
+        int i = 0;
+        for (; i < shortest; i++) {
+            if (s1.charAt(i) != s2.charAt(i)) {
+                return i;
+            }
+        }
+        if (i < s1.length() || i < s2.length()) {
+            return i;
+        }
+
+        return NOT_FOUND;
     }
 }
