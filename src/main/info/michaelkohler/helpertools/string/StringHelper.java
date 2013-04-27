@@ -64,7 +64,7 @@ public final class StringHelper {
     public static String join(String[] items, String separator) {
         checkNotNull(items, "items cannot be null");
         checkArgument(items.length > 0, "items cannot be empty");
-        checkNotNull(separator, "separator cannot be null");
+        
         StringBuilder sb = new StringBuilder();
         sb.append(items[0]);
         for (int i = 1; i < items.length; i++) {
@@ -76,6 +76,7 @@ public final class StringHelper {
     
     /**
      * Creates a continuous string out of a Iterable and a separator.
+     * Handles null by returning null.
      * @param items Iterable to iterate through
      * @param separator the separator to use between elements
      * @return joined string
@@ -229,6 +230,4 @@ public final class StringHelper {
         StringBuilder sb = new StringBuilder(string);
         return sb.reverse().toString();
     }
-    
-    
 }

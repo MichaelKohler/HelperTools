@@ -20,6 +20,11 @@
 package info.michaelkohler.helpertools;
 
 import static org.junit.Assert.assertEquals;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import info.michaelkohler.helpertools.string.StringHelper;
 
 import org.junit.Test;
@@ -163,4 +168,37 @@ public class StringHelperTest {
     public void testEmptyReplaceArg() {
         StringHelper.replaceWithoutRepetition("text", "find", "");
     }
+    
+    @Test
+    public void testNullAndEmptyReverseArg(){
+        assertEquals("",StringHelper.reverse(""));
+        assertEquals(null,StringHelper.reverse(null));
+    }
+    
+    public void testNullIterableJoinArg(){
+        assertEquals(null,StringHelper.join(null, '.'));
+    }
+    
+    @Test
+    public void testReverse(){
+        String test = "abc";
+        assertEquals("cba", StringHelper.reverse(test));
+    }
+    
+    @Test
+    public void testJoinIterable(){
+        List<String> a = new ArrayList<String>(Arrays.asList("apu","jil","joe"));
+        String expected = "apu,jil,joe";
+        assertEquals(expected,StringHelper.join(a,','));
+    }
+    
+    @Test
+    public void testJoinIterableOneItem(){
+        List<String> a = new ArrayList<String>(1);
+        a.add("apu");
+        String expected = "apu";
+        assertEquals(expected,StringHelper.join(a,','));
+    }
+    
+    
 }
