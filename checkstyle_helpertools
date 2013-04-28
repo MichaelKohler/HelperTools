@@ -14,9 +14,14 @@ Checkstyle configuration that checks the sun coding conventions.
   <module name="TreeWalker">
     <module name="JavadocMethod">
       <property name="suppressLoadErrors" value="true"/>
+      <property name="scope" value="public"/>
     </module>
-    <module name="JavadocType"/>
-    <module name="JavadocVariable"/>
+    <module name="JavadocType">
+      <property name="scope" value="public"/>
+    </module>
+    <module name="JavadocVariable">
+      <property name="scope" value="public"/>
+    </module>
     <module name="JavadocStyle"/>
     <module name="ConstantName"/>
     <module name="LocalFinalVariableName"/>

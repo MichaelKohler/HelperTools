@@ -24,20 +24,31 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
- * A class of date-related convenient helper methods. 
+ * A class of date-related convenient helper methods.
+ *
  * @author ivan.sim
+ * @version 0.0.1
  */
-public class DateHelper {
+public final class DateHelper {
+
+    /**
+     * this class should not be instantiated therefore the constructor is private.
+     */
+    private DateHelper() {
+    }
+
     /**
      * Returns today's date.
+     *
      * @return A {@link Date} object representation of today's date.
      */
     public static Date todayDate() {
         return new Date();
     }
-    
+
     /**
      * Returns yesterday's date.
+     *
      * @return A {@link Date} object representation of yesterday's date.
      */
     public static Date yesterdayDate() {
@@ -45,9 +56,10 @@ public class DateHelper {
         cal.roll(Calendar.DATE, false);
         return cal.getTime();
     }
-    
+
     /**
      * Returns tomorrow's date.
+     *
      * @return A {@link Date} object representation of tomorrow's date.
      */
     public static Date tomorrowDate() {

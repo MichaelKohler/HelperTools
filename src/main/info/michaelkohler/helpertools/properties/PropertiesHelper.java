@@ -19,10 +19,10 @@
  */
 package info.michaelkohler.helpertools.properties;
 
+import info.michaelkohler.helpertools.logging.Debugger;
 import static info.michaelkohler.helpertools.string.StringHelper.isNullOrEmpty;
 import static info.michaelkohler.helpertools.tools.Validator.checkArgument;
 import static info.michaelkohler.helpertools.tools.Validator.checkNotNull;
-import info.michaelkohler.helpertools.logging.Debugger;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -79,7 +79,7 @@ public final class PropertiesHelper {
         if (propertyFileName == null) {
             setPropertyFilename("");
         }
-        
+
         return propertyFileName;
     }
 
@@ -128,7 +128,7 @@ public final class PropertiesHelper {
     public static void setProperty(String aKey, String aValue) {
         checkArgument(!isNullOrEmpty(aKey), "aKey cannot be null or empty");
         checkArgument(!isNullOrEmpty(aValue), "aValue cannot be null or empty");
-        
+
         loadPropertiesFile();
         props.setProperty(aKey, aValue);
         storePropsFile();
@@ -142,7 +142,7 @@ public final class PropertiesHelper {
      */
     public static String getProperty(String aKey) {
         checkArgument(!isNullOrEmpty(aKey), "aKey cannot be null or empty");
-        
+
         loadPropertiesFile();
         String propValue = "";
         propValue = props.getProperty(aKey);
@@ -158,7 +158,7 @@ public final class PropertiesHelper {
      */
     public static boolean propertyExists(String aKey) {
         checkArgument(!isNullOrEmpty(aKey), "aKey cannot be null or empty");
-        
+
         loadPropertiesFile();
         boolean exists = props.containsKey(aKey);
         return exists;
@@ -171,7 +171,7 @@ public final class PropertiesHelper {
      */
     public static void removeProperty(String aKey) {
         checkArgument(!isNullOrEmpty(aKey), "aKey cannot be null or empty");
-        
+
         loadPropertiesFile();
         if (props.containsKey(aKey))
             props.remove(aKey);

@@ -25,17 +25,29 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
- * A class that provides convenient methods to support dates generated based on the Gregorian calendar. @see {@link GregorianCalendar}.
- * @author isim
+ * A class that provides convenient methods to support dates generated based on
+ * the Gregorian calendar. @see {@link GregorianCalendar}.
  *
+ * @author isim
+ * @version 0.0.1
  */
-public class CalendarHelper {
+public final class CalendarHelper {
+
     /**
-     * Create a date representation of the specified year, month and day based on the Gregorian calendar. @see {@link GregorianCalendar}.
+     * this class should not be instantiated therefore the constructor is private.
+     */
+    private CalendarHelper() {
+    }
+
+    /**
+     * Create a date representation of the specified year, month and day based on
+     * the Gregorian calendar. @see {@link GregorianCalendar}.
+     *
      * @param year Year to be used.
      * @param month Month to be used.
      * @param day Day to be used.
-     * @return A {@link Date} object representing the date of the specified year, month and day.
+     * @return A {@link Date} object representing the date of the specified year,
+     *         month and day.
      */
     public static Date date(int year, int month, int day) {
         DateTimeValidator.validateDateArguments(year, month, day);
@@ -43,18 +55,22 @@ public class CalendarHelper {
     }
 
     /**
-     * Create a date representation of the specified year, month and day with hour, minute and second based on the Gregorian calendar. @see {@link GregorianCalendar}.
+     * Create a date representation of the specified year, month and day with hour,
+     * minute and second based on the Gregorian calendar. @see {@link GregorianCalendar}.
      * @param year Year to be used.
      * @param month Month to be used.
      * @param day Day to be used.
      * @param hour Hour to be used.
      * @param minute Minute to be used.
      * @param second Second to be used.
-     * @return A {@link Date} object representing the date of the specified year, month and day with hour, minute and second.
+     * @return A {@link Date} object representing the date of the specified year, month
+     *         and day with hour, minute and second.
      */
-    public static Date datetime(int year, int month, int day, 
+    public static Date datetime(int year, int month, int day,
             int hour, int minute, int second) {
-        DateTimeValidator.validateDateTimeArguments(year, month, day, hour, minute, second);
-        return new GregorianCalendar(year, month - 1, day, hour, minute, second).getTime();
+        DateTimeValidator.validateDateTimeArguments(year, month, day, hour, minute,
+                                                      second);
+        return new GregorianCalendar(year, month - 1, day, hour, minute, second)
+                     .getTime();
     }
 }

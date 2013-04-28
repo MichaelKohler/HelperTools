@@ -20,9 +20,9 @@
 
 package info.michaelkohler.helpertools.collections;
 
+import info.michaelkohler.helpertools.string.StringHelper;
 import static info.michaelkohler.helpertools.tools.Validator.checkArgument;
 import static info.michaelkohler.helpertools.tools.Validator.checkNotNull;
-import info.michaelkohler.helpertools.string.StringHelper;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -53,6 +53,7 @@ public final class CollectionHelper {
      * have a field of a specified name.
      *
      * @param collection the collection to be traversed
+     * @param <T> typed param for the collection
      * @param property the name of the property to be extracted
      *
      * @return a Collection of the selected properties
@@ -60,7 +61,8 @@ public final class CollectionHelper {
     public static <T> Collection<Object> all(Collection<T> collection, String property)
         throws NoSuchFieldException {
         checkNotNull(collection, "collection cannot be null");
-        checkArgument(!StringHelper.isNullOrEmpty(property), "property cannot be null or empty");
+        checkArgument(!StringHelper.isNullOrEmpty(property),
+                        "property cannot be null or empty");
 
         Collection<Object> properties = new ArrayList<Object>();
         for (T element : collection) {
@@ -82,7 +84,7 @@ public final class CollectionHelper {
                 e.printStackTrace();
             }
         }
-        
+
         return properties;
     }
 
@@ -106,6 +108,7 @@ public final class CollectionHelper {
      * </pre>
      *
      * @param collection the collection to be traversed
+     * @param <T> typed param for the collection
      * @param function the method to be executed
      */
     public static <T> void each(Collection<T> collection, IFunction function) {

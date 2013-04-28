@@ -19,9 +19,9 @@
  */
 package info.michaelkohler.helpertools.io;
 
+import info.michaelkohler.helpertools.tools.Validator;
 import static info.michaelkohler.helpertools.string.StringHelper.isNullOrEmpty;
 import static info.michaelkohler.helpertools.tools.Validator.checkArgument;
-import info.michaelkohler.helpertools.tools.Validator;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -68,7 +68,7 @@ public class FileReader {
         BufferedReader br = createBufferedReader();
 
         String strLine = "";
-        while ((strLine = br.readLine()) != null){
+        while ((strLine = br.readLine()) != null) {
             readText += strLine + "\n";
         }
         br.close();
@@ -76,28 +76,31 @@ public class FileReader {
     }
 
     /**
-     * Reads line after line to the supplied Collection of Strings 
-     * @param collection A collection where the lines read are going to be appended to. 
+     * Reads line after line to the supplied Collection of Strings.
+     *
+     * @param collection A collection where the lines read are going to be appended to.
      * @throws IOException if there was an error opening/accessing/reading the file
      */
     public final void readLines(final Collection<String> collection) throws IOException {
-        Validator.checkNotNull(collection,"Collection supplied must not be null");
-		BufferedReader br = null;
-		try {
-			br = createBufferedReader();
-			String strLine = "";
-			while ((strLine = br.readLine()) != null) {
-				collection.add(strLine);
-			}
-		} finally {
-			if (br != null) {
-				br.close();
-			}
-		}
-	}
+        Validator.checkNotNull(collection, "Collection supplied must not be null");
+        BufferedReader br = null;
+        try {
+            br = createBufferedReader();
+            String strLine = "";
+            while ((strLine = br.readLine()) != null) {
+                collection.add(strLine);
+            }
+        } finally {
+            if (br != null) {
+                br.close();
+            }
+        }
+    }
 
     /**
-     * Reads the file line after line to a List of Strings. The file is always closed.
+     * Reads the file line after line to a List of Strings. The file is always
+     * closed.
+     *
      * @return the List of Strings read from the file
      * @throws IOException if there was an error opening/accessing/reading the file
      */
@@ -109,6 +112,7 @@ public class FileReader {
 
     /**
      * Creates a BufferedReader from the path supplied.
+     *
      * @return A BufferedReader for the path specified
      * @throws IOException if file is not found
      */
@@ -117,6 +121,5 @@ public class FileReader {
         BufferedReader br = new BufferedReader(fReader);
         return br;
     }
-
 
 }

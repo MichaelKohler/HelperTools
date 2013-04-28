@@ -34,6 +34,7 @@ import java.util.Iterator;
  * @version 0.0.2
  */
 public final class StringHelper {
+    static final int NOT_FOUND = -1;
 
     /**
      * Empty private constructor, no instantiation
@@ -63,7 +64,7 @@ public final class StringHelper {
     public static String join(String[] items, String separator) {
         checkNotNull(items, "items cannot be null");
         checkArgument(items.length > 0, "items cannot be empty");
-        
+
         StringBuilder sb = new StringBuilder();
         sb.append(items[0]);
         for (int i = 1; i < items.length; i++) {
@@ -72,11 +73,11 @@ public final class StringHelper {
         }
         return sb.toString();
     }
-    
+
     /**
      * Creates a continuous string out of a Iterable and a separator. Handles
      * null by returning null.
-     * 
+     *
      * @param items
      *            Iterable to iterate through
      * @param separator
@@ -110,13 +111,13 @@ public final class StringHelper {
      */
     public static int countChar(String text, char character) {
         checkNotNull(text, "text cannot be null");
-        
+
         if (text.indexOf(character) < 0) {
             // If text doesn't contain character, String#indexOf returns -1, so
             // prevent ArrayIndexOutOfBounds by returning now.
             return 0;
         }
-        
+
         int n = 0;
         char[] characters = text.toCharArray();
         for (int i = text.indexOf(character); i < characters.length; i++) {
@@ -144,7 +145,7 @@ public final class StringHelper {
         if (needed <= 0) {
             return string;
         }
-        
+
         char[] padding = new char[needed];
         java.util.Arrays.fill(padding, c);
         StringBuffer sb = new StringBuffer(length);
@@ -184,7 +185,7 @@ public final class StringHelper {
         if (needed <= 0) {
             return string;
         }
-        
+
         char[] padding = new char[needed];
         java.util.Arrays.fill(padding, c);
         StringBuffer sb = new StringBuffer(length);
@@ -206,11 +207,11 @@ public final class StringHelper {
      * @return the new string
      */
     public static String replaceWithoutRepetition(String text, String find,
-                                                                  String replace) {
+                                                    String replace) {
         checkNotNull(text, "text cannot be null");
         checkNotNull(find, "find cannot be null");
         checkNotNull(replace, "replace cannot be null");
-        
+
         String notMatch = replace.replace(find, "");
 
         String out = text.replaceAll(find, replace);
@@ -218,10 +219,10 @@ public final class StringHelper {
         out = out.replaceAll(notMatch + replace, replace);
         return out;
     }
-    
+
     /**
      * Reverses a string. It handles null by returning a null.
-     * 
+     *
      * @param string
      *            String to be reversed
      * @return reversed String
@@ -239,7 +240,7 @@ public final class StringHelper {
      * Compares the CharSequences and returns
      * the index of the first difference.
      * If no difference is found then -1 is returned.
-     * 
+     *
      * @param s1 first CharSequence not null
      * @param s2 second CharSequence not null
      * @return index of the first difference or if there is no
@@ -249,11 +250,10 @@ public final class StringHelper {
         checkNotNull(s1, "s1 cannot be null");
         checkNotNull(s2, "s2 cannot be null");
 
-        final int NOT_FOUND = -1;
         if (s1 == s2) {
             return NOT_FOUND;
         }
-        
+
         final int shortest = (s1.length() < s2.length()) ? s1.length() : s2.length();
         int i = 0;
         for (; i < shortest; i++) {

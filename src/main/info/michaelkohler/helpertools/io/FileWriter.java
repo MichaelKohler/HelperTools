@@ -90,7 +90,7 @@ public class FileWriter {
      */
     public final void writeFile(InputStream aStream) throws IOException {
         checkNotNull(aStream, "aStream cannot be null");
-        
+
         final int chunkSize = 1024;
         OutputStream out = new FileOutputStream(new File(this.path));
         int read = 0;
@@ -98,7 +98,7 @@ public class FileWriter {
         while ((read = aStream.read(bytes)) != -1) {
             out.write(bytes, 0, read);
         }
-        
+
         aStream.close();
         out.flush();
         out.close();

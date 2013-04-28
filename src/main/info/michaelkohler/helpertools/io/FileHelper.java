@@ -20,8 +20,8 @@
 
 package info.michaelkohler.helpertools.io;
 
-import static info.michaelkohler.helpertools.tools.Validator.checkNotNull;
 import info.michaelkohler.helpertools.string.StringHelper;
+import static info.michaelkohler.helpertools.tools.Validator.checkNotNull;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -39,6 +39,10 @@ import java.util.regex.Pattern;
  * @version 0.0.1
  */
 public final class FileHelper {
+    /**
+     * default buffer size.
+     */
+    static final int BUFFER_SIZE = 1024;
 
     /**
      * Empty private constructor, no instantiation needed.
@@ -72,7 +76,7 @@ public final class FileHelper {
             FileOutputStream os = makeFile(to);
 
             // Transfer bytes from in to out
-            byte[] buf = new byte[1024];
+            byte[] buf = new byte[BUFFER_SIZE];
             int len;
             while ((len = is.read(buf)) > 0) {
                 os.write(buf, 0, len);
@@ -305,6 +309,11 @@ public final class FileHelper {
         }
     }
 
+    /**
+     * Creates a folder with the given path.
+     *
+     * @param path path to the folder to create
+     */
     public static void createFolders(File path) {
         checkNotNull(path, "path cannot be null");
         if (!path.exists()) {

@@ -19,8 +19,8 @@
  */
 package info.michaelkohler.helpertools.io;
 
-import static info.michaelkohler.helpertools.tools.Validator.checkNotNull;
 import info.michaelkohler.helpertools.logging.Debugger;
+import static info.michaelkohler.helpertools.tools.Validator.checkNotNull;
 
 import java.io.IOException;
 

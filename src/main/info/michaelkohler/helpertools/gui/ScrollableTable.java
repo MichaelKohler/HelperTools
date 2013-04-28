@@ -49,7 +49,7 @@ public class ScrollableTable extends JScrollPane {
      */
     public ScrollableTable(String[][] aData, String[] aColumnNames) {
         super();
-        
+
         Validator.checkNotNull(aData, "Illegal NULL data set");
         Validator.checkNotNull(aColumnNames, "Illegal NULL columns");
         TableModel model = getTableModel(aData, aColumnNames);
