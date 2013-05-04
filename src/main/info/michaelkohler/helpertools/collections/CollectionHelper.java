@@ -95,11 +95,9 @@ public final class CollectionHelper {
      * {@code
      * // be myCollection a |Collection| of class myClass, which
      * // contains a property named myProperty of type |String|.
-     * CollectionHelper.each(stringCollection, new IFunction() {
-     *   public void execute(Object o, int index ) {
-     *     String s = (String) o;
-     *     System.out.println("myProperty of element at index "+index+
-     *                               " has value "+s.myProperty);
+     * CollectionHelper.each(stringCollection, new IFunction<String>() {
+     *   public void execute(String element, int index) {
+     *      element.trim();
      *   }
      * });
      * }
@@ -108,12 +106,12 @@ public final class CollectionHelper {
      * @param collection the collection to be traversed
      * @param function the method to be executed
      */
-    public static <T> void each(Collection<T> collection, IFunction function) {
+    public static <T> void each(Collection<T> collection, IFunction<T> function) {
         checkNotNull(collection, "collection cannot be null");
         checkNotNull(function, "function cannot be null");
 
         int index = 0;
-        for (Object element : collection) {
+        for (T element : collection) {
             function.execute(element, index);
             index++;
         }
