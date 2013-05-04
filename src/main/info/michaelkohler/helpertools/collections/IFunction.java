@@ -4,8 +4,8 @@ package info.michaelkohler.helpertools.collections;
  * The |IFunction| is an interface to be used
  * with {@link CollectionHelper}.
  *
- * @author Lukas Diener
- * @version 0.0.1
+ * @author Lukas Diener, Victor J. Reventos
+ * @version 0.0.2
  */
 public interface IFunction<T> {
 

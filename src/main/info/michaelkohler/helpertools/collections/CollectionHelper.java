@@ -32,8 +32,8 @@ import java.util.Collection;
  * The |CollectionHelper| is a static class which helps
  * performing batch operations on collections.
  *
- * @author Lukas Diener
- * @version 0.0.1
+ * @author Lukas Diener, Victor J. Reventos
+ * @version 0.0.2
  */
 public final class CollectionHelper {
 
