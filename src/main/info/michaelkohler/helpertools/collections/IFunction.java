@@ -7,7 +7,7 @@ package info.michaelkohler.helpertools.collections;
  * @author Lukas Diener
  * @version 0.0.1
  */
-public interface IFunction {
+public interface IFunction<T> {
 
     /**
      * This method will be executed for every element in
@@ -17,5 +17,5 @@ public interface IFunction {
      * @param element the current element
      * @param index the current index in the collection
      */
-    void execute(Object element, int index);
+    void execute(T element, int index);
 }
