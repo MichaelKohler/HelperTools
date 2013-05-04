@@ -65,9 +65,8 @@ public class CollectionHelperTest {
 
     @Test
     public void stringCollectionEach() {
-        CollectionHelper.each(stringCollection, new IFunction() {
-            public void execute(Object o, int index ) {
-                String s = (String) o;
+        CollectionHelper.each(stringCollection, new IFunction<String>() {
+            public void execute(String s, int index ) {
                 if(index == 0) assertEquals(s.length(), 11);
                 if(index == 1) assertEquals(s.length(), 6);
                 if(index == 2) assertEquals(s.length(), 14);
