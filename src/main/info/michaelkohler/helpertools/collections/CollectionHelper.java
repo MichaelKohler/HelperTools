@@ -32,8 +32,8 @@ import java.util.Collection;
  * The |CollectionHelper| is a static class which helps
  * performing batch operations on collections.
  *
- * @author Lukas Diener
- * @version 0.0.1
+ * @author Lukas Diener, Victor J. Reventos
+ * @version 0.0.2
  */
 public final class CollectionHelper {
 
@@ -97,11 +97,9 @@ public final class CollectionHelper {
      * {@code
      * // be myCollection a |Collection| of class myClass, which
      * // contains a property named myProperty of type |String|.
-     * CollectionHelper.each(stringCollection, new IFunction() {
-     *   public void execute(Object o, int index ) {
-     *     String s = (String) o;
-     *     System.out.println("myProperty of element at index "+index+
-     *                               " has value "+s.myProperty);
+     * CollectionHelper.each(stringCollection, new IFunction<String>() {
+     *   public void execute(String element, int index) {
+     *      element.trim();
      *   }
      * });
      * }
@@ -111,12 +109,12 @@ public final class CollectionHelper {
      * @param <T> typed param for the collection
      * @param function the method to be executed
      */
-    public static <T> void each(Collection<T> collection, IFunction function) {
+    public static <T> void each(Collection<T> collection, IFunction<T> function) {
         checkNotNull(collection, "collection cannot be null");
         checkNotNull(function, "function cannot be null");
 
         int index = 0;
-        for (Object element : collection) {
+        for (T element : collection) {
             function.execute(element, index);
             index++;
         }
