@@ -5,4 +5,4 @@ This is a collection of useful classes which are released regularly as a .jar fi
 
 For full documentation of the classes, see http://helpertools.michaelkohler.info
 
-Next release: 0.0.5 at the end of the year (around 28.12.2012)
+Please use "mvn package" command for full coverage (compile, test, checkstyle, jar) before submitting a Pull Request.
