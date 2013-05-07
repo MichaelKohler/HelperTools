@@ -31,6 +31,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import info.michaelkohler.helpertools.collections.CollectionHelper;
 import info.michaelkohler.helpertools.collections.IFunction;
+import info.michaelkohler.helpertools.collections.IFunction2;
 
 public class CollectionHelperTest {
     /**
@@ -119,4 +120,44 @@ public class CollectionHelperTest {
     public void testEachNullIFunction() {
         CollectionHelper.each(myClassCollection, null);
     }
+    
+    @Test
+    public void testFilter(){
+        List<String> strings = new ArrayList<String>();
+        strings.add("abc");
+        strings.add("bac");
+        strings.add("bcc");
+        
+        List<String> filter =CollectionHelper.filter(strings, new IFunction2<Boolean, String>(){
+            @Override
+            public Boolean execute(String element) {
+                return !element.contains("a");
+            }
+        });
+        
+        assertEquals(1, filter.size());
+        assertEquals("bcc", filter.get(0));
+    }
+    
+    @Test
+    public void testMap(){
+        List<String> strings = new ArrayList<String>();
+        for(int i=0; i < 10; i++){
+            strings.add(" " + i+ " ");
+        }
+        
+        List<String> mapped = CollectionHelper.map(strings, new IFunction2<String, String>() {
+            @Override
+            public String execute(String element) {
+                return element.trim();
+            }
+        });
+        
+        assertEquals(strings.size(), mapped.size());
+        for(String s: mapped){
+            assertEquals(false, s.contains(" "));
+        }
+    }
+        
+    
 }

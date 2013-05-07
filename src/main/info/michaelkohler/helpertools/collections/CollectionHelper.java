@@ -20,20 +20,22 @@
 
 package info.michaelkohler.helpertools.collections;
 
-import info.michaelkohler.helpertools.string.StringHelper;
 import static info.michaelkohler.helpertools.tools.Validator.checkArgument;
 import static info.michaelkohler.helpertools.tools.Validator.checkNotNull;
+import info.michaelkohler.helpertools.string.StringHelper;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * The |CollectionHelper| is a static class which helps
  * performing batch operations on collections.
  *
  * @author Lukas Diener, Victor J. Reventos
- * @version 0.0.2
+ * @version 0.0.3
  */
 public final class CollectionHelper {
 
@@ -52,7 +54,7 @@ public final class CollectionHelper {
      * @throws NoSuchFieldException Signals that the class doesn't
      * have a field of a specified name.
      *
-     * @param collection the collection to be traversed
+     * @param iterable the collection to be traversed
      * @param <T> typed param for the collection
      * @param property the name of the property to be extracted
      *
@@ -118,5 +120,37 @@ public final class CollectionHelper {
             function.execute(element, index);
             index++;
         }
+    }
+    
+    /**
+     * Returns a new list with only the elements in which function returned true
+     * 
+     * @param iterable iterable to iterate through
+     * @param function function to filter the elements
+     * @return A new list with the elements filtered
+     */
+    public static <T> List<T> filter(Iterable<T> iterable, IFunction2<Boolean,T> function){
+        List<T> list = new LinkedList<T>();
+        for(T t: iterable){
+            if(function.execute(t)){
+                list.add(t);
+            }
+        } 
+        return list;
+ 
+    }
+    
+    /**
+     * Apply the function to each element and returns a new list of the results.
+     * @param iterable
+     * @param function function to apply to each element
+     * @return A new list with the function applied to each element
+     */
+    public static <R,T> List<R> map(Iterable<T> iterable, IFunction2<R,T> function){
+        List<R> mapped = new LinkedList<R>();
+        for(T element: iterable){
+            mapped.add(function.execute(element));
+        } 
+        return mapped;
     }
 }
