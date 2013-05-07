@@ -35,7 +35,7 @@ import java.util.List;
  * performing batch operations on collections.
  *
  * @author Lukas Diener, Victor J. Reventos
- * @version 0.0.2
+ * @version 0.0.3
  */
 public final class CollectionHelper {
 
