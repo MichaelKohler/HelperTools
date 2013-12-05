@@ -20,13 +20,15 @@
 
 package info.michaelkohler.helpertools.collections;
 
-import info.michaelkohler.helpertools.string.StringHelper;
 import static info.michaelkohler.helpertools.tools.Validator.checkArgument;
 import static info.michaelkohler.helpertools.tools.Validator.checkNotNull;
+import info.michaelkohler.helpertools.string.StringHelper;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * The |CollectionHelper| is a static class which helps
@@ -118,5 +120,28 @@ public final class CollectionHelper {
             function.execute(element, index);
             index++;
         }
+    }
+
+    /**
+     * This method performs a union on two collections of elements as per definition of the <i>union</i> operation in set theory. 
+     * The resulting collection guarantees unique membership as per implementation of the Java {@link java.util.Set} interface.
+     * This is a null-safe operation.
+     * @see <a href="http://en.wikipedia.org/wiki/Union_(set_theory)">Union (set theory)</a>
+     * @param firstGroup Collection to be used.
+     * @param secondGroup Collection to be used.
+     * @return The resulting collection containing all distinct members from the two groups.
+     */
+    public static <T> Collection<T> union(Collection<T> firstGroup,
+        Collection<T> secondGroup) {
+      
+      if(firstGroup == null)
+        return secondGroup;
+      else if(secondGroup == null)
+        return firstGroup;
+      else {
+        Set<T> firstSet = new HashSet<T>(firstGroup);
+        firstSet.addAll(secondGroup);
+        return firstSet;
+      }
     }
 }
