@@ -124,4 +124,45 @@ public class CollectionHelperUnionTest {
     for(Iterator<Integer> iterator = expected.iterator(); iterator.hasNext();)
       Assert.assertTrue(actual.contains(iterator.next()));
   }
+  
+  @Test
+  public void testUnionOfTwoLists_EmptyLists(){
+    List<Integer> emptyList1 = new ArrayList<Integer>();
+    List<Integer> emptyList2 = new ArrayList<Integer>();
+    List<Integer> expected = new ArrayList<Integer>();
+    
+    Collection<Integer> actual = CollectionHelper.union(emptyList1, emptyList2);
+    Assert.assertEquals(expected.size(), actual.size());
+    Assert.assertTrue(actual.isEmpty());
+  }
+  
+  @Test
+  public void testUnionOfTwoLists_NullList_FirstParam(){
+    List<Integer> nullList = null;
+    List<Integer> aList = new ArrayList<Integer>();
+    aList.add(1); aList.add(2); aList.add(3);
+    
+    List<Integer> expected = new ArrayList<Integer>();
+    expected.add(1); expected.add(2); expected.add(3);
+    
+    Collection<Integer> actual = CollectionHelper.union(nullList, aList);
+    Assert.assertEquals(expected.size(), actual.size());
+    for(Iterator<Integer> iterator = expected.iterator(); iterator.hasNext();)
+      Assert.assertTrue(actual.contains(iterator.next()));
+  }
+  
+  @Test
+  public void testUnionOfTwoLists_NullList_SecondParam(){
+    List<Integer> nullList = null;
+    List<Integer> aList = new ArrayList<Integer>();
+    aList.add(1); aList.add(2); aList.add(3);
+    
+    List<Integer> expected = new ArrayList<Integer>();
+    expected.add(1); expected.add(2); expected.add(3);
+    
+    Collection<Integer> actual = CollectionHelper.union(aList, nullList);
+    Assert.assertEquals(expected.size(), actual.size());
+    for(Iterator<Integer> iterator = expected.iterator(); iterator.hasNext();)
+      Assert.assertTrue(actual.contains(iterator.next()));
+  }
 }

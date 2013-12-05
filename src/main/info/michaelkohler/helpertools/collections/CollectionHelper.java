@@ -125,6 +125,7 @@ public final class CollectionHelper {
     /**
      * This method performs a union on two collections of elements as per definition of the <i>union</i> operation in set theory. 
      * The resulting collection guarantees unique membership as per implementation of the Java {@link java.util.Set} interface.
+     * This is a null-safe operation.
      * @see <a href="http://en.wikipedia.org/wiki/Union_(set_theory)">Union (set theory)</a>
      * @param firstGroup Collection to be used.
      * @param secondGroup Collection to be used.
@@ -133,8 +134,14 @@ public final class CollectionHelper {
     public static <T> Collection<T> union(Collection<T> firstGroup,
         Collection<T> secondGroup) {
       
-      Set<T> firstSet = new HashSet<T>(firstGroup);
-      firstSet.addAll(secondGroup);
-      return firstSet;
+      if(firstGroup == null)
+        return secondGroup;
+      else if(secondGroup == null)
+        return firstGroup;
+      else {
+        Set<T> firstSet = new HashSet<T>(firstGroup);
+        firstSet.addAll(secondGroup);
+        return firstSet;
+      }
     }
 }
