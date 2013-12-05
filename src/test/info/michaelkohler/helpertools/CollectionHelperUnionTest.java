@@ -51,7 +51,7 @@ public class CollectionHelperUnionTest {
     Collection<Integer> actual = CollectionHelper.union(oddNums, evenNums);
     Assert.assertEquals(expected.size(), actual.size());
     for(Iterator<Integer> iterator = expected.iterator(); iterator.hasNext();)
-      Assert.assertTrue(expected.contains(iterator.next()));
+      Assert.assertTrue(actual.contains(iterator.next()));
   }
   
   @Test
@@ -81,7 +81,7 @@ public class CollectionHelperUnionTest {
     Collection<Integer> actual = CollectionHelper.union(oddNums, evenNums);
     Assert.assertEquals(expected.size(), actual.size());
     for(Iterator<Integer> iterator = expected.iterator(); iterator.hasNext();)
-      Assert.assertTrue(expected.contains(iterator.next()));
+      Assert.assertTrue(actual.contains(iterator.next()));
   }
   
   @Test
@@ -163,6 +163,96 @@ public class CollectionHelperUnionTest {
     Collection<Integer> actual = CollectionHelper.union(aList, nullList);
     Assert.assertEquals(expected.size(), actual.size());
     for(Iterator<Integer> iterator = expected.iterator(); iterator.hasNext();)
+      Assert.assertTrue(actual.contains(iterator.next()));
+  }
+  
+  @Test
+  public void testUnionOfTwoStringLists_ContainsAll_Test1() {
+    List<String> maleNames = new ArrayList<String>();
+    maleNames.add("John"); maleNames.add("Mike"); maleNames.add("Chris");
+    maleNames.add("Matt"); maleNames.add("Bill");
+    
+    List<String> femaleNames = new ArrayList<String>();
+    femaleNames.add("Sherry"); femaleNames.add("Liz"); femaleNames.add("Mary");
+    femaleNames.add("Michelle"); femaleNames.add("Jane");
+    
+    List<String> expected = new ArrayList<String>();
+    expected.add("John"); expected.add("Mike"); expected.add("Chris");
+    expected.add("Matt"); expected.add("Bill");
+    expected.add("Sherry"); expected.add("Liz"); expected.add("Mary");
+    expected.add("Michelle"); expected.add("Jane");
+    
+    Collection<String> actual = CollectionHelper.union(maleNames, femaleNames);
+    Assert.assertEquals(expected.size(), actual.size());
+    for(Iterator<String> iterator = expected.iterator(); iterator.hasNext();)
+      Assert.assertTrue(actual.contains(iterator.next()));
+  }
+  
+  @Test
+  public void testUnionOfTwoStringLists_ContainsAll_Test2() {
+    List<String> maleNames = new ArrayList<String>();
+    maleNames.add("John"); maleNames.add("Mike"); maleNames.add("Chris");
+    maleNames.add("Matt"); maleNames.add("Bill"); maleNames.add("Robin"); 
+    maleNames.add("Lee"); maleNames.add("Kenneth"); maleNames.add("Howe");
+    
+    List<String> femaleNames = new ArrayList<String>();
+    femaleNames.add("Sherry"); femaleNames.add("Liz"); femaleNames.add("Mary");
+    femaleNames.add("Michelle"); femaleNames.add("Jane"); femaleNames.add("Loewe");
+    femaleNames.add("Kathy"); femaleNames.add("Renee"); femaleNames.add("Bonny");
+    
+    List<String> expected = new ArrayList<String>();
+    expected.add("John"); expected.add("Mike"); expected.add("Chris");
+    expected.add("Matt"); expected.add("Bill"); expected.add("Robin"); 
+    expected.add("Lee"); expected.add("Kenneth"); expected.add("Howe");
+    expected.add("Sherry"); expected.add("Liz"); expected.add("Mary");
+    expected.add("Michelle"); expected.add("Jane"); expected.add("Loewe");
+    expected.add("Kathy"); expected.add("Renee"); expected.add("Bonny");
+    
+    Collection<String> actual = CollectionHelper.union(maleNames, femaleNames);
+    Assert.assertEquals(expected.size(), actual.size());
+    for(Iterator<String> iterator = expected.iterator(); iterator.hasNext();)
+      Assert.assertTrue(actual.contains(iterator.next()));
+  }
+  
+  @Test
+  public void testUnionOfTwoStringLists_UniqueMembership_Test1() {
+    List<String> maleNames = new ArrayList<String>();
+    maleNames.add("John"); maleNames.add("Mike"); maleNames.add("Chris");
+    maleNames.add("Matt"); maleNames.add("Bill");
+    
+    List<String> duplicates = new ArrayList<String>();
+    duplicates.add("John"); duplicates.add("Mike"); duplicates.add("Chris");
+    duplicates.add("Matt"); duplicates.add("Bill");
+    
+    List<String> expected = new ArrayList<String>();
+    expected.add("John"); expected.add("Mike"); expected.add("Chris");
+    expected.add("Matt"); expected.add("Bill");
+    
+    Collection<String> actual = CollectionHelper.union(maleNames, duplicates);
+    Assert.assertEquals(expected.size(), actual.size());
+    for(Iterator<String> iterator = expected.iterator(); iterator.hasNext();)
+      Assert.assertTrue(actual.contains(iterator.next()));
+  }
+  
+  @Test
+  public void testUnionOfTwoStringLists_UniqueMembership_Test2() {
+    List<String> maleNames = new ArrayList<String>();
+    maleNames.add("John"); maleNames.add("Mike"); maleNames.add("Chris");
+    maleNames.add("Matt"); maleNames.add("Bill");
+    
+    List<String> moreMaleNames = new ArrayList<String>();
+    moreMaleNames.add("Mark"); moreMaleNames.add("David"); 
+    moreMaleNames.add("Chris"); // duplicate
+    moreMaleNames.add("Paul"); moreMaleNames.add("Luke");
+    
+    List<String> expected = new ArrayList<String>();
+    expected.add("John"); expected.add("Mike"); expected.add("Chris");
+    expected.add("Matt"); expected.add("Bill"); expected.add("Mark"); 
+    expected.add("David"); expected.add("Paul"); expected.add("Luke");
+    
+    Collection<String> actual = CollectionHelper.union(maleNames, moreMaleNames);
+    Assert.assertEquals(expected.size(), actual.size());
+    for(Iterator<String> iterator = expected.iterator(); iterator.hasNext();)
       Assert.assertTrue(actual.contains(iterator.next()));
   }
 }
