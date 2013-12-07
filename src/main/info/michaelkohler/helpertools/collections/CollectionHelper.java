@@ -144,4 +144,20 @@ public final class CollectionHelper {
         return firstSet;
       }
     }
+
+    public static <T> Collection<T> intersect(Collection<T> groupOne,
+        Collection<T> groupTwo) {
+      
+      if(groupOne == null)
+        return groupTwo;
+      else if(groupTwo == null)
+        return groupOne;
+      else {
+        Collection<T> results = new HashSet<T>();
+        for(T listOneItem : groupOne)
+          if(groupTwo.contains(listOneItem))
+            results.add(listOneItem);
+        return results;
+      }
+    }
 }
