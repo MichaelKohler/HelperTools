@@ -14,8 +14,10 @@ public class CollectionHelperUnionTest {
 
   // When testing for unique membership, the codes iterate through the 'expected' collection (instead of the 'actual' collection)
   // to ensures that each unique expected item is verified for membership in the 'actual' collection. 
-  // Given that the size of the 'actual' collection has already been verified, if an 'expected' item is not found in the 
-  // 'actual' collection, then the 'actual' collection is not unique.
+  // Given that the size of the 'actual' collection has already been verified to be equal to that of the 'expected' collection,
+  // if an 'expected' item is not found in the 'actual' collection, then either:
+  // 1. the 'actual' collection contains erroneous result or, 
+  // 2. the 'actual' collection is not unique.
   
   @Test
   public void testUnionOfTwoLists_TotalCount() {
