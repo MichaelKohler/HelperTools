@@ -169,4 +169,29 @@ public final class CollectionHelper {
         return results;
       }
     }
+
+    /**
+     * 
+     * @param groupOne
+     * @param groupTwo
+     * @return
+     */
+    public static <T> Collection<T> difference(Collection<T> groupOne,
+        Collection<T> groupTwo) {
+      
+      if(groupOne == null)
+        return groupTwo;
+      else if(groupTwo == null)
+        return groupOne;
+      
+      Set<T> results = new HashSet<T>();
+      for(T groupOneItem : groupOne)
+        if(!groupTwo.contains(groupOneItem))
+          results.add(groupOneItem);
+      for(T groupTwoItem : groupTwo)
+        if(!groupOne.contains(groupTwoItem))
+          results.add(groupTwoItem);
+
+      return results;
+    }
 }
