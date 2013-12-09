@@ -185,13 +185,29 @@ public final class CollectionHelper {
         return groupOne;
       
       Set<T> results = new HashSet<T>();
+      results.addAll(findGroupOneDelta(groupOne, groupTwo));
+      results.addAll(findGroupTwoDelta(groupTwo, groupOne));
+      
+      return results;
+    }
+
+    private static <T> Set<T> findGroupOneDelta(Collection<T> groupOne,
+        Collection<T> groupTwo) {
+      
+      Set<T> delta = new HashSet<T>();
       for(T groupOneItem : groupOne)
         if(!groupTwo.contains(groupOneItem))
-          results.add(groupOneItem);
-      for(T groupTwoItem : groupTwo)
-        if(!groupOne.contains(groupTwoItem))
-          results.add(groupTwoItem);
-
-      return results;
+          delta.add(groupOneItem);
+      return delta;
+    }
+    
+    private static <T> Set<T> findGroupTwoDelta(Collection<T> groupOne,
+        Collection<T> groupTwo) {
+      
+      Set<T> delta = new HashSet<T>();
+      for(T groupOneItem : groupOne)
+        if(!groupTwo.contains(groupOneItem))
+          delta.add(groupOneItem);
+      return delta;
     }
 }
