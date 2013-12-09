@@ -12,7 +12,7 @@ import org.junit.Test;
 public class CollectionHelperDifferenceTest {
 
   @Test
-  public void testDifference_SixDifferenceElements() {
+  public void testDifference_NoCommonElements() {
     List<Integer> listOne = new ArrayList<Integer>();
     listOne.add(1); listOne.add(2); listOne.add(3);
     listOne.add(4); listOne.add(5); listOne.add(6);
@@ -192,6 +192,62 @@ public class CollectionHelperDifferenceTest {
     Collection<Integer> actual = CollectionHelper.delta(listOne, listTwo);
     Assert.assertEquals(expected.size(), actual.size());
     for(Integer item : expected)
+      Assert.assertTrue(actual.contains(item));
+  }
+  
+  @Test
+  public void testDifference_StringElement_FirstListIsSubset() {
+    List<String> listOne = new ArrayList<String>();
+    listOne.add("Jane"); listOne.add("Elizabeth"); listOne.add("Lisa");
+    
+    List<String> listTwo = new ArrayList<String>();
+    listTwo.add("Jane"); listTwo.add("Alexander"); listTwo.add("Lisa");
+    listTwo.add("Bob"); listTwo.add("Lukaz"); listTwo.add("Elizabeth");
+    
+    List<String> expected = new ArrayList<String>();
+    expected.add("Bob"); expected.add("Alexander"); expected.add("Lukaz");
+    
+    Collection<String> actual = CollectionHelper.delta(listOne, listTwo);
+    Assert.assertEquals(expected.size(), actual.size());
+    for(String item : expected)
+      Assert.assertTrue(actual.contains(item));
+  }
+  
+  @Test
+  public void testDifference_StringElement_SecondListIsSubset() {
+    List<String> listOne = new ArrayList<String>();
+    listOne.add("John"); listOne.add("Matthew"); listOne.add("Paul");
+    listOne.add("Alex"); listOne.add("Arthur"); listOne.add("Troy");
+    
+    List<String> listTwo = new ArrayList<String>();
+    listTwo.add("Matthew"); listTwo.add("Alex"); listTwo.add("Troy");
+    
+    List<String> expected = new ArrayList<String>();
+    expected.add("John"); expected.add("Arthur"); expected.add("Paul");
+    
+    Collection<String> actual = CollectionHelper.delta(listOne, listTwo);
+    Assert.assertEquals(expected.size(), actual.size());
+    for(String item : expected)
+      Assert.assertTrue(actual.contains(item));
+  }
+  
+  @Test
+  public void testDifference_StringElement_NoCommonElements() {
+    List<String> listOne = new ArrayList<String>();
+    listOne.add("John"); listOne.add("Marco"); listOne.add("Mike");
+    listOne.add("Andrew"); listOne.add("Arthur"); listOne.add("Troy");
+    
+    List<String> listTwo = new ArrayList<String>();
+    listTwo.add("Leslie"); listTwo.add("Susan"); listTwo.add("George");
+    
+    List<String> expected = new ArrayList<String>();
+    expected.add("John"); expected.add("Marco"); expected.add("Mike");
+    expected.add("Andrew"); expected.add("Arthur"); expected.add("Troy");
+    expected.add("Leslie"); expected.add("Susan"); expected.add("George");
+    
+    Collection<String> actual = CollectionHelper.delta(listOne, listTwo);
+    Assert.assertEquals(expected.size(), actual.size());
+    for(String item : expected)
       Assert.assertTrue(actual.contains(item));
   }
 
