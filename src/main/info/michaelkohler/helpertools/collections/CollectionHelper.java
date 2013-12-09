@@ -145,6 +145,15 @@ public final class CollectionHelper {
       }
     }
 
+    /**
+     * This method performs an intersection on two collections of elements as per definition of the <i>intersect</i> operation in set theory.
+     * The resulting collection guarantees unique membership as per implementation of the Java {@link java.util.Set} interface.
+     * This is a null-safe operation.
+     * @see <a href="http://en.wikipedia.org/wiki/Union_(set_theory)">Union (set theory)</a>
+     * @param firstGroup Collection to be used.
+     * @param secondGroup Collection to be used.
+     * @return The resulting collection containing all common members from the two groups.
+     */
     public static <T> Collection<T> intersect(Collection<T> groupOne,
         Collection<T> groupTwo) {
       
@@ -159,5 +168,48 @@ public final class CollectionHelper {
             results.add(listOneItem);
         return results;
       }
+    }
+
+    /**
+     * This method performs a delta operation on two collections of elements; i.e. it returns a collection with elements that
+     * are not found in the collection returns by the CollectionHelper.intersect() method.
+     * The resulting collection guarantees unique membership as per implementation of the Java {@link java.util.Set} interface.
+     * This is a null-safe operation.
+     * @param firstGroup Collection to be used.
+     * @param secondGroup Collection to be used.
+     * @return The resulting collection which represents the delta of the two groups.
+     */
+    public static <T> Collection<T> delta(Collection<T> groupOne,
+        Collection<T> groupTwo) {
+      
+      if(groupOne == null)
+        return groupTwo;
+      else if(groupTwo == null)
+        return groupOne;
+      
+      Set<T> delta = new HashSet<T>();
+      delta.addAll(findGroupOneDelta(groupOne, groupTwo));
+      delta.addAll(findGroupTwoDelta(groupTwo, groupOne));
+      return delta;
+    }
+
+    private static <T> Set<T> findGroupOneDelta(Collection<T> groupOne,
+        Collection<T> groupTwo) {
+      
+      Set<T> delta = new HashSet<T>();
+      for(T groupOneItem : groupOne)
+        if(!groupTwo.contains(groupOneItem))
+          delta.add(groupOneItem);
+      return delta;
+    }
+    
+    private static <T> Set<T> findGroupTwoDelta(Collection<T> groupOne,
+        Collection<T> groupTwo) {
+      
+      Set<T> delta = new HashSet<T>();
+      for(T groupOneItem : groupOne)
+        if(!groupTwo.contains(groupOneItem))
+          delta.add(groupOneItem);
+      return delta;
     }
 }
