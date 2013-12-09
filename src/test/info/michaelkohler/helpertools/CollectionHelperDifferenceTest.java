@@ -12,7 +12,7 @@ import org.junit.Test;
 public class CollectionHelperDifferenceTest {
 
   @Test
-  public void testDifference_NoCommonElements() {
+  public void testDifference_IntegerElement_NoCommonElements() {
     List<Integer> listOne = new ArrayList<Integer>();
     listOne.add(1); listOne.add(2); listOne.add(3);
     listOne.add(4); listOne.add(5); listOne.add(6);
@@ -32,7 +32,7 @@ public class CollectionHelperDifferenceTest {
   }
   
   @Test
-  public void testDifference_AllElementsAreDifferent() {
+  public void testDifference_IntegerElement_AllElementsAreDifferent() {
     List<Integer> listOne = new ArrayList<Integer>();
     listOne.add(1); listOne.add(2); listOne.add(3);
     listOne.add(4); listOne.add(5); listOne.add(6);
@@ -54,7 +54,7 @@ public class CollectionHelperDifferenceTest {
   }
   
   @Test
-  public void testDifference_FirstListIsEmpty() {
+  public void testDifference_IntegerElement_FirstListIsEmpty() {
     List<Integer> listOne = new ArrayList<Integer>();
     
     List<Integer> listTwo = new ArrayList<Integer>();
@@ -70,7 +70,7 @@ public class CollectionHelperDifferenceTest {
   }
   
   @Test
-  public void testDifference_SecondListIsEmpty() {
+  public void testDifference_IntegerElement_SecondListIsEmpty() {
     List<Integer> listOne = new ArrayList<Integer>();
     listOne.add(1); listOne.add(2); listOne.add(3);
     
@@ -86,7 +86,7 @@ public class CollectionHelperDifferenceTest {
   }
   
   @Test
-  public void testDifference_FirstListIsNull() {
+  public void testDifference_IntegerElement_FirstListIsNull() {
     List<Integer> listOne = null;
     
     List<Integer> listTwo = new ArrayList<Integer>();
@@ -102,7 +102,7 @@ public class CollectionHelperDifferenceTest {
   }
   
   @Test
-  public void testDifference_SecondListIsNull() {
+  public void testDifference_IntegerElement_SecondListIsNull() {
     List<Integer> listOne = new ArrayList<Integer>();
     listOne.add(7); listOne.add(8); listOne.add(9);
     
@@ -118,7 +118,7 @@ public class CollectionHelperDifferenceTest {
   }
   
   @Test
-  public void testDifference_FirstListIsLonger() {
+  public void testDifference_IntegerElement_FirstListIsLonger() {
     List<Integer> listOne = new ArrayList<Integer>();
     listOne.add(1); listOne.add(2); listOne.add(3);
     listOne.add(4); listOne.add(5); listOne.add(6);
@@ -138,7 +138,7 @@ public class CollectionHelperDifferenceTest {
   }
   
   @Test
-  public void testDifference_SecondListIsLonger() {
+  public void testDifference_IntegerElement_SecondListIsLonger() {
     List<Integer> listOne = new ArrayList<Integer>();
     listOne.add(1); listOne.add(2); listOne.add(3);
     listOne.add(4); listOne.add(5); listOne.add(6);
@@ -160,7 +160,7 @@ public class CollectionHelperDifferenceTest {
   }
   
   @Test
-  public void testDifference_FirstListIsSubset() {
+  public void testDifference_IntegerElement_FirstListIsSubset() {
     List<Integer> listOne = new ArrayList<Integer>();
     listOne.add(1); listOne.add(2); listOne.add(3);
     
@@ -178,7 +178,7 @@ public class CollectionHelperDifferenceTest {
   }
   
   @Test
-  public void testDifference_SecondListIsSubset() {
+  public void testDifference_IntegerElement_SecondListIsSubset() {
     List<Integer> listOne = new ArrayList<Integer>();
     listOne.add(1); listOne.add(2); listOne.add(3);
     listOne.add(7); listOne.add(8); listOne.add(9);
