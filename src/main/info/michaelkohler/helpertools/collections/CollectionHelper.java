@@ -176,7 +176,7 @@ public final class CollectionHelper {
      * @param groupTwo
      * @return
      */
-    public static <T> Collection<T> difference(Collection<T> groupOne,
+    public static <T> Collection<T> delta(Collection<T> groupOne,
         Collection<T> groupTwo) {
       
       if(groupOne == null)
@@ -184,11 +184,10 @@ public final class CollectionHelper {
       else if(groupTwo == null)
         return groupOne;
       
-      Set<T> results = new HashSet<T>();
-      results.addAll(findGroupOneDelta(groupOne, groupTwo));
-      results.addAll(findGroupTwoDelta(groupTwo, groupOne));
-      
-      return results;
+      Set<T> delta = new HashSet<T>();
+      delta.addAll(findGroupOneDelta(groupOne, groupTwo));
+      delta.addAll(findGroupTwoDelta(groupTwo, groupOne));
+      return delta;
     }
 
     private static <T> Set<T> findGroupOneDelta(Collection<T> groupOne,

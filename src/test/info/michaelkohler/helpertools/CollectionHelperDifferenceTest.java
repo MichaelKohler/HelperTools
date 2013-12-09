@@ -25,7 +25,7 @@ public class CollectionHelperDifferenceTest {
     expected.add(1); expected.add(2); expected.add(3);
     expected.add(7); expected.add(8); expected.add(9);
     
-    Collection<Integer> actual = CollectionHelper.difference(listOne, listTwo);
+    Collection<Integer> actual = CollectionHelper.delta(listOne, listTwo);
     Assert.assertEquals(expected.size(), actual.size());
     for(Integer item : expected)
       Assert.assertTrue(actual.contains(item));
@@ -47,7 +47,7 @@ public class CollectionHelperDifferenceTest {
     expected.add(7); expected.add(8); expected.add(9);
     expected.add(10); expected.add(11); expected.add(12);
     
-    Collection<Integer> actual = CollectionHelper.difference(listOne, listTwo);
+    Collection<Integer> actual = CollectionHelper.delta(listOne, listTwo);
     Assert.assertEquals(expected.size(), actual.size());
     for(Integer item : expected)
       Assert.assertTrue(actual.contains(item));
@@ -63,7 +63,7 @@ public class CollectionHelperDifferenceTest {
     List<Integer> expected = new ArrayList<Integer>();
     expected.add(7); expected.add(8); expected.add(9);
     
-    Collection<Integer> actual = CollectionHelper.difference(listOne, listTwo);
+    Collection<Integer> actual = CollectionHelper.delta(listOne, listTwo);
     Assert.assertEquals(expected.size(), actual.size());
     for(Integer item : expected)
       Assert.assertTrue(actual.contains(item));
@@ -79,7 +79,7 @@ public class CollectionHelperDifferenceTest {
     List<Integer> expected = new ArrayList<Integer>();
     expected.add(1); expected.add(2); expected.add(3);
     
-    Collection<Integer> actual = CollectionHelper.difference(listOne, listTwo);
+    Collection<Integer> actual = CollectionHelper.delta(listOne, listTwo);
     Assert.assertEquals(expected.size(), actual.size());
     for(Integer item : expected)
       Assert.assertTrue(actual.contains(item));
@@ -95,7 +95,7 @@ public class CollectionHelperDifferenceTest {
     List<Integer> expected = new ArrayList<Integer>();
     expected.add(7); expected.add(8); expected.add(9);
     
-    Collection<Integer> actual = CollectionHelper.difference(listOne, listTwo);
+    Collection<Integer> actual = CollectionHelper.delta(listOne, listTwo);
     Assert.assertEquals(expected.size(), actual.size());
     for(Integer item : expected)
       Assert.assertTrue(actual.contains(item));
@@ -111,7 +111,7 @@ public class CollectionHelperDifferenceTest {
     List<Integer> expected = new ArrayList<Integer>();
     expected.add(7); expected.add(8); expected.add(9);
     
-    Collection<Integer> actual = CollectionHelper.difference(listOne, listTwo);
+    Collection<Integer> actual = CollectionHelper.delta(listOne, listTwo);
     Assert.assertEquals(expected.size(), actual.size());
     for(Integer item : expected)
       Assert.assertTrue(actual.contains(item));
@@ -131,7 +131,7 @@ public class CollectionHelperDifferenceTest {
     expected.add(1); expected.add(2); expected.add(3);
     expected.add(4); expected.add(5); expected.add(6);
     
-    Collection<Integer> actual = CollectionHelper.difference(listOne, listTwo);
+    Collection<Integer> actual = CollectionHelper.delta(listOne, listTwo);
     Assert.assertEquals(expected.size(), actual.size());
     for(Integer item : expected)
       Assert.assertTrue(actual.contains(item));
@@ -153,7 +153,7 @@ public class CollectionHelperDifferenceTest {
     expected.add(7); expected.add(8); expected.add(9);
     expected.add(10); expected.add(11); expected.add(12);
     
-    Collection<Integer> actual = CollectionHelper.difference(listOne, listTwo);
+    Collection<Integer> actual = CollectionHelper.delta(listOne, listTwo);
     Assert.assertEquals(expected.size(), actual.size());
     for(Integer item : expected)
       Assert.assertTrue(actual.contains(item));
@@ -171,7 +171,7 @@ public class CollectionHelperDifferenceTest {
     List<Integer> expected = new ArrayList<Integer>();
     expected.add(7); expected.add(8); expected.add(9);
     
-    Collection<Integer> actual = CollectionHelper.difference(listOne, listTwo);
+    Collection<Integer> actual = CollectionHelper.delta(listOne, listTwo);
     Assert.assertEquals(expected.size(), actual.size());
     for(Integer item : expected)
       Assert.assertTrue(actual.contains(item));
@@ -189,7 +189,7 @@ public class CollectionHelperDifferenceTest {
     List<Integer> expected = new ArrayList<Integer>();
     expected.add(7); expected.add(8); expected.add(9);
     
-    Collection<Integer> actual = CollectionHelper.difference(listOne, listTwo);
+    Collection<Integer> actual = CollectionHelper.delta(listOne, listTwo);
     Assert.assertEquals(expected.size(), actual.size());
     for(Integer item : expected)
       Assert.assertTrue(actual.contains(item));
