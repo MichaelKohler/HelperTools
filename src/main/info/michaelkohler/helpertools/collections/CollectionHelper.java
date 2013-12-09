@@ -171,10 +171,13 @@ public final class CollectionHelper {
     }
 
     /**
-     * 
-     * @param groupOne
-     * @param groupTwo
-     * @return
+     * This method performs a delta operation on two collections of elements; i.e. it returns a collection with elements that
+     * are not found in the collection returns by the CollectionHelper.intersect() method.
+     * The resulting collection guarantees unique membership as per implementation of the Java {@link java.util.Set} interface.
+     * This is a null-safe operation.
+     * @param firstGroup Collection to be used.
+     * @param secondGroup Collection to be used.
+     * @return The resulting collection which represents the delta of the two groups.
      */
     public static <T> Collection<T> delta(Collection<T> groupOne,
         Collection<T> groupTwo) {
