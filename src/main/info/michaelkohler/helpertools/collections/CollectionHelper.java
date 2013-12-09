@@ -145,6 +145,15 @@ public final class CollectionHelper {
       }
     }
 
+    /**
+     * This method performs an intersection on two collections of elements as per definition of the <i>intersect</i> operation in set theory.
+     * The resulting collection guarantees unique membership as per implementation of the Java {@link java.util.Set} interface.
+     * This is a null-safe operation.
+     * @see <a href="http://en.wikipedia.org/wiki/Union_(set_theory)">Union (set theory)</a>
+     * @param firstGroup Collection to be used.
+     * @param secondGroup Collection to be used.
+     * @return The resulting collection containing all common members from the two groups.
+     */
     public static <T> Collection<T> intersect(Collection<T> groupOne,
         Collection<T> groupTwo) {
       
