@@ -25,4 +25,4 @@ Thanks!
 Next release
 -------
 
-The next release will be 0.0.6 coming at the beginning of Q3 2013. If there is a bug we will release it earlier.
+The next release will be 0.1.0 coming in Q1 2015. If there is a bug we will release it earlier.
