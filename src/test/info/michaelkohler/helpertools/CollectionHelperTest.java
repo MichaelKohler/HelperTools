@@ -1,7 +1,7 @@
 package info.michaelkohler.helpertools;
 
 /* ============== HelperTools ==============
- * Initial developer: Lukas Diener <lukas.diener@hotmail.com>
+ * Initial developer: Lukas Diener (@LukasSkywalker)
  *
  * =====
  * DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE - Version 2
